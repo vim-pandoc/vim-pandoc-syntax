@@ -144,11 +144,14 @@ syn match pandocFootnoteIDTail /\]/ contained containedin=pandocFootnoteID conce
 
 " List Items: {{{1
 "
+" Unordered lists 
+syn match pandocUListItem /^\s*[*+-]\s\+/he=e-1 conceal cchar=•
+" Ordered lists
 " TODO: support roman numerals
-syn match pandocListItem /^\s*\([*+-]\|\((*\d\+[.)]\+\)\|\((*\l[.)]\+\)\)\s\+/he=e-1 nextgroup=pandocPara
-syn match pandocListItem /^\s*(*\u[.)]\+\s\{2,}/he=e-1 nextgroup=pandocPara
-syn match pandocListItem /^\s*(*[#][.)]\+\s\{1,}/he=e-1 nextgroup=pandocPara
-syn match pandocListItem /^\s*(*@.\{-}[.)]\+\s\{1,}/he=e-1 nextgroup=pandocPara
+syn match pandocListItem /^\s*\(\((*\d\+[.)]\+\)\|\((*\l[.)]\+\)\)\s\+/he=e-1
+syn match pandocListItem /^\s*(*\u[.)]\+\s\{2,}/he=e-1
+syn match pandocListItem /^\s*(*[#][.)]\+\s\{1,}/he=e-1
+syn match pandocListItem /^\s*(*@.\{-}[.)]\+\s\{1,}/he=e-1
 " }}}
 
 " Special: {{{1
@@ -175,6 +178,7 @@ hi link pandocCodeBlock String
 hi link pandocDelimitedCodeBlock String
 hi link pandocDelimitedCodeBlockLanguage Comment
 hi link pandocCodePre String
+hi link pandocUListItem Operator
 hi link pandocListItem Operator
 
 hi link pandocLinkArea Type
