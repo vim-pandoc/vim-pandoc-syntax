@@ -1,0 +1,37 @@
+% headings test
+% vim-pandoc-syntax  
+  with multiple lines
+
+# heading 
+
+a
+
+## heading
+
+a
+
+### heading
+
+a
+
+#### heading
+
+a
+
+##### heading
+
+a
+
+###### heading
+
+test
+
+heading
+-------
+
+aaaaa
+
+heading
+=======
+
+aaaaa

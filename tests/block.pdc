@@ -1,0 +1,67 @@
+# Block spans
+
+this is a paragraph.
+
+this is a long paragraph with *italics* and **bold** items.
+
+this is a long paragraph where *an italicized section ends with a space *.
+
+this is a *long paragraph that spans 
+two* lines.
+
+this is a paragraph with *a span that is very very very very very very very very
+very very very very very very very very very very very very very very very very
+very very very very very very very* long. 
+
+this is a paragraph where _italics_ and __bold__ are set with underscores.
+
+# italics *in* titles
+
+yes, we can.
+
+# bold **in** titles
+
+inline `code` in this paragraph. this is a ``test for this`` stuff.
+
+superscripts ^are kinda^ cool. subscripts can ~also~ be kinda lame. there's also sections
+with ~~striked out~~ text.
+
+a new line can be outputted for lines with a couple  
+of spaces.
+
+---
+
+***
+
+# mix and match
+
+oh no! mix and match *is **hard** stuff*, real hard.
+
+mixing is **quite *the* problem**.
+
+# blockquotes
+
+> this is a test block
+> this is another *test*. block
+  a block
+> less block
+aaa block
+
+no block.
+
+# code blocks
+
+    def func(a):
+	return 1
+
+no code
+
+~~~python
+def func(a):
+    return 1
+~~~
+
+# definitions
+
+hello
+:  this is a definition.

@@ -1,0 +1,11 @@
+# this is a test for links, references and footnotes. 
+
+a link to [the example.com website](http://www.example.com "example") 
+
+testing footnotes[^footnote1]. this is kinda silly.^[another footnote.] 
+^superscrips^ are ok, but be careful to keep spaces between the inline
+footnotes and the superscripts.
+
+[^footnote1]: this is a footnote.
+
+Mister @Lovejoy95, at [-@Lovejoy], cites @Lovejoy [pp. 12-12].
