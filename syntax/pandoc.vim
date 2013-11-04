@@ -50,7 +50,7 @@ syn match AtxStart /#/ contained containedin=pandocAtxHeader conceal cchar=§
 
 " Blockquotes: {{{1
 "
-syn match pandocBlockQuote /^>.*\n\(.*\n\@<!\n\)*/ contains=@Spell,pandocEmphasis,pandocStrong skipnl
+syn match pandocBlockQuote /^>.*\n\(.*\n\@<!\n\)*/ contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout skipnl
 
 " }}}
 
