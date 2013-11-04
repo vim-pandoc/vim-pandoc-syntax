@@ -65,3 +65,13 @@ def func(a):
 
 hello
 :  this is a definition.
+
+# lists
+
+* this
+* this
+    * and this
+	+ and this
+
+1) a
+2) b

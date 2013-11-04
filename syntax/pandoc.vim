@@ -145,7 +145,8 @@ syn match pandocFootnoteIDTail /\]/ contained containedin=pandocFootnoteID conce
 " List Items: {{{1
 "
 " Unordered lists 
-syn match pandocUListItem /^\s*[*+-]\s\+/he=e-1 conceal cchar=•
+syn match pandocUListItem /^\s*[*+-]\s\+/he=e-1
+syn match pandocUListItemBullet /[*+-]/ contained containedin=pandocUListItem conceal cchar=•
 " Ordered lists
 " TODO: support roman numerals
 syn match pandocListItem /^\s*\(\((*\d\+[.)]\+\)\|\((*\l[.)]\+\)\)\s\+/he=e-1
@@ -180,6 +181,7 @@ hi link pandocDelimitedCodeBlockLanguage Comment
 hi link pandocCodePre String
 hi link pandocUListItem Operator
 hi link pandocListItem Operator
+hi link pandocUListItemBullet Operator
 
 hi link pandocLinkArea Type
 hi link pandocLinkText Label
