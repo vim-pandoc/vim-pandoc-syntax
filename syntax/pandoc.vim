@@ -172,6 +172,13 @@ syn match pandocNewLine /\(  \|\\\)$/ conceal cchar=↵
 "}}}
 " }}}
 
+" YAML: {{{1
+
+unlet b:current_syntax
+syn include @YAML colors/yaml.vim
+syn region pandocYAMLHeader matchgroup=Delimiter start=/\%^\-\-\-/ end=/\-\-\-/ contains=@YAML 
+"}}}
+
 " Styling: {{{1
 hi link pandocTitleBlockTitle Directory
 hi link pandocAtxHeader Title
