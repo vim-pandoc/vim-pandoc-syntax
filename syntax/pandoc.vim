@@ -89,10 +89,10 @@ syn match pandocPCiteAnchor /@/ contained containedin=pandocPCite
 
 " Text Styles: {{{1
 
-"" Emphasis: {{{2
+" Emphasis: {{{2
 "
-syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\)\@<=\*\S\@=/ end=/\S\@<=\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
-syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\)\@<=_\S\@=/ end=/\S\@<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
+syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ end=/\S\@<=\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
+syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ end=/\S\@<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
 " }}}
 " Strong: {{{2
 "
@@ -119,9 +119,9 @@ syn region pandocStrikeout matchgroup=Operator start=/\~\~/ end=/\~\~/  contains
 
 " Delimited Code Blocks: {{{1
 " this is here because we can override strikeouts and subscripts
-syn region pandocDelimitedCodeBlock start=/^\z(\~\{3,}\~*\)/ end=/\z1\~*/ skipnl contains=pandocDelimitedCodeBlockStart keepend
-syn region pandocDelimitedCodeBlock start=/^\z(`\{3,}`*\)/ end=/\z1`*/ skipnl contains=pandocDelimitedCodeBlockStart keepend
-syn match pandocDelimitedCodeBlockStart /\(\_^\n\_^\)\@<=\(\~\{3,}\~*\|`\{3,}`*\)/ contained nextgroup=pandocDelimitedCodeBlockLanguage conceal cchar=λ
+syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=\~\{3,}\~*\)/ end=/\z1\~*/ skipnl contains=pandocDelimitedCodeBlockStart keepend
+syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=`\{3,}`*\)/ end=/\z1`*/ skipnl contains=pandocDelimitedCodeBlockStart keepend
+syn match pandocDelimitedCodeBlockStart /\(\_^\n\_^\(\s\{4,}\)\=\)\@<=\(\~\{3,}\~*\|`\{3,}`*\)/ contained nextgroup=pandocDelimitedCodeBlockLanguage conceal cchar=λ
 syn match pandocDelimitedCodeBlockLanguage /\(\s\?\)\@<=.\+\(\_$\)\@=/ contained
 syn match pandocDelimitedCodeBlockEnd /\(`\{3,}`*\|\~\{3,}\~*\)\(\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock conceal
 syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl

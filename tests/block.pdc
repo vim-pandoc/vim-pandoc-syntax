@@ -61,6 +61,12 @@ def func(a):
     return 1
 ~~~
 
+test
+
+    ~~~haskell
+    test
+    ~~~
+
 # definitions
 
 hello
