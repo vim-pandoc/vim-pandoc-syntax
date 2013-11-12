@@ -195,6 +195,8 @@ hi link pandocSetexHeader Title
 hi link pandocBlockQuote Comment
 hi link pandocCodeBlock String
 hi link pandocDelimitedCodeBlock String
+hi link pandocDelimitedCodeBlockStart Delimiter
+hi link pandocDelimitedCodeBlockEnd Delimiter
 hi link pandocDelimitedCodeBlockLanguage Comment
 hi link pandocCodePre String
 hi link pandocUListItem Operator
