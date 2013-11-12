@@ -119,8 +119,11 @@ syn region pandocStrikeout matchgroup=Operator start=/\~\~/ end=/\~\~/  contains
 
 " Delimited Code Blocks: {{{1
 " this is here because we can override strikeouts and subscripts
-syn region pandocDelimitedCodeBlock start=/^\z(\~\{3,}\~*\)\( {.\+}\)*/ end=/\z1\~*/ skipnl contains=pandocDelimitedCodeBlockLanguage
-syn match pandocDelimitedCodeBlockLanguage /{.\+}/ contained containedin=pandocDelimitedCodeBlock
+syn region pandocDelimitedCodeBlock start=/^\z(\~\{3,}\~*\)/ end=/\z1\~*/ skipnl contains=pandocDelimitedCodeBlockStart keepend
+syn region pandocDelimitedCodeBlock start=/^\z(`\{3,}`*\)/ end=/\z1`*/ skipnl contains=pandocDelimitedCodeBlockStart keepend
+syn match pandocDelimitedCodeBlockStart /\(\_^\n\_^\)\@<=\(\~\{3,}\~*\|`\{3,}`*\)/ contained nextgroup=pandocDelimitedCodeBlockLanguage conceal cchar=λ
+syn match pandocDelimitedCodeBlockLanguage /\(\s\?\)\@<=.\+\(\_$\)\@=/ contained
+syn match pandocDelimitedCodeBlockEnd /\(`\{3,}`*\|\~\{3,}\~*\)\(\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock conceal
 syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl
 syn match pandocCodePre /<code>.\{-}<\/code>/ skipnl
 " }}}
