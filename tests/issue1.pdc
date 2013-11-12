@@ -1,0 +1,16 @@
+CMake works fine with Visual Studio but there are a few things to consider. The
+property for the working directory in the Debugging section should most likely
+be set to `$(OutDir)`. Likewise, the start-up project must be set manually as
+it's set to ALL_BUILD by default. ALL_BUILD is a project that builds all
+projects and correctly triggers any scripts. ZERO_CHECK is a project that runs
+and, if any CMake files have been changed, asks to reload Visual Studio.
+
+Furthermore, if you're making a Windows application, you should add the WIN32
+parameter to `add_executable` to instruct the compiler to use the `WinMain`
+[entry-point](http://msdn.microsoft.com/en-us/library/f9t8842e.aspx) and
+WINDOWS
+[subsystem](http://msdn.microsoft.com/en-us/library/fcc1zstk%28v=vs.110%29.aspx):
+
+possible regressions:
+
+*test* test *test*. _ this 
