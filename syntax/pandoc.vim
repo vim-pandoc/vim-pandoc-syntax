@@ -159,11 +159,12 @@ syn match pandocFootnoteIDTail /\]/ contained containedin=pandocFootnoteID conce
 syn match pandocUListItem /^\s*[*+-]\s\+/he=e-1
 syn match pandocUListItemBullet /[*+-]/ contained containedin=pandocUListItem conceal cchar=•
 " Ordered lists
-" TODO: support roman numerals
 syn match pandocListItem /^\s*\(\((*\d\+[.)]\+\)\|\((*\l[.)]\+\)\)\s\+/he=e-1
 syn match pandocListItem /^\s*(*\u[.)]\+\s\{2,}/he=e-1
 syn match pandocListItem /^\s*(*[#][.)]\+\s\{1,}/he=e-1
 syn match pandocListItem /^\s*(*@.\{-}[.)]\+\s\{1,}/he=e-1
+" roman numerals, up to 'c', for now
+syn match pandocListItem /^\s*(*x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+/ 
 " }}}
 
 " Special: {{{1
