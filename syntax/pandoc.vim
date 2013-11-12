@@ -128,6 +128,14 @@ syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl
 syn match pandocCodePre /<code>.\{-}<\/code>/ skipnl
 " }}}
 
+" Abbreviations: {{{1
+syn region pandocAbbreviationDefinition start=/^\*\[.\{-}\]:\s*/ end="$" contains=pandocNoFormatted,@Spell
+syn match pandocAbbreviationSeparator /:/ contained containedin=pandocAbbreviationDefinition conceal cchar=→
+syn match pandocAbbreviation /\*\[.\{-}\]/ contained containedin=pandocAbbreviationDefinition
+syn match pandocAbbreviationHead /\*\[/ contained containedin=pandocAbbreviation conceal
+syn match pandocAbbreviationTail /\]/ contained containedin=pandocAbbreviation conceal
+" }}}
+
 " Footnotes: {{{1
 " we put these here not to interfere with superscripts.
 "
@@ -201,6 +209,12 @@ hi link pandocAutomaticLink Underlined
 
 hi link pandocDefinitionBlockTerm Identifier
 hi link pandocDefinitionBlockMark Operator
+
+hi link pandocAbbreviationHead Type
+hi link pandocAbbreviation Label
+hi link pandocAbbreviationTail Type
+hi link pandocAbbreviationSeparator Identifier
+hi link pandocAbbreviationDefinition Comment
 
 hi link pandocFootnoteID Label
 hi link pandocFootnoteIDHead Type
