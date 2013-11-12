@@ -92,7 +92,7 @@ syn match pandocPCiteAnchor /@/ contained containedin=pandocPCite
 "" Emphasis: {{{2
 "
 syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\)\@<=\*\S\@=/ end=/\S\@<=\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
-syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\)\@<=_\S\@=/ end=/\S\@<=_\([[:punct:]]\s\|\_$\)\@=/ contains=@Spell concealends
+syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\)\@<=_\S\@=/ end=/\S\@<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
 " }}}
 " Strong: {{{2
 "
