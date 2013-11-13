@@ -61,14 +61,27 @@ syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s
 "}}}
 
 " Links: {{{1
-syn region pandocLinkArea start=/\[.\{-}\]\@<=\(:\|(\|\[\)/ end=/\(\(\]\|)\)\|\(^\s*\n\|\%^\)\)/ contains=pandocLinkText,pandocLinkURL,pandocLinkTitle,pandocAutomaticLink,pandocPCite keepend
-syn region pandocLinkText matchgroup=Operator start=/\[/ end=/\]/ contained contains=@Spell containedin=pandocLinkArea extend 
-syn region pandocLinkTextRef matchgroup=Operator start=/(/ end=/)/ contained containedin=pandocLinkArea transparent 
-syn match pandocLinkTextText /\S*/ contained containedin=pandocLinkTextRef 
-syn match pandocLinkTitle /".\{-}"/ contained containedin=pandocLinkTextRef contains=@Spell
-
-" Automatic_links:
+"
+" Inline: {{{2
+syn region pandocLinkArea start=/\[.\{-}\](/ end=/)/ keepend
+syn match pandocLinkText /\[\zs.*\ze\]/ contained containedin=pandocLinkArea
+syn match pandocLinkData /(\zs.*\ze)/ contained containedin=pandocLinkArea
+syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocLinkData contains=@Spell
+" }}}
+" Reference: {{{2
+syn region pandocReferenceArea start=/\[.\{-}\]\s\{,1}\[/ end=/\]/ keepend
+syn match pandocReferenceText /\[\zs.\{-}\ze\]\s\{,1}\[/ contained containedin=pandocReferenceArea
+syn match pandocReferenceLabel /\]\s\{,1}\[\zs.\{-}\ze\]/ contained containedin=pandocReferenceArea
+" }}}
+" Definitions: {{{2
+syn region pandocReferenceDefinition start=/\[.\{-}\]:/ end=/\(\n\s*".*"$\|$\)/ keepend
+syn match pandocReferenceDefinitionLabel /\[\zs.\{-}\ze\]:/ contained containedin=pandocReferenceDefinition
+syn match pandocReferenceDefinitionAddress /:\s*\zs.*/ contained containedin=pandocReferenceDefinition
+syn match pandocReferenceDefinitionTip /\s*".\{-}"/ contained containedin=pandocReferenceDefinition,pandocReferenceDefinitionAddress contains=@Spell
+"}}}
+" Automatic_links: {{{2
 syn match pandocAutomaticLink /<\(https\{0,1}.\{-}\|.\{-}@.\{-}\..\{-}\)>/
+" }}}
 " }}}
 
 " Citations: {{{1
@@ -219,10 +232,20 @@ hi link pandocUListItem Operator
 hi link pandocListItem Operator
 hi link pandocUListItemBullet Operator
 
-hi link pandocLinkArea Type
-hi link pandocLinkText Label
-hi link pandocLinkTextText Underlined
-hi link pandocLinkTitle Identifier
+hi link pandocLinkArea Operator
+hi link pandocLinkText String 
+hi link pandocLinkData Underlined
+hi link pandocLinkTip Identifier 
+
+hi link pandocReferenceArea Operator
+hi link pandocReferenceText String
+hi link pandocReferenceLabel Label
+
+hi link pandocReferenceDefinition Operator
+hi link pandocReferenceDefinitionLabel Label
+hi link pandocReferenceDefinitionAddress Underlined
+hi link pandocReferenceDefinitionTip Identifier
+
 hi link pandocAutomaticLink Underlined
 
 hi link pandocDefinitionBlockTerm Identifier

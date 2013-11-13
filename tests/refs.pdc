@@ -2,6 +2,8 @@
 
 a link to [the example.com website](http://www.example.com "example") 
 
+well, [the example.com website](http://www.example.com) 
+
 testing footnotes[^footnote1]. this is kinda silly.^[another footnote.] 
 ^superscrips^ are ok, but be careful to keep spaces between the inline
 footnotes and the superscripts.
@@ -11,4 +13,20 @@ footnotes and the superscripts.
 Mister @Lovejoy95, at [-@Lovejoy], cites @Lovejoy [pp. 12-12].
 
 *[PCL]: P C L
+
+[hello][hello]aaaaaa this
+
+[hello] [hello] this is a test.
+
+[hello][]
+
+[hello]: www.google.com
+
+[hello]: www.google.com "pandoc"
+
+[hello]: www.google.com
+  "pandoc"
+this is no longer part of the reference definition
+
+
 
