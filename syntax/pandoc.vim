@@ -90,9 +90,15 @@ syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<
 " }}}
 " Strong: {{{2
 "
-syn region pandocStrong matchgroup=Operator start=/\*\*/ end=/\*\*/ contains=@Spell concealends 
+syn region pandocStrong matchgroup=Operator start=/\*\*/ end=/\*\*/ contains=@Spell concealends
 syn region pandocStrong matchgroup=Operator start=/__/ end=/__/ contains=@Spell concealends
 "}}}
+" Strong Emphasis: {{{2
+"
+syn region pandocStrongEmphasis matchgroup=Operator start=/\*\*\*/ end=/\*\*\*/ contains=@Spell concealends
+syn region pandocStrongEmphasis matchgroup=Operator start=/___/ end=/___/ contains=@Spell concealends
+" }}}
+"
 " Inline Code: {{{2
 
 " Using single back ticks
@@ -235,6 +241,7 @@ hi link pandocPCiteAnchor Operator
 
 hi pandocEmphasis gui=italic cterm=italic
 hi pandocStrong gui=bold cterm=bold
+hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
 hi link pandocNoFormatted String
 hi pandocSubscript gui=underline cterm=underline
 hi pandocSuperscript gui=underline cterm=underline
