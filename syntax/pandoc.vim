@@ -85,8 +85,8 @@ syn match pandocPCiteAnchor /@/ contained containedin=pandocPCite
 
 " Emphasis: {{{2
 "
-syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ end=/\S\@<=\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
-syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ end=/\S\@<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
+syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@<=\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
+syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell concealends
 " }}}
 " Strong: {{{2
 "
@@ -98,7 +98,12 @@ syn region pandocStrong matchgroup=Operator start=/__/ end=/__/ contains=@Spell 
 syn region pandocStrongEmphasis matchgroup=Operator start=/\*\*\*/ end=/\*\*\*/ contains=@Spell concealends
 syn region pandocStrongEmphasis matchgroup=Operator start=/___/ end=/___/ contains=@Spell concealends
 " }}}
-"
+" Mixed: {{{2
+syn region pandocStrongInEmphasis matchgroup=Operator start=/\*\*/ end=/\*\*/ contained containedin=pandocEmphasis contains=@Spell concealends
+syn region pandocStrongInEmphasis matchgroup=Operator start=/__/ end=/__/ contained containedin=pandocEmphasis contains=@Spell concealends
+syn region pandocEmphasisInStrong matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@<=\*\([[:punct:]]\|\s\|\_$\)\@=/ contained containedin=pandocStrong contains=@Spell concealends
+syn region pandocEmphasisInStrong matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@<=_\([[:punct:]]\|\s\|\_$\)\@=/ contained containedin=pandocStrong contains=@Spell concealends
+
 " Inline Code: {{{2
 
 " Using single back ticks
@@ -243,6 +248,8 @@ hi link pandocPCiteAnchor Operator
 hi pandocEmphasis gui=italic cterm=italic
 hi pandocStrong gui=bold cterm=bold
 hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
+hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
+hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
 hi link pandocNoFormatted String
 hi pandocSubscript gui=underline cterm=underline
 hi pandocSuperscript gui=underline cterm=underline
