@@ -66,6 +66,10 @@ def func(a):
     return 1
 ~~~
 
+~~~ {.python}
+print("hi")
+~~~
+
 test
 
     ~~~haskell
