@@ -1,8 +1,9 @@
 " vi: fdm=marker 
 " Vim syntax file
 " Language: Pandoc (superset of Markdown)
-" Maintainer: David Sanson <dsanson@gmail.com>
 " Maintainer: Felipe Morales <hel.sheep@gmail.com>
+" Contributor: David Sanson <dsanson@gmail.com>
+" Contributor: blaenk
 " OriginalAuthor: Jeremy Schultz <taozhyn@gmail.com>
 " Version: 5.0
 
@@ -32,20 +33,11 @@ syn match pandocLatex /\$.\{-}\$/ contains=@LATEX
 " }}}}
 " }}}
 
-" Headings: {{{1
-
+" Titleblock: {{{1
+"
 syn region pandocTitleBlock start=/\%^%/ end=/\n\n/ contains=pandocLinkArea,pandocNewLine
 syn match pandocTitleBlockMark /%\ / contained containedin=pandocTitleBlock,pandocTitleBlockTitle conceal
 syn match pandocTitleBlockTitle /\%^%.*\n/ contained containedin=pandocTitleBlock
-
-"""""""""""""""""""""""""""""""""""""""""""""
-" Header:
-"
-syn match pandocAtxHeader /^\s*#\{1,6}.*\n/ contains=pandocEmphasis,pandocStrong
-syn match pandocSetexHeader /^.\+\n[=]\+$/ contains=pandocEmphasis,pandocStrong
-syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong
-syn match AtxStart /#/ contained containedin=pandocAtxHeader conceal cchar=§
-
 "}}}
 
 " Blockquotes: {{{1
@@ -137,6 +129,14 @@ syn region pandocSuperscript matchgroup=Operator start=/\^/ end=/\^/ contains=@S
 syn region pandocStrikeout matchgroup=Operator start=/\~\~/ end=/\~\~/  contains=@Spell concealends cchar=!
 " }}}
 " }}}
+
+" Headers: {{{1
+"
+syn match pandocAtxHeader /^\s*#\{1,6}.*\n/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted
+syn match AtxStart /#/ contained containedin=pandocAtxHeader conceal cchar=§
+syn match pandocSetexHeader /^.\+\n[=]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted
+syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted
+"}}}
 
 " Delimited Code Blocks: {{{1
 " this is here because we can override strikeouts and subscripts
