@@ -160,7 +160,7 @@ syn match pandocFootnoteIDTail /\]/ contained containedin=pandocFootnoteID conce
 
 " Definitions: {{{1
 "
-syn region pandocDefinitionBlock start=/^.*\n\(^\s*\n\)*\s\{0,2}[:~]/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent keepend 
+syn region pandocDefinitionBlock start=/^.*\n\(^\s*\n\)*\s\{0,2}[:~]/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent,pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocFootnoteID,pandocLinkArea,pandocAutomaticLink keepend 
 syn match pandocDefinitionBlockTerm /^.*\n\(^\s*\n\)*\(\s*[:~]\)\@=/ contained contains=pandocNoFormatted,pandocEmphasis,pandocStrong
 syn match pandocDefinitionBlockMark /^\s*[:~]/ contained conceal cchar= 
 " }}}
@@ -201,6 +201,7 @@ syn region pandocYAMLHeader matchgroup=Delimiter start=/\%^\-\-\-/ end=/\-\-\-/ 
 "}}}
 
 " Styling: {{{1
+hi pandocTitleBlock term=italic gui=italic
 hi link pandocTitleBlockTitle Directory
 hi link pandocAtxHeader Title
 hi link AtxStart Operator
