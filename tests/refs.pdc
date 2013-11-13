@@ -28,5 +28,6 @@ Mister @Lovejoy95, at [-@Lovejoy], cites @Lovejoy [pp. 12-12].
   "pandoc"
 this is no longer part of the reference definition
 
+![test](less.jpg)
 
-
+![test][]

@@ -63,15 +63,18 @@ syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s
 " Links: {{{1
 "
 " Inline: {{{2
-syn region pandocLinkArea start=/\[.\{-}\](/ end=/)/ keepend
+syn region pandocLinkArea start=/!\{,1}\[.\{-}\](/ end=/)/ keepend
 syn match pandocLinkText /\[\zs.*\ze\]/ contained containedin=pandocLinkArea
 syn match pandocLinkData /(\zs.*\ze)/ contained containedin=pandocLinkArea
 syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocLinkData contains=@Spell
 " }}}
 " Reference: {{{2
-syn region pandocReferenceArea start=/\[.\{-}\]\s\{,1}\[/ end=/\]/ keepend
+syn region pandocReferenceArea start=/!\{,1}\[.\{-}\]\s\{,1}\[/ end=/\]/ keepend
 syn match pandocReferenceText /\[\zs.\{-}\ze\]\s\{,1}\[/ contained containedin=pandocReferenceArea
 syn match pandocReferenceLabel /\]\s\{,1}\[\zs.\{-}\ze\]/ contained containedin=pandocReferenceArea
+" }}}
+" Image: {{{2
+syn match pandocImageIcon /!/ contained containedin=pandocLinkArea,pandocReferenceArea conceal cchar=▨
 " }}}
 " Definitions: {{{2
 syn region pandocReferenceDefinition start=/\[.\{-}\]:/ end=/\(\n\s*".*"$\|$\)/ keepend
@@ -197,9 +200,9 @@ syn match pandocListItem /^\s*(*x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+/
 " Horizontal Rules: {{{2
 "
 " 3 or more * on a line
-syn match pandocHRule /\s\{0,3}\(-\s*\)\{3,}\n/ conceal cchar=⁂
+syn match pandocHRule /\s\{0,3}\(-\s*\)\{3,}\n/ conceal cchar=—
 " 3 or more - on a line
-syn match pandocHRule /\s\{0,3}\(\*\s*\)\{3,}\n/ conceal cchar=⁂
+syn match pandocHRule /\s\{0,3}\(\*\s*\)\{3,}\n/ conceal cchar=—
 "}}}
 " New lines: {{{2
 syn match pandocNewLine /\(  \|\\\)$/ conceal cchar=↵
@@ -236,6 +239,7 @@ hi link pandocLinkArea Operator
 hi link pandocLinkText String 
 hi link pandocLinkData Underlined
 hi link pandocLinkTip Identifier 
+hi link pandocImageIcon Operator
 
 hi link pandocReferenceArea Operator
 hi link pandocReferenceText String
