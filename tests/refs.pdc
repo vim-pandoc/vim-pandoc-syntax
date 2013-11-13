@@ -42,3 +42,11 @@ delta function](http://en.wikipedia.org/wiki/Dirac_delta_function) (unit
 impulse) $\delta[n]$ through a linear system results in the impulse response
 $h[n]$. The impulse response is simply the signal resulting from passing the
 unit impulse (Dirac delta function) through a linear system.
+
+# issue 25 
+
+[[abc]](xxx)
+
+[[abc]][]
+
+[[abc]]: x
