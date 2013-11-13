@@ -10,7 +10,6 @@
 syntax clear
 setlocal conceallevel=2
 syntax spell toplevel
-syntax sync minlines=100
 "}}}
 
 " Embeds: {{{1
@@ -288,3 +287,6 @@ hi link pandocNewLine Error
 "}}}
 
 let b:current_syntax = "pandoc"
+
+syntax sync minlines=100
+
