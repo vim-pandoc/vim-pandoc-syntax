@@ -20,14 +20,25 @@ Mister @Lovejoy95, at [-@Lovejoy], cites @Lovejoy [pp. 12-12].
 
 [hello][]
 
-[hello]: www.google.com
+[hello1]: www.google.com
 
-[hello]: www.google.com "pandoc"
+[hello2]: www.google.com "pandoc"
 
-[hello]: www.google.com
+[hello3]: www.google.com
   "pandoc"
 this is no longer part of the reference definition
 
-![test](less.jpg)
+![test](test.png)
 
-![test][]
+![testimg][]
+
+[testimg]: test.png
+
+What follows are some notes on algorithms I've been reviewing from [Algorithms](http://amzn.com/032157351X) by Robert Sedgewick and Kevin Wayne, [The Algorithm Design Manual](http://amzn.com/1849967202) by Steven S. Skiena, and other sources around the Internet [^mit] [^umd] [^umgd]. I wanted to write some notes on the material so that I could easily look back on it, but mainly so that I could be sure that I understand the material --- since I have to understand it to explain it.
+
+[Convolution](http://en.wikipedia.org/wiki/Convolution) is a mathematical
+method of combining two signals to form a third signal. Passing the [Dirac
+delta function](http://en.wikipedia.org/wiki/Dirac_delta_function) (unit
+impulse) $\delta[n]$ through a linear system results in the impulse response
+$h[n]$. The impulse response is simply the signal resulting from passing the
+unit impulse (Dirac delta function) through a linear system.
