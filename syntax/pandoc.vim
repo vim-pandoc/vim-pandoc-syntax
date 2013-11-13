@@ -10,6 +10,7 @@
 syntax clear
 setlocal conceallevel=2
 syntax spell toplevel
+syntax sync minlines=100
 "}}}
 
 " Embeds: {{{1
