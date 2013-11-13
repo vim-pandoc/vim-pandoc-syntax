@@ -15,6 +15,9 @@ very very very very very very very* long.
 
 this is a paragraph where _italics_ and __bold__ are set with underscores.
 
+***this*** is a paragraph with ***strongly emphasized*** words, such as this
+___one___.
+
 # italics *in* titles
 
 yes, we can.
