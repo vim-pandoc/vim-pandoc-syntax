@@ -72,6 +72,9 @@ test
 hello
 :  this is a definition.
 
+`hello`
+:  this is a definition
+
 # lists
 
 * this

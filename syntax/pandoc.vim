@@ -57,14 +57,8 @@ syn match pandocBlockQuote /^>.*\n\(.*\n\@<!\n\)*/ contains=@Spell,pandocEmphasi
 " Code Blocks: {{{1
 "
 syn region pandocCodeBlock   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s\{4,}\|\t\+\)\).*\n/ end=/.\(\n^\s*\n\)\@=/
+syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s\{8,}\|\t\+\)\).*\n/ end=/.\(\n^\s*\n\)\@=/ contained
 "}}}
-
-" Definitions: {{{1
-"
-syn match pandocDefinitionBlock /^.*\n\(^\s*\n\)*\s\{0,2}[:~]\(\s\{1,3}\|\t\).*\n\(\(^\s\{4,}\|^\t\).*\n\)*/ skipnl contains=pandocDefinitionBlockTerm,pandocDefinitionBlockMark,pandocLinkArea,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,@Spell
-syn match pandocDefinitionBlockTerm /^.*\n\(^\s*\n\)*\(\s*[:~]\)\@=/ contained containedin=pandocDefinitionBlock contains=pandocNoFormatted,pandocEmphasis
-syn match pandocDefinitionBlockMark /^\s*[:~]/ contained containedin=pandocDefinitionBlock
-" }}}
 
 " Links: {{{1
 syn region pandocLinkArea start=/\[.\{-}\]\@<=\(:\|(\|\[\)/ end=/\(\(\]\|)\)\|\(^\s*\n\|\%^\)\)/ contains=pandocLinkText,pandocLinkURL,pandocLinkTitle,pandocAutomaticLink,pandocPCite keepend
@@ -153,6 +147,13 @@ syn match pandocFootnoteIDHead /\[\^/ contained containedin=pandocFootnoteID con
 syn match pandocFootnoteIDTail /\]/ contained containedin=pandocFootnoteID conceal
 " }}}
 
+" Definitions: {{{1
+"
+syn region pandocDefinitionBlock start=/^.*\n\(^\s*\n\)*\s\{0,2}[:~]/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent keepend 
+syn match pandocDefinitionBlockTerm /^.*\n\(^\s*\n\)*\(\s*[:~]\)\@=/ contained contains=pandocNoFormatted,pandocEmphasis,pandocStrong
+syn match pandocDefinitionBlockMark /^\s*[:~]/ contained conceal cchar= 
+" }}}
+
 " List Items: {{{1
 "
 " Unordered lists 
@@ -195,6 +196,7 @@ hi link pandocSetexHeader Title
 
 hi link pandocBlockQuote Comment
 hi link pandocCodeBlock String
+hi link pandocCodeBlockInsideIndent String
 hi link pandocDelimitedCodeBlock String
 hi link pandocDelimitedCodeBlockStart Delimiter
 hi link pandocDelimitedCodeBlockEnd Delimiter
