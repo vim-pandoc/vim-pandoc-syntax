@@ -222,14 +222,24 @@ syn match pandocListItem /^\s*(*x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+/
 "
 " Horizontal Rules: {{{2
 "
-" 3 or more * on a line
-exe 'syn match pandocHRule /\s\{0,3}\(-\s*\)\{3,}\n/ conceal cchar='.s:pandoc_syntax_cchars["hr"]
 " 3 or more - on a line
-exe 'syn match pandocHRule /\s\{0,3}\(\*\s*\)\{3,}\n/ conceal cchar='.s:pandoc_syntax_cchars["hr"]
+exe 'syn match pandocHRule /^\s\{,3}\(-\s*\)\{3,}\n/ conceal cchar='.s:pandoc_syntax_cchars["hr"]
+" 3 or more * on a line
+exe 'syn match pandocHRule /^\s\{,3}\(\*\s*\)\{3,}\n/ conceal cchar='.s:pandoc_syntax_cchars["hr"]
 "}}}
-" New lines: {{{2
+" New_lines: {{{2
 exe 'syn match pandocNewLine /\(  \|\\\)$/ conceal cchar='.s:pandoc_syntax_cchars["newline"]
 "}}}
+" Dashes: {{{2
+syn match pandocEmDash /---/ conceal cchar=—
+syn match pandocEnDash /---\@!/ conceal cchar=-
+syn match pandocEllipses /\.\.\./ conceal cchar=…
+" }}}
+" Quotes: {{{2
+syn match pandocBeginQuote /"\</ conceal cchar=“
+syn match pandocEndQuote /\>"/ conceal cchar=”
+" }}}
+"
 " }}}
 
 " YAML: {{{1
@@ -240,6 +250,8 @@ syn region pandocYAMLHeader matchgroup=Delimiter start=/\%^\-\-\-/ end=/\-\-\-/ 
 "}}}
 
 " Styling: {{{1
+" override this for consistency
+hi! link Conceal Operator
 hi pandocTitleBlock term=italic gui=italic
 hi link pandocTitleBlockTitle Directory
 hi link pandocAtxHeader Title

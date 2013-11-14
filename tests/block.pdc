@@ -32,10 +32,6 @@ with ~~striked out~~ text.
 a new line can be outputted for lines with a couple  
 of spaces.
 
----
-
-***
-
 # mix and match
 
 oh no! mix and match *is **hard** stuff*, real hard.
@@ -93,3 +89,18 @@ hello
 
 1) a
 2) b
+
+# smart punctuation
+
+an em-dash --- in some text.
+an en-dash: --.
+ellipses: ....
+quote "signs". This only works at the beggining and end of words.
+
+# horizontal rules
+
+---
+
+***
+
+
