@@ -237,7 +237,7 @@ syn match pandocEllipses /\.\.\./ conceal cchar=…
 " }}}
 " Quotes: {{{2
 syn match pandocBeginQuote /"\</ conceal cchar=“
-syn match pandocEndQuote /\(\>\|[[:punct:]]\)"/ conceal cchar=”
+syn match pandocEndQuote /\(\>\|[[:punct:]]\)\@<="/ conceal cchar=”
 " }}}
 "
 " }}}
