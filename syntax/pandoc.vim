@@ -280,7 +280,10 @@ hi link pandocSetexHeader Title
 hi link pandocBlockQuote Comment
 hi link pandocCodeBlock String
 hi link pandocCodeBlockInsideIndent String
-hi link pandocDelimitedCodeBlock Special
+" if the user sets g:pandoc_syntax_fill_codeblocks to 0, we use Normal
+if !exists("g:pandoc_syntax_fill_codeblocks") || g:pandoc_syntax_fill_codeblocks != 0
+    hi link pandocDelimitedCodeBlock Special
+endif
 hi link pandocDelimitedCodeBlockStart Delimiter
 hi link pandocDelimitedCodeBlockEnd Delimiter
 hi link pandocDelimitedCodeBlockLanguage Comment
