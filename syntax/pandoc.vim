@@ -251,7 +251,6 @@ syn region pandocYAMLHeader matchgroup=Delimiter start=/\%^\-\-\-/ end=/\-\-\-/ 
 
 " Styling: {{{1
 " override this for consistency
-hi! link Conceal Operator
 hi pandocTitleBlock term=italic gui=italic
 hi link pandocTitleBlockTitle Directory
 hi link pandocAtxHeader Title
