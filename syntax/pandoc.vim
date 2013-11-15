@@ -163,11 +163,11 @@ syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,
 
 " Delimited Code Blocks: {{{1
 " this is here because we can override strikeouts and subscripts
-syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=\~\{3,}\~*\)/ end=/\z1\~*/ skipnl contains=pandocDelimitedCodeBlockStart keepend
-syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=`\{3,}`*\)/ end=/\z1`*/ skipnl contains=pandocDelimitedCodeBlockStart keepend
+syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=\~\{3,}\~*\)/ end=/\z1\~*/ skipnl contains=pandocDelimitedCodeBlockStart,pandocDelimitedCodeBlockEnd keepend
+syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=`\{3,}`*\)/ end=/\z1`*/ skipnl contains=pandocDelimitedCodeBlockStart,pandocDelimitedCodeBlockEnd keepend
 exe 'syn match pandocDelimitedCodeBlockStart /\(\_^\n\_^\(\s\{4,}\)\=\)\@<=\(\~\{3,}\~*\|`\{3,}`*\)/ contained nextgroup=pandocDelimitedCodeBlockLanguage conceal cchar='.s:pandoc_syntax_cchars["codelang"]
 syn match pandocDelimitedCodeBlockLanguage /\(\s\?\)\@<=.\+\(\_$\)\@=/ contained
-syn match pandocDelimitedCodeBlockEnd /\(`\{3,}`*\|\~\{3,}\~*\)\(\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock conceal
+syn match pandocDelimitedCodeBlockEnd /\(`\{3,}`*\|\~\{3,}\~*\)\(\_$\n\_$\)\@=/ conceal
 syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl
 syn match pandocCodePre /<code>.\{-}<\/code>/ skipnl
 
@@ -180,13 +180,12 @@ if exists("g:pandoc_user_codelangs")
     let s:pandoc_enabled_codelangs = extend(s:pandoc_enabled_codelangs, g:pandoc_user_codelangs)
 endif
 
-setlocal isk+=_
 for l in s:pandoc_enabled_codelangs
     unlet b:current_syntax
     exe 'syn include @'.toupper(l).' syntax/'.l.'.vim'
-    exe 'syn region pandocDelimitedCodeBlock_'.l.' start=/\(^\z(\(\s\{4,}\)\=[`~]\{3,}[`~]*\).*'.l.'.*\n\)\@<=./'.
-		\' skip=/\_$/ end=/$/ '.
-		\'contained containedin=pandocDelimitedCodeBlock contains=pandocDelimitedCodeBlockEnd,@'.toupper(l)
+    exe "syn region panodcDelimitedCodeBlock_" . l . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\).*' . l . '.*\n\)\@<=\_^/' .
+          \' end=/\_$\n\(\(`\{3,}`*\|\~\{3,}\~*\)\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock' .
+          \' contains=@' . toupper(l)
     exe 'hi link pandocDelimitedCodeBlock_'.l.' pandocDelimitedCodeBlock'
 endfor
 " }}}
@@ -345,5 +344,6 @@ hi link pandocNewLine Error
 
 let b:current_syntax = "pandoc"
 
+syntax sync clear
 syntax sync minlines=100
 
