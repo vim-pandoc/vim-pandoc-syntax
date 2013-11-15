@@ -167,11 +167,11 @@ syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=\~\{3,}\~*\)/ end=/\
 syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=`\{3,}`*\)/ end=/\z1`*/ skipnl contains=pandocDelimitedCodeBlockStart keepend
 exe 'syn match pandocDelimitedCodeBlockStart /\(\_^\n\_^\(\s\{4,}\)\=\)\@<=\(\~\{3,}\~*\|`\{3,}`*\)/ contained nextgroup=pandocDelimitedCodeBlockLanguage conceal cchar='.s:pandoc_syntax_cchars["codelang"]
 syn match pandocDelimitedCodeBlockLanguage /\(\s\?\)\@<=.\+\(\_$\)\@=/ contained
-syn match pandocDelimitedCodeBlockEnd /\(`\{3,}`*\|\~\{3,}\~*\)\(\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock conceal
+syn match pandocDelimitedCodeBlockEnd /\(`\{3,}`*\|\~\{3,}\~*\)\(\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock conceal
 syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl
 syn match pandocCodePre /<code>.\{-}<\/code>/ skipnl
 
-let s:pandoc_enabled_codelangs = ["cmake",
+let s:pandoc_enabled_codelangs = [
 	    \"cpp",
 	    \"haskell",
 	    \"python",
@@ -184,7 +184,9 @@ setlocal isk+=_
 for l in s:pandoc_enabled_codelangs
     unlet b:current_syntax
     exe 'syn include @'.toupper(l).' syntax/'.l.'.vim'
-    exe 'syn region pandocDelimitedCodeBlock_'.l.' start=/\(^\z(\(\s\{4,}\)\=`\{3,}`*\).*'.l.'.*\n\)\@<=./ end=/\n\(\(`\{3,}`*\|\~\{3,}\~*\)\(\_$\n\_$\)\@=\)\@=/ skipnl contained containedin=pandocDelimitedCodeBlock contains=@'.toupper(l)
+    exe 'syn region pandocDelimitedCodeBlock_'.l.' start=/\(^\z(\(\s\{4,}\)\=[`~]\{3,}[`~]*\).*'.l.'.*\n\)\@<=./'.
+		\' skip=/\_$/ end=/$/ '.
+		\'contained containedin=pandocDelimitedCodeBlock contains=pandocDelimitedCodeBlockEnd,@'.toupper(l)
     exe 'hi link pandocDelimitedCodeBlock_'.l.' pandocDelimitedCodeBlock'
 endfor
 " }}}
