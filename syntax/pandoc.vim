@@ -3,7 +3,7 @@
 " Language: Pandoc (superset of Markdown)
 " Maintainer: Felipe Morales <hel.sheep@gmail.com>
 " Contributor: David Sanson <dsanson@gmail.com>
-" Contributor: blaenk
+" Contributor: Jorge Israel Peña <jorge.israel.p@gmail.com>
 " OriginalAuthor: Jeremy Schultz <taozhyn@gmail.com>
 " Version: 5.0
 
