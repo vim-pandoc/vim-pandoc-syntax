@@ -170,6 +170,23 @@ syn match pandocDelimitedCodeBlockLanguage /\(\s\?\)\@<=.\+\(\_$\)\@=/ contained
 syn match pandocDelimitedCodeBlockEnd /\(`\{3,}`*\|\~\{3,}\~*\)\(\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock conceal
 syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl
 syn match pandocCodePre /<code>.\{-}<\/code>/ skipnl
+
+let s:pandoc_enabled_codelangs = ["cmake",
+	    \"cpp",
+	    \"haskell",
+	    \"python",
+	    \"ruby"]
+if exists("g:pandoc_user_codelangs")
+    let s:pandoc_enabled_codelangs = extend(s:pandoc_enabled_codelangs, g:pandoc_user_codelangs)
+endif
+
+setlocal isk+=_
+for l in s:pandoc_enabled_codelangs
+    unlet b:current_syntax
+    exe 'syn include @'.toupper(l).' syntax/'.l.'.vim'
+    exe 'syn region pandocDelimitedCodeBlock_'.l.' start=/\(^\z(\(\s\{4,}\)\=`\{3,}`*\).*'.l.'.*\n\)\@<=./ end=/\n\(\(`\{3,}`*\|\~\{3,}\~*\)\(\_$\n\_$\)\@=\)\@=/ skipnl contained containedin=pandocDelimitedCodeBlock contains=@'.toupper(l)
+    exe 'hi link pandocDelimitedCodeBlock_'.l.' pandocDelimitedCodeBlock'
+endfor
 " }}}
 
 " Abbreviations: {{{1
