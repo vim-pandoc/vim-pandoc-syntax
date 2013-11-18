@@ -50,7 +50,7 @@ endif
 " }}}
 
 " Functions: {{{1
-function EnableEmbedsforCodeblocksWithLang(langname, langsyntaxfile) 
+function! EnableEmbedsforCodeblocksWithLang(langname, langsyntaxfile) 
     unlet b:current_syntax
     exe 'syn include @'.toupper(langname).' syntax/'.g:pandoc_use_embeds_in_codeblocks_for_langs[langname].'.vim'
     exe "syn region pandocDelimitedCodeBlock_" . langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\).*' . langname . '.*\n\)\@<=\_^/' .
@@ -59,7 +59,7 @@ function EnableEmbedsforCodeblocksWithLang(langname, langsyntaxfile)
     exe 'hi link pandocDelimitedCodeBlock_'.langname.' pandocDelimitedCodeBlock'
 endfunction
 
-function DisableEmbedsforCodeblocksWithLang(langname)
+function! DisableEmbedsforCodeblocksWithLang(langname)
     exe 'syn clear pandocDelimitedCodeBlock_'.langname
     exe 'hi clear pandocDefinitionBlock_'.langname
 endfunction
@@ -118,7 +118,7 @@ syn match pandocReferenceText /\[\zs.\{-}\ze\]\s\{,1}\[/ contained containedin=p
 syn match pandocReferenceLabel /\]\s\{,1}\[\zs.\{-}\ze\]/ contained containedin=pandocReferenceArea
 " }}}
 " Inline: {{{2
-syn region pandocLinkArea start=/!\{,1}\[i/ skip=/\](/ end=/)/ keepend
+syn region pandocLinkArea start=/!\{,1}\[/ skip=/\](/ end=/)/ keepend
 syn match pandocLinkText /\[\zs.\{-}\ze\]/ contained containedin=pandocLinkArea
 syn match pandocLinkData /(\zs.\{-}\ze)/ contained containedin=pandocLinkArea
 syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocLinkData contains=@Spell
