@@ -118,7 +118,7 @@ syn match pandocReferenceText /\[\zs.\{-}\ze\]\s\{,1}\[/ contained containedin=p
 syn match pandocReferenceLabel /\]\s\{,1}\[\zs.\{-}\ze\]/ contained containedin=pandocReferenceArea
 " }}}
 " Inline: {{{2
-syn region pandocLinkArea start=/!\{,1}\[/ skip=/\](/ end=/)/ keepend
+syn region pandocLinkArea start=/!\{,1}\[.\{-}\](/ end=/)/ keepend
 syn match pandocLinkText /\[\zs.\{-}\ze\]/ contained containedin=pandocLinkArea
 syn match pandocLinkData /(\zs.\{-}\ze)/ contained containedin=pandocLinkArea
 syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocLinkData contains=@Spell
