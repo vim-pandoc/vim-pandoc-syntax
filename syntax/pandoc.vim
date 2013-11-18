@@ -112,19 +112,10 @@ syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s
 
 " Links: {{{1
 "
-" Reference: {{{2
-syn region pandocReferenceArea start=/!\{,1}\[/ skip=/\]\s\{,1}\[/ end=/\]/ keepend
-syn match pandocReferenceText /\[\zs.\{-}\ze\]\s\{,1}\[/ contained containedin=pandocReferenceArea
-syn match pandocReferenceLabel /\]\s\{,1}\[\zs.\{-}\ze\]/ contained containedin=pandocReferenceArea
-" }}}
-" Inline: {{{2
-syn region pandocLinkArea start=/!\{,1}\[.\{-}\](/ end=/)/ keepend
-syn match pandocLinkText /\[\zs.\{-}\ze\]/ contained containedin=pandocLinkArea
-syn match pandocLinkData /(\zs.\{-}\ze)/ contained containedin=pandocLinkArea
-syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocLinkData contains=@Spell
-" }}}
-" Image: {{{2
-exe "syn match pandocImageIcon /!/ contained containedin=pandocLinkArea,pandocReferenceArea conceal cchar=". s:cchars["image"]
+syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/\]\]\@=/ end=/\]/ keepend
+syn region pandocReferenceURL matchgroup=Operator start=/\]\@<=(/ end=/)/ keepend
+syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocReferenceURL contains=@Spell
+exe 'syn match pandocImageIcon /!\[\@=/ conceal cchar='. s:cchars["image"]
 " }}}
 " Definitions: {{{2
 syn region pandocReferenceDefinition start=/\[.\{-}\]:/ end=/\(\n\s*".*"$\|$\)/ keepend
@@ -324,15 +315,10 @@ hi link pandocUListItem Operator
 hi link pandocListItem Operator
 hi link pandocUListItemBullet Operator
 
-hi link pandocLinkArea Operator
-hi link pandocLinkText String 
-hi link pandocLinkData Underlined
-hi link pandocLinkTip Identifier 
-hi link pandocImageIcon Operator
-
-hi link pandocReferenceArea Operator
-hi link pandocReferenceText String
 hi link pandocReferenceLabel Label
+hi link pandocReferenceURL Underlined
+hi link pandocLinkTip Identifier
+hi link pandocImageIcon Operator
 
 hi link pandocReferenceDefinition Operator
 hi link pandocReferenceDefinitionLabel Label
