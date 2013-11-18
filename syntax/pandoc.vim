@@ -27,6 +27,42 @@ let s:cchars = {
 if exists("g:pandoc_syntax_user_cchars")
     let s:cchars = extend(s:cchars, g:pandoc_syntax_user_cchars)
 endif
+
+" Defaults: {{{2
+
+" highlight codeblocks differently to normal text
+if !exists("g:pandoc_syntax_fill_codeblocks")
+    let g:pandoc_syntax_fill_codeblocks = 1
+endif
+
+" use embedded highlighting for delimited codeblocks where a language is
+" specifed.
+if !exists("g:pandoc_use_embeds_in_codeblocks")
+    let g:pandoc_use_embeds_in_codeblocks = 1
+endif
+
+" for what languages and using what vim syntax files highlight those embeds
+" defaults to None.
+if !exists("g:pandoc_use_embeds_in_codeblocks_for_langs")
+    let g:pandoc_use_embeds_in_codeblocks_for_langs = {}
+endif
+"}}}
+" }}}
+
+" Functions: {{{1
+function EnableEmbedsforCodeblocksWithLang(langname, langsyntaxfile) 
+    unlet b:current_syntax
+    exe 'syn include @'.toupper(langname).' syntax/'.g:pandoc_use_embeds_in_codeblocks_for_langs[langname].'.vim'
+    exe "syn region pandocDelimitedCodeBlock_" . langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\).*' . langname . '.*\n\)\@<=\_^/' .
+	  \' end=/\_$\n\(\(`\{3,}`*\|\~\{3,}\~*\)\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock' .
+	  \' contains=@' . toupper(langname)
+    exe 'hi link pandocDelimitedCodeBlock_'.langname.' pandocDelimitedCodeBlock'
+endfunction
+
+function DisableEmbedsforCodeblocksWithLang(langname)
+    exe 'syn clear pandocDelimitedCodeBlock_'.langname
+    exe 'hi clear pandocDefinitionBlock_'.langname
+endfunction
 " }}}
 
 " BASE: {{{1
@@ -171,23 +207,21 @@ syn match pandocDelimitedCodeBlockEnd /\(`\{3,}`*\|\~\{3,}\~*\)\(\_$\n\_$\)\@=/ 
 syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl
 syn match pandocCodePre /<code>.\{-}<\/code>/ skipnl
 
-let s:pandoc_enabled_codelangs = [
-	    \"cpp",
-	    \"haskell",
-	    \"python",
-	    \"ruby"]
-if exists("g:pandoc_user_codelangs")
-    let s:pandoc_enabled_codelangs = extend(s:pandoc_enabled_codelangs, g:pandoc_user_codelangs)
+" enable highlighting for embedded region in codeblocks if there exists a
+" g:pandoc_use_embeds_in_codeblocks_for_langs *dictionary*.
+"
+" keys in this dictionary are the language code interpreted by pandoc, and
+" values are the names of the corresponding vim syntax files, without the
+" extension (sometimes they don't match). E.g,
+"
+" let g:pandoc_use_embeds_in_codeblocks_for_langs = {
+"	    \ "literatehaskell": "lhaskell" }
+"
+if g:pandoc_use_embeds_in_codeblocks != 0
+    for l in keys(g:pandoc_use_embeds_in_codeblocks_for_langs)
+	call EnableEmbedsforCodeblocksWithLang(l, g:pandoc_use_embeds_in_codeblocks_for_langs[l])
+    endfor
 endif
-
-for l in s:pandoc_enabled_codelangs
-    unlet b:current_syntax
-    exe 'syn include @'.toupper(l).' syntax/'.l.'.vim'
-    exe "syn region panodcDelimitedCodeBlock_" . l . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\).*' . l . '.*\n\)\@<=\_^/' .
-          \' end=/\_$\n\(\(`\{3,}`*\|\~\{3,}\~*\)\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock' .
-          \' contains=@' . toupper(l)
-    exe 'hi link pandocDelimitedCodeBlock_'.l.' pandocDelimitedCodeBlock'
-endfor
 " }}}
 
 " Abbreviations: {{{1
