@@ -8,7 +8,7 @@
 " Version: 5.0
 
 " Configuration: {{{
-let s:pandoc_syntax_cchars = { 
+let s:cchars = { 
 	    \"newline": "↵", 
 	    \"image": "▨", 
 	    \"super": "ⁿ", 
@@ -25,7 +25,7 @@ let s:pandoc_syntax_cchars = {
 " if the user has a dictionary with replacements for the default cchars, 
 " use those
 if exists("g:pandoc_syntax_user_cchars")
-    let s:pandoc_syntax_cchars = extend(s:pandoc_syntax_cchars, g:pandoc_syntax_user_cchars)
+    let s:cchars = extend(s:cchars, g:pandoc_syntax_user_cchars)
 endif
 " }}}
 
@@ -88,7 +88,7 @@ syn match pandocLinkData /(\zs.\{-}\ze)/ contained containedin=pandocLinkArea
 syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocLinkData contains=@Spell
 " }}}
 " Image: {{{2
-exe "syn match pandocImageIcon /!/ contained containedin=pandocLinkArea,pandocReferenceArea conceal cchar=". s:pandoc_syntax_cchars["image"]
+exe "syn match pandocImageIcon /!/ contained containedin=pandocLinkArea,pandocReferenceArea conceal cchar=". s:cchars["image"]
 " }}}
 " Definitions: {{{2
 syn region pandocReferenceDefinition start=/\[.\{-}\]:/ end=/\(\n\s*".*"$\|$\)/ keepend
@@ -143,20 +143,20 @@ syn region pandocNoFormatted matchgroup=Operator start=/`/ end=/`/ concealends
 syn region pandocNoFormatted matchgroup=Operator start=/``/ end=/``/ concealends
 "}}}
 " Subscripts: {{{2 
-exe 'syn region pandocSubscript matchgroup=Operator start=/\~/ end=/\~/ contains=@Spell concealends cchar='.s:pandoc_syntax_cchars["sub"]
+exe 'syn region pandocSubscript matchgroup=Operator start=/\~/ end=/\~/ contains=@Spell concealends cchar='.s:cchars["sub"]
 "}}}
 " Superscript: {{{2
-exe 'syn region pandocSuperscript matchgroup=Operator start=/\^/ end=/\^/ contains=@Spell concealends cchar='.s:pandoc_syntax_cchars["super"]
+exe 'syn region pandocSuperscript matchgroup=Operator start=/\^/ end=/\^/ contains=@Spell concealends cchar='.s:cchars["super"]
 "}}}
 " Strikeout: {{{2
-exe 'syn region pandocStrikeout matchgroup=Operator start=/\~\~/ end=/\~\~/  contains=@Spell concealends cchar='.s:pandoc_syntax_cchars["strike"]
+exe 'syn region pandocStrikeout matchgroup=Operator start=/\~\~/ end=/\~\~/  contains=@Spell concealends cchar='.s:cchars["strike"]
 " }}}
 " }}}
 
 " Headers: {{{1
 "
 syn match pandocAtxHeader /^\s*#\{1,6}.*\n/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted
-exe "syn match AtxStart /#/ contained containedin=pandocAtxHeader conceal cchar=".s:pandoc_syntax_cchars["atx"]
+exe "syn match AtxStart /#/ contained containedin=pandocAtxHeader conceal cchar=".s:cchars["atx"]
 syn match pandocSetexHeader /^.\+\n[=]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted
 syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted
 "}}}
@@ -165,7 +165,7 @@ syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,
 " this is here because we can override strikeouts and subscripts
 syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=\~\{3,}\~*\)/ end=/\z1\~*/ skipnl contains=pandocDelimitedCodeBlockStart,pandocDelimitedCodeBlockEnd keepend
 syn region pandocDelimitedCodeBlock start=/^\z(\(\s\{4,}\)\=`\{3,}`*\)/ end=/\z1`*/ skipnl contains=pandocDelimitedCodeBlockStart,pandocDelimitedCodeBlockEnd keepend
-exe 'syn match pandocDelimitedCodeBlockStart /\(\_^\n\_^\(\s\{4,}\)\=\)\@<=\(\~\{3,}\~*\|`\{3,}`*\)/ contained nextgroup=pandocDelimitedCodeBlockLanguage conceal cchar='.s:pandoc_syntax_cchars["codelang"]
+exe 'syn match pandocDelimitedCodeBlockStart /\(\_^\n\_^\(\s\{4,}\)\=\)\@<=\(\~\{3,}\~*\|`\{3,}`*\)/ contained nextgroup=pandocDelimitedCodeBlockLanguage conceal cchar='.s:cchars["codelang"]
 syn match pandocDelimitedCodeBlockLanguage /\(\s\?\)\@<=.\+\(\_$\)\@=/ contained
 syn match pandocDelimitedCodeBlockEnd /\(`\{3,}`*\|\~\{3,}\~*\)\(\_$\n\_$\)\@=/ conceal
 syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl
@@ -192,7 +192,7 @@ endfor
 
 " Abbreviations: {{{1
 syn region pandocAbbreviationDefinition start=/^\*\[.\{-}\]:\s*/ end="$" contains=pandocNoFormatted,@Spell
-exe "syn match pandocAbbreviationSeparator /:/ contained containedin=pandocAbbreviationDefinition conceal cchar=".s:pandoc_syntax_cchars["abbrev"]
+exe "syn match pandocAbbreviationSeparator /:/ contained containedin=pandocAbbreviationDefinition conceal cchar=".s:cchars["abbrev"]
 syn match pandocAbbreviation /\*\[.\{-}\]/ contained containedin=pandocAbbreviationDefinition
 syn match pandocAbbreviationHead /\*\[/ contained containedin=pandocAbbreviation conceal
 syn match pandocAbbreviationTail /\]/ contained containedin=pandocAbbreviation conceal
@@ -204,14 +204,14 @@ syn match pandocAbbreviationTail /\]/ contained containedin=pandocAbbreviation c
 syn match pandocFootnoteID /\[\^[^\]]\+\]/ nextgroup=pandocFootnoteDef
 "   Inline footnotes
 syn region pandocFootnoteDef start=/\^\[/ end=/\]/ contains=pandocLinkArea,pandocLatex,pandocPCite,@Spell skipnl keepend 
-exe 'syn match pandocFootnoteDefHead /\^\[/ contained containedin=pandocFootnoteDef conceal cchar='.s:pandoc_syntax_cchars["footnote"]
+exe 'syn match pandocFootnoteDefHead /\^\[/ contained containedin=pandocFootnoteDef conceal cchar='.s:cchars["footnote"]
 syn match pandocFootnoteDefTail /\]/ contained containedin=pandocFootnoteDef conceal
 
 " regular footnotes
 syn region pandocFootnoteBlock start=/\[\^.\{-}\]:\s*\n*/ end=/^\n^\s\@!/ contains=pandocLinkArea,pandocLatex,pandocPCite,pandocStrong,pandocEmphasis,pandocNoFormatted,pandocSuperscript,pandocSubscript,pandocStrikeout,@Spell skipnl
 syn match pandocFootnoteBlockSeparator /:/ contained containedin=pandocFootnoteBlock
 syn match pandocFootnoteID /\[\^.\{-}\]/ contained containedin=pandocFootnoteBlock
-exe 'syn match pandocFootnoteIDHead /\[\^/ contained containedin=pandocFootnoteID conceal cchar='.s:pandoc_syntax_cchars["footnote"]
+exe 'syn match pandocFootnoteIDHead /\[\^/ contained containedin=pandocFootnoteID conceal cchar='.s:cchars["footnote"]
 syn match pandocFootnoteIDTail /\]/ contained containedin=pandocFootnoteID conceal
 " }}}
 
@@ -219,14 +219,14 @@ syn match pandocFootnoteIDTail /\]/ contained containedin=pandocFootnoteID conce
 "
 syn region pandocDefinitionBlock start=/^.*\n\(^\s*\n\)*\s\{0,2}[:~]\(\~\{2,}\~*\)\@!/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent,pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocFootnoteID,pandocLinkArea,pandocAutomaticLink keepend 
 syn match pandocDefinitionBlockTerm /^.*\n\(^\s*\n\)*\(\s*[:~]\)\@=/ contained contains=pandocNoFormatted,pandocEmphasis,pandocStrong
-exe 'syn match pandocDefinitionBlockMark /^\s*[:~]/ contained conceal cchar='.s:pandoc_syntax_cchars["definition"]
+exe 'syn match pandocDefinitionBlockMark /^\s*[:~]/ contained conceal cchar='.s:cchars["definition"]
 " }}}
 
 " List Items: {{{1
 "
 " Unordered lists 
 syn match pandocUListItem /^\s*[*+-]\s\+/he=e-1
-exe 'syn match pandocUListItemBullet /[*+-]/ contained containedin=pandocUListItem conceal cchar='.s:pandoc_syntax_cchars["li"]
+exe 'syn match pandocUListItemBullet /[*+-]/ contained containedin=pandocUListItem conceal cchar='.s:cchars["li"]
 " Ordered lists
 syn match pandocListItem /^\s*\(\((*\d\+[.)]\+\)\|\((*\l[.)]\+\)\)\s\+/he=e-1
 syn match pandocListItem /^\s*(*\u[.)]\+\s\{2,}/he=e-1
@@ -241,12 +241,12 @@ syn match pandocListItem /^\s*(*x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+/
 " Horizontal Rules: {{{2
 "
 " 3 or more - on a line
-exe 'syn match pandocHRule /^\s\{,3}\(-\s*\)\{3,}\n/ conceal cchar='.s:pandoc_syntax_cchars["hr"]
+exe 'syn match pandocHRule /^\s\{,3}\(-\s*\)\{3,}\n/ conceal cchar='.s:cchars["hr"]
 " 3 or more * on a line
-exe 'syn match pandocHRule /^\s\{,3}\(\*\s*\)\{3,}\n/ conceal cchar='.s:pandoc_syntax_cchars["hr"]
+exe 'syn match pandocHRule /^\s\{,3}\(\*\s*\)\{3,}\n/ conceal cchar='.s:cchars["hr"]
 "}}}
 " New_lines: {{{2
-exe 'syn match pandocNewLine /\(  \|\\\)$/ conceal cchar='.s:pandoc_syntax_cchars["newline"]
+exe 'syn match pandocNewLine /\(  \|\\\)$/ conceal cchar='.s:cchars["newline"]
 "}}}
 " Dashes: {{{2
 syn match pandocEmDash /---/ conceal cchar=—
