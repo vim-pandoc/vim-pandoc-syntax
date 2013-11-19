@@ -287,8 +287,11 @@ syn match pandocEndQuote /\(\>\|[[:punct:]]\)\@<="/ conceal cchar=”
 
 " YAML: {{{1
 
-unlet b:current_syntax
-syn include @YAML colors/yaml.vim
+try
+    unlet b:current_syntax
+    syn include @YAML colors/yaml.vim
+catch /E484/
+endtry
 syn region pandocYAMLHeader matchgroup=Delimiter start=/\%^\-\-\-/ end=/\-\-\-/ contains=@YAML 
 "}}}
 
