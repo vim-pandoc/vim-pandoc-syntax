@@ -93,7 +93,7 @@ syn match pandocLatex /\$.\{-}\$/ contains=@LATEX
 
 " Titleblock: {{{1
 "
-syn region pandocTitleBlock start=/\%^%/ end=/\n\n/ contains=pandocLinkArea,pandocNewLine
+syn region pandocTitleBlock start=/\%^%/ end=/\n\n/ contains=pandocReferenceLabel,pandocReferenceURL,pandocNewLine
 syn match pandocTitleBlockMark /%\ / contained containedin=pandocTitleBlock,pandocTitleBlockTitle conceal
 syn match pandocTitleBlockTitle /\%^%.*\n/ contained containedin=pandocTitleBlock
 "}}}
@@ -228,12 +228,12 @@ syn match pandocAbbreviationTail /\]/ contained containedin=pandocAbbreviation c
 "
 syn match pandocFootnoteID /\[\^[^\]]\+\]/ nextgroup=pandocFootnoteDef
 "   Inline footnotes
-syn region pandocFootnoteDef start=/\^\[/ end=/\]/ contains=pandocLinkArea,pandocLatex,pandocPCite,@Spell skipnl keepend 
+syn region pandocFootnoteDef start=/\^\[/ end=/\]/ contains=pandocReferenceLabel,pandocReferenceURL,pandocLatex,pandocPCite,@Spell skipnl keepend 
 exe 'syn match pandocFootnoteDefHead /\^\[/ contained containedin=pandocFootnoteDef conceal cchar='.s:cchars["footnote"]
 syn match pandocFootnoteDefTail /\]/ contained containedin=pandocFootnoteDef conceal
 
 " regular footnotes
-syn region pandocFootnoteBlock start=/\[\^.\{-}\]:\s*\n*/ end=/^\n^\s\@!/ contains=pandocLinkArea,pandocLatex,pandocPCite,pandocStrong,pandocEmphasis,pandocNoFormatted,pandocSuperscript,pandocSubscript,pandocStrikeout,@Spell skipnl
+syn region pandocFootnoteBlock start=/\[\^.\{-}\]:\s*\n*/ end=/^\n^\s\@!/ contains=pandocReferenceLabel,pandocReferenceURL,pandocLatex,pandocPCite,pandocStrong,pandocEmphasis,pandocNoFormatted,pandocSuperscript,pandocSubscript,pandocStrikeout,@Spell skipnl
 syn match pandocFootnoteBlockSeparator /:/ contained containedin=pandocFootnoteBlock
 syn match pandocFootnoteID /\[\^.\{-}\]/ contained containedin=pandocFootnoteBlock
 exe 'syn match pandocFootnoteIDHead /\[\^/ contained containedin=pandocFootnoteID conceal cchar='.s:cchars["footnote"]
@@ -242,7 +242,7 @@ syn match pandocFootnoteIDTail /\]/ contained containedin=pandocFootnoteID conce
 
 " Definitions: {{{1
 "
-syn region pandocDefinitionBlock start=/^.*\n\(^\s*\n\)*\s\{0,2}[:~]\(\~\{2,}\~*\)\@!/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent,pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocFootnoteID,pandocLinkArea,pandocAutomaticLink keepend 
+syn region pandocDefinitionBlock start=/^.*\n\(^\s*\n\)*\s\{0,2}[:~]\(\~\{2,}\~*\)\@!/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent,pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocFootnoteID,pandocReferenceURL,pandocReferenceLabel,pandocAutomaticLink keepend 
 syn match pandocDefinitionBlockTerm /^.*\n\(^\s*\n\)*\(\s*[:~]\)\@=/ contained contains=pandocNoFormatted,pandocEmphasis,pandocStrong
 exe 'syn match pandocDefinitionBlockMark /^\s*[:~]/ contained conceal cchar='.s:cchars["definition"]
 " }}}
