@@ -44,7 +44,7 @@ endif
 " for what languages and using what vim syntax files highlight those embeds
 " defaults to None.
 if !exists("g:pandoc_use_embeds_in_codeblocks_for_langs")
-    let g:pandoc_use_embeds_in_codeblocks_for_langs = {}
+    let g:pandoc_use_embeds_in_codeblocks_for_langs = []
 endif
 "}}}
 " }}}
