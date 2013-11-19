@@ -66,8 +66,8 @@ function! DisableEmbedsforCodeblocksWithLang(langname)
     exe 'hi clear pandocDefinitionBlock_'.a:langname
 endfunction
 
-command! -nargs=1 -complete=syntax PandocHighlight call EnableEmbedsforCodeblocksWithLang(<f-args>)
-command! -nargs=1 -complete=syntax PandocUnhighlight call DisableEmbedsforCodeblocksWithLang(<f-args>)
+command! -buffer -nargs=1 -complete=syntax PandocHighlight call EnableEmbedsforCodeblocksWithLang(<f-args>)
+command! -buffer -nargs=1 -complete=syntax PandocUnhighlight call DisableEmbedsforCodeblocksWithLang(<f-args>)
 
 " }}}
 
