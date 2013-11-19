@@ -50,19 +50,25 @@ endif
 " }}}
 
 " Functions: {{{1
-function! EnableEmbedsforCodeblocksWithLang(langname, langsyntaxfile) 
+function! EnableEmbedsforCodeblocksWithLang(entry)
+    let s:langname = matchstr(a:entry, "^[^=]*")
+    let s:langsyntaxfile = matchstr(a:entry, "[^=]*$")
     unlet b:current_syntax
-    exe 'syn include @'.toupper(a:langname).' syntax/'.a:langsyntaxfile.'.vim'
-    exe "syn region pandocDelimitedCodeBlock_" . a:langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\).*' . a:langname . '.*\n\)\@<=\_^/' .
+    exe 'syn include @'.toupper(s:langname).' syntax/'.s:langsyntaxfile.'.vim'
+    exe "syn region pandocDelimitedCodeBlock_" . s:langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\).*' . s:langname . '.*\n\)\@<=\_^/' .
 	  \' end=/\_$\n\(\(`\{3,}`*\|\~\{3,}\~*\)\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock' .
-	  \' contains=@' . toupper(a:langname)
-    exe 'hi link pandocDelimitedCodeBlock_'.a:langname.' pandocDelimitedCodeBlock'
+	  \' contains=@' . toupper(s:langname)
+    exe 'hi link pandocDelimitedCodeBlock_'.s:langname.' pandocDelimitedCodeBlock'
 endfunction
 
 function! DisableEmbedsforCodeblocksWithLang(langname)
     exe 'syn clear pandocDelimitedCodeBlock_'.a:langname
     exe 'hi clear pandocDefinitionBlock_'.a:langname
 endfunction
+
+command! -buffer -nargs=1 -complete=syntax PandocHighlight call EnableEmbedsforCodeblocksWithLang(<f-args>)
+command! -buffer -nargs=1 -complete=syntax PandocUnhighlight call DisableEmbedsforCodeblocksWithLang(<f-args>)
+
 " }}}
 
 " BASE: {{{1
@@ -199,18 +205,15 @@ syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl
 syn match pandocCodePre /<code>.\{-}<\/code>/ skipnl
 
 " enable highlighting for embedded region in codeblocks if there exists a
-" g:pandoc_use_embeds_in_codeblocks_for_langs *dictionary*.
+" g:pandoc_use_embeds_in_codeblocks_for_langs *list*.
 "
-" keys in this dictionary are the language code interpreted by pandoc, and
-" values are the names of the corresponding vim syntax files, without the
-" extension (sometimes they don't match). E.g,
-"
-" let g:pandoc_use_embeds_in_codeblocks_for_langs = {
-"	    \ "literatehaskell": "lhaskell" }
+" entries in this list are the language code interpreted by pandoc,
+" if this differs from the name of the vim syntax file, append =vimname
+" e.g. let g:pandoc_use_embeds_in_codeblocks_for_langs = ["haskell", "literatehaskell=lhaskell"]
 "
 if g:pandoc_use_embeds_in_codeblocks != 0
-    for l in keys(g:pandoc_use_embeds_in_codeblocks_for_langs)
-	call EnableEmbedsforCodeblocksWithLang(l, g:pandoc_use_embeds_in_codeblocks_for_langs[l])
+    for l in g:pandoc_use_embeds_in_codeblocks_for_langs
+      call EnableEmbedsforCodeblocksWithLang(l)
     endfor
 endif
 " }}}
