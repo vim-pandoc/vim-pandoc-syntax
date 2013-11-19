@@ -52,16 +52,16 @@ endif
 " Functions: {{{1
 function! EnableEmbedsforCodeblocksWithLang(langname, langsyntaxfile) 
     unlet b:current_syntax
-    exe 'syn include @'.toupper(langname).' syntax/'.g:pandoc_use_embeds_in_codeblocks_for_langs[langname].'.vim'
-    exe "syn region pandocDelimitedCodeBlock_" . langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\).*' . langname . '.*\n\)\@<=\_^/' .
+    exe 'syn include @'.toupper(a:langname).' syntax/'.a:langsyntaxfile.'.vim'
+    exe "syn region pandocDelimitedCodeBlock_" . a:langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\).*' . a:langname . '.*\n\)\@<=\_^/' .
 	  \' end=/\_$\n\(\(`\{3,}`*\|\~\{3,}\~*\)\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock' .
-	  \' contains=@' . toupper(langname)
-    exe 'hi link pandocDelimitedCodeBlock_'.langname.' pandocDelimitedCodeBlock'
+	  \' contains=@' . toupper(a:langname)
+    exe 'hi link pandocDelimitedCodeBlock_'.a:langname.' pandocDelimitedCodeBlock'
 endfunction
 
 function! DisableEmbedsforCodeblocksWithLang(langname)
-    exe 'syn clear pandocDelimitedCodeBlock_'.langname
-    exe 'hi clear pandocDefinitionBlock_'.langname
+    exe 'syn clear pandocDelimitedCodeBlock_'.a:langname
+    exe 'hi clear pandocDefinitionBlock_'.a:langname
 endfunction
 " }}}
 
