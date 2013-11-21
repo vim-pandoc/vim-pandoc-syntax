@@ -203,7 +203,7 @@ syn match pandocPCiteAnchor /@/ contained containedin=pandocPCite
 
 " Emphasis: {{{2
 "
-call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@<=\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell', 'concealends')
+call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=\*/ skip=/\(\*\*\|__\)/ end=/\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell', 'concealends')
 call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell', 'concealends')
 " }}}
 " Strong: {{{2
