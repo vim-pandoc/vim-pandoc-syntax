@@ -314,6 +314,7 @@ hi link pandocAtxHeader Title
 hi link AtxStart Operator
 hi link pandocSetexHeader Title
 
+hi link pandocHTMLComment Comment
 hi link pandocBlockQuote Comment
 hi link pandocCodeBlock String
 hi link pandocCodeBlockInsideIndent String
