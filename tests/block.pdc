@@ -26,8 +26,10 @@ yes, we can.
 
 inline `code` in this paragraph. this is a ``test for this`` stuff.
 
-superscripts ^are kinda^ cool. subscripts can ~also~ be kinda lame. there's also sections
-with ~~striked out~~ text.
+superscripts ^are\ kinda^ cool (2^12^). subscripts can ~also~ be ~kinda\ lame~
+(like drinking H~2~O). there's also sections with ~~striked out~~ text.
+
+this ~= could be a problem if we allowed unscaped spaces.
 
 a new line can be outputted for lines with a couple  
 of spaces.

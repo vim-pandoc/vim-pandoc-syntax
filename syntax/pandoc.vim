@@ -45,7 +45,7 @@ let s:cchars = {
 	    \"image": "▨", 
 	    \"super": "ⁿ", 
 	    \"sub": "ₙ", 
-	    \"strike": "!", 
+	    \"strike": "x̶", 
 	    \"atx": "§",  
 	    \"codelang": "λ",
 	    \"abbrev": "→",
@@ -75,6 +75,11 @@ if !exists("g:pandoc_use_embeds_in_codeblocks_for_langs")
     let g:pandoc_use_embeds_in_codeblocks_for_langs = []
 endif
 "}}}2
+" underline subscript, superscript and strikeout? {{{2
+if !exists("g:pandoc_underline_special_blocks")
+    let g:pandoc_underline_special_blocks = 1
+endif
+" }}}2
 " }}}
 
 " Functions: {{{1
@@ -230,13 +235,16 @@ call s:WithConceal("block", 'syn region pandocNoFormatted matchgroup=Operator st
 call s:WithConceal("block", 'syn region pandocNoFormatted matchgroup=Operator start=/``/ end=/``/', 'concealends')
 "}}}
 " Subscripts: {{{2 
-call s:WithConceal("block", 'syn region pandocSubscript matchgroup=Operator start=/\~/ end=/\~/ contains=@Spell', 'concealends cchar='.s:cchars["sub"])
+syn region pandocSubscript start=/\~\(\([[:graph:]]\(\\ \)\=\)\{-}\~\)\@=/ end=/\~/ keepend
+call s:WithConceal("block", 'syn match pandocSubscriptMark /\~/ contained containedin=pandocSubscript', 'conceal cchar='.s:cchars["sub"])
 "}}}
 " Superscript: {{{2
-call s:WithConceal("block", 'syn region pandocSuperscript matchgroup=Operator start=/\^/ end=/\^/ contains=@Spell', 'concealends cchar='.s:cchars["super"])
+syn region pandocSuperscript start=/\^\(\([[:graph:]]\(\\ \)\=\)\{-}\^\)\@=/ skip=/\\ / end=/\^/ keepend
+call s:WithConceal("block", 'syn match pandocSuperscriptMark /\^/ contained containedin=pandocSuperscript', 'conceal cchar='.s:cchars["super"])
 "}}}
 " Strikeout: {{{2
-call s:WithConceal("block", 'syn region pandocStrikeout matchgroup=Operator start=/\~\~/ end=/\~\~/  contains=@Spell', 'concealends cchar='.s:cchars["strike"])
+syn region pandocStrikeout start=/\~\~/ end=/\~\~/ contains=@Spell keepend
+call s:WithConceal("block", 'syn match pandocStrikeoutMark /\~\~/ contained containedin=pandocStrikeout', 'conceal cchar='.s:cchars["strike"])
 " }}}
 " }}}
 
@@ -417,10 +425,14 @@ hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
 hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
 hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
 hi link pandocNoFormatted String
-hi pandocSubscript gui=underline cterm=underline
-hi pandocSuperscript gui=underline cterm=underline
-hi pandocStrikeout gui=underline cterm=underline
-
+hi link pandocSubscriptMark Operator
+hi link pandocSuperscriptMark Operator
+hi link pandocStrikeoutMark Operator
+if g:pandoc_underline_special_blocks == 1
+    hi pandocSubscript gui=underline cterm=underline
+    hi pandocSuperscript gui=underline cterm=underline
+    hi pandocStrikeout gui=underline cterm=underline
+endif
 hi link pandocNewLine Error
 "}}}
 
