@@ -148,10 +148,10 @@ syn region pandocHTMLComment start=/<!--/ end=/-->/
 " Unset current_syntax so the 2nd include will work
 unlet b:current_syntax
 syn include @LATEX syntax/tex.vim
-" Single Tex command
-"syn match pandocLatex /\\\w\S/ contains=@LATEX
-" Math Tex
-syn match pandocLatex /\$.\{-}\$/ contains=@LATEX
+syn match pandocLaTeXInlineMath /\$[[:alpha:]\\].\{-}[[:alpha:]\\]\$/ contains=@LATEX
+syn region pandocLaTeXMathBlock start=/\$\$/ end=/\$\$/ keepend contains=@LATEX 
+syn match pandocLaTeXCommand /\\[[:alpha:]]\+\(\({.\{-}}\)\=\(\[.\{-}\]\)\=\)*/ contains=@LATEX 
+syn region pandocLaTeXRegion start=/\\begin{\z(.\{-}\)}/ end=/\\end{\z1}/ keepend contains=@LATEX
 " }}}}
 " }}}
 

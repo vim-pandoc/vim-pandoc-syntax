@@ -1,0 +1,22 @@
+This is a paragraph with $\text{inline} \LaTeX$.
+
+This \$ is a dollar sign. $ this too. $30000 dollars are mentioned in pandoc's
+Example. I don't have that amount.
+
+$$
+This is \LaTeX too. \sum a b
+$$
+
+\LaTeX
+
+\newcommand{\tuple}[1]{\langle #1 \rangle}
+
+\begin{tabular}{|l|l|}\hline
+Age & Frequency \\ \hline
+18--25  & 15 \\
+26--35  & 33 \\
+36--45  & 22 \\ \hline
+\end{tabular}
+
+# test
+
