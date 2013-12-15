@@ -12,6 +12,9 @@ footnotes and the superscripts.
 
 Mister @Lovejoy95, at [-@Lovejoy], cites @Lovejoy [pp. 12-12].
 
+Some printable characters might not be matched (in @Krämer, `ä` caused
+issues).
+
 *[PCL]: P C L
 
 [hello][welcome] aaaaaa this with [inline link](http://site.com) gets messed up

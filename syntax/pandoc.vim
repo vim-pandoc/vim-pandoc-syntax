@@ -197,10 +197,10 @@ syn match pandocAutomaticLink /<\(https\{0,1}.\{-}\|.\{-}@.\{-}\..\{-}\)>/
 " parenthetical citations
 syn match pandocPCite /\[-\{0,1}@.\{-}\]/ contains=pandocEmphasis,pandocStrong,pandocLatex,@Spell
 " in-text citations without location
-syn match pandocPCite /@\w*/
+syn match pandocPCite /@[[:graph:]äëïöü]*/
 
 " in-text citations with location
-syn match pandocPCite /@\w*\s\[.\{-}\]/
+syn match pandocPCite /@[[:graph:]äëïöü]*\s\[.\{-}\]/
 syn match pandocPCiteAnchor /@/ contained containedin=pandocPCite
 " }}}
 
