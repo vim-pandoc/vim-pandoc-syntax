@@ -345,8 +345,8 @@ syn match pandocEnDash /---\@!/ conceal cchar=-
 syn match pandocEllipses /\.\.\./ conceal cchar=…
 " }}}
 " Quotes: {{{2
-syn match pandocBeginQuote /"\</ conceal cchar=“
-syn match pandocEndQuote /\(\>\|[[:punct:]]\)\@<="/ conceal cchar=”
+syn match pandocBeginQuote /"\</ conceal cchar=“ containedin=pandocEmphasis,pandocStrong 
+syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="/ conceal cchar=” containedin=pandocEmphasis,pandocStrong
 " }}}
 "
 endif
