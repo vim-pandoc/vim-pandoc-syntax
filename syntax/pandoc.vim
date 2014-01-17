@@ -329,21 +329,20 @@ syn match pandocListItem /^\s*(*x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+/
 " Special: {{{1
 
 if index(g:pandoc_use_conceal_for_rules, "special") > -1
+" New_lines: {{{2
+exe 'syn match pandocNewLine /\(  \|\\\)$/ conceal cchar='.s:cchars["newline"]
+"}}}
+" Dashes: {{{2
+syn match pandocEmDash /---/ conceal cchar=— 
+syn match pandocEnDash /---\@!/ conceal cchar=- 
+syn match pandocEllipses /\.\.\./ conceal cchar=…
+" }}}
 " Horizontal Rules: {{{2
-"
 " 3 or more - on a line
 exe 'syn match pandocHRule /^\s\{,3}\(-\s*\)\{3,}\n/ conceal cchar='.s:cchars["hr"]
 " 3 or more * on a line
 exe 'syn match pandocHRule /^\s\{,3}\(\*\s*\)\{3,}\n/ conceal cchar='.s:cchars["hr"]
 "}}}
-" New_lines: {{{2
-exe 'syn match pandocNewLine /\(  \|\\\)$/ conceal cchar='.s:cchars["newline"]
-"}}}
-" Dashes: {{{2
-syn match pandocEmDash /---/ conceal cchar=—
-syn match pandocEnDash /---\@!/ conceal cchar=-
-syn match pandocEllipses /\.\.\./ conceal cchar=…
-" }}}
 " Quotes: {{{2
 syn match pandocBeginQuote /"\</ conceal cchar=“ containedin=pandocEmphasis,pandocStrong 
 syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="/ conceal cchar=” containedin=pandocEmphasis,pandocStrong
@@ -434,6 +433,8 @@ if g:pandoc_underline_special_blocks == 1
     hi pandocStrikeout gui=underline cterm=underline
 endif
 hi link pandocNewLine Error
+hi link pandocHRule Delimiter
+
 "}}}
 
 let b:current_syntax = "pandoc"
