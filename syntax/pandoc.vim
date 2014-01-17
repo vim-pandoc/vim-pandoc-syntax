@@ -338,10 +338,7 @@ syn match pandocEnDash /---\@!/ conceal cchar=-
 syn match pandocEllipses /\.\.\./ conceal cchar=…
 " }}}
 " Horizontal Rules: {{{2
-" 3 or more - on a line
-exe 'syn match pandocHRule /^\s\{,3}\(-\s*\)\{3,}\n/ conceal cchar='.s:cchars["hr"]
-" 3 or more * on a line
-exe 'syn match pandocHRule /^\s\{,3}\(\*\s*\)\{3,}\n/ conceal cchar='.s:cchars["hr"]
+exe 'syn match pandocHRule /^\s\{,3}\([-*_]\s*\)\{3,}\n/ conceal cchar='.s:cchars["hr"]
 "}}}
 " Quotes: {{{2
 syn match pandocBeginQuote /"\</ conceal cchar=“ containedin=pandocEmphasis,pandocStrong 
