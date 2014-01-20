@@ -56,6 +56,10 @@ multiple lines.
 |               |               | - tasty            |
 +---------------+---------------+--------------------+
 
++----------------------+------------------+
+| test                 | a                |
++----------------------+------------------+
+
 # pipe tables 
 
 | Right | Left | Default | Center |
@@ -64,4 +68,3 @@ multiple lines.
 |  123  |  123 |   123   |   123  |
 |    1  |    1 |     1   |     1  |
 
-  : Demonstration of simple table syntax.

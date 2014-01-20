@@ -352,12 +352,18 @@ endif
 syn region pandocGridTable start=/\n\@<=+-/ end=/+\n\n/ keepend
 syn match pandocGridTableDelims /[\|=]/ contained containedin=pandocGridTable
 syn match pandocGridTableDelims /\([\-+][\-+=]\@=\|[\-+=]\@<=[\-+]\)/ contained containedin=pandocGridTable
-syn match pandocGridTableBulletList 
+syn match pandocGridTableHeader /\(^.*\n\)\(+=.*\)\@=/ contained containedin=pandocGridTable 
 hi link pandocGridTableDelims Delimiter
+hi link pandocGridTableHeader Delimiter
 
 syn region pandocPipeTable start=/\([+|]\n\)\@<!\n\@<=|/ end=/|\n\n/ keepend 
 syn match pandocPipeTableDelims /[\|\-:]/ contained containedin=pandocPipeTable
+syn match pandocPipeTableHeader /\(^.*\n\)\(|-\)\@=/ contained containedin=pandocPipeTable
 hi link pandocPipeTableDelims Delimiter
+hi link pandocPipeTableHeader Delimiter
+
+syn match pandocTableHeaderWord /\<.\{-}\>/ contained containedin=pandocGridTableHeader,pandocPipeTableHeader
+hi link pandocTableHeaderWord pandocStrong
 " }}}1
 
 " YAML: {{{1
