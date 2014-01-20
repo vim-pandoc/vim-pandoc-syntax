@@ -348,6 +348,16 @@ syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="/ conceal cchar=” containedin
 endif
 " }}}
 
+" Tables: {{{1
+syn region pandocGridTable start=/\n\@<=+-/ end=/+\n\n/ keepend
+syn match pandocGridTableDelims /[\|\-+=]/
+hi link pandocGridTableDelims Delimiter
+
+syn region pandocPipeTable start=/\([+|]\n\)\@<!\n\@<=|/ end=/|\n\n/ keepend 
+syn match pandocPipeTableDelims /[\|\-:]/
+hi link pandocPipeTableDelims Delimiter
+" }}}1
+
 " YAML: {{{1
 
 try
