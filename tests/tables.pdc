@@ -2,11 +2,14 @@
 
   Right     Left     Center     Default
 -------     ------ ----------   -------
-     12     12        12            12
+     12     12        *12*            12
     123     123       123          123
       1     1          1             1
 
-Table:  Demonstration of simple table syntax.
+error         2nd-order   10th-order
+------       ----------- ------------
+$\insample$  $0.029$     $10^{-5}$
+$\outsample$ $0.120$     $7680$
 
 -------     ------ ----------   -------
      12     12        12             12
@@ -28,11 +31,6 @@ Table:  Demonstration of simple table syntax.
                                     rows.
 -------------------------------------------------------------
 
-Table: Here's the caption. It, too, may span
-multiple lines.
-
-
-
 ----------- ------- --------------- -------------------------
    First    row                12.0 Example of a row that
                                     spans multiple lines.
@@ -41,8 +39,6 @@ multiple lines.
                                     the blank line between
                                     rows.
 ----------- ------- --------------- -------------------------
-
-: Here's a multiline table without headers.
 
 # grid table
 
