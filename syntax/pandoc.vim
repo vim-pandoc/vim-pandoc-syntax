@@ -350,11 +350,13 @@ endif
 
 " Tables: {{{1
 syn region pandocGridTable start=/\n\@<=+-/ end=/+\n\n/ keepend
-syn match pandocGridTableDelims /[\|\-+=]/
+syn match pandocGridTableDelims /[\|=]/ contained containedin=pandocGridTable
+syn match pandocGridTableDelims /\([\-+][\-+=]\@=\|[\-+=]\@<=[\-+]\)/ contained containedin=pandocGridTable
+syn match pandocGridTableBulletList 
 hi link pandocGridTableDelims Delimiter
 
 syn region pandocPipeTable start=/\([+|]\n\)\@<!\n\@<=|/ end=/|\n\n/ keepend 
-syn match pandocPipeTableDelims /[\|\-:]/
+syn match pandocPipeTableDelims /[\|\-:]/ contained containedin=pandocPipeTable
 hi link pandocPipeTableDelims Delimiter
 " }}}1
 
