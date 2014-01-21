@@ -378,7 +378,7 @@ hi link pandocGridTableHeader Delimiter
 syn region pandocPipeTable start=/\([+|]\n\)\@<!\n\@<=|/ end=/|\n\n/ keepend 
 " without beginning and end pipes
 syn region pandocPipeTable start=/^.*\n-.\{-}|/ end=/|.*\n\n/ keepend
-syn match pandocPipeTableDelims /[\|\-:]/ contained containedin=pandocPipeTable
+syn match pandocPipeTableDelims /[\|\-:+]/ contained containedin=pandocPipeTable
 syn match pandocPipeTableHeader /\(^.*\n\)\(|-\)\@=/ contained containedin=pandocPipeTable
 syn match pandocPipeTableHeader /\(^.*\n\)\(-\)\@=/ contained containedin=pandocPipeTable
 hi link pandocPipeTableDelims Delimiter
