@@ -355,7 +355,7 @@ try
     syn include @YAML colors/yaml.vim
 catch /E484/
 endtry
-syn region pandocYAMLHeader matchgroup=Delimiter start=/\%^\-\-\-/ end=/\-\-\-/ contains=@YAML 
+syn region pandocYAMLHeader matchgroup=Delimiter start=/\%^\-\{3}/ end=/[\-|\.]\{3}/ contains=@YAML 
 "}}}
 
 " Styling: {{{1
