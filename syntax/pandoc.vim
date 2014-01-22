@@ -164,7 +164,7 @@ syn match pandocTitleBlockTitle /\%^%.*\n/ contained containedin=pandocTitleBloc
 
 " Blockquotes: {{{1
 "
-syn match pandocBlockQuote /^>.*\n\(.*\n\@<!\n\)*/ contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout skipnl
+syn match pandocBlockQuote /^>.*\n\(.*\n\@<!\n\)*/ contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem skipnl
 
 " }}}
 
@@ -208,7 +208,7 @@ syn match pandocPCiteAnchor /@/ contained containedin=pandocPCite
 
 " Emphasis: {{{2
 "
-call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@<!\(\_^\|\s\|[[:punct:]]\)\@<=\*/ skip=/\(\*\*\|__\)/ end=/\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell', 'concealends')
+call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@<!\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell', 'concealends')
 call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@<!\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell', 'concealends')
 " }}}
 " Strong: {{{2
@@ -315,7 +315,7 @@ call s:WithConceal("definition", 'syn match pandocDefinitionBlockMark /^\s*[:~]/
 " List Items: {{{1
 "
 " Unordered lists 
-syn match pandocUListItem /^\s*[*+-]\s\+/he=e-1
+syn match pandocUListItem /^>\=\s*[*+-]\s\+/he=e-1,hs=s+1
 call s:WithConceal("list", 'syn match pandocUListItemBullet /[*+-]/ contained containedin=pandocUListItem', 'conceal cchar='.s:cchars["li"])
 " Ordered lists
 syn match pandocListItem /^\s*\(\((*\d\+[.)]\+\)\|\((*\l[.)]\+\)\)\s\+/he=e-1
