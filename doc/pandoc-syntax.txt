@@ -1,0 +1,78 @@
+*pandoc-syntax*
+
+CONFIGURATION				       *pandoc-syntax-confguration*
+
++ *g:pandoc_use_conceal*
+  Use |conceal| for pretty highlighting. Default is 1 for vim version > 7.3
+
++ *g:pandoc_use_conceal_for_rules* 
+  A list of rules |conceal| should be used
+  with. Defaults to ["titleblock", "image", "block", "atx", "codeblock_start",
+  "codeblock_delim", "abbrev", "footnote", "definition", "list", "special"]
+
+  To review what are the rules for, look for the call to |s:WithConceal| in
+  syntax/pandoc.vim that takes the corresponding  rulename as first argument.
+
++ *g:pandoc_syntax_user_cchars*
+  A dictionary of what characters should be used in conceal rules. These
+  override the defaults (see those in |s:cchars|). For example, if you prefer
+  to mark footnotes with the `*` symbol:
+
+      let g:pandoc_syntax_user_cchars = ["footnote" : "*"]
+
++ *g:pandoc_syntax_fill_codeblocks*
+  Highlight codeblocks in a different color to normal text. Default = 1. 
+
++ *g:pandoc_use_embeds_in_codeblocks*
+  Use embedded highlighting for delimited codeblocks where a language is
+  specified. Default = 1
+
++ *g:pandoc_use_embeds_in_codeblocks_for_langs*
+  For what languages and using what syntax files to highlight embeds. This is
+  a list of language names. When the language pandoc and vim use don't match,
+  you can use the "PANDOC=VIM" syntax. For example:
+
+      let g:pandoc_use_embeds_in_codeblocks_for_langs = ["ruby",
+      "literatehaskell=lhaskell"]
+
++ *g:pandoc_underline_special_blocks*
+  Undeline subscript, superscript and strikeout text styles. Default = 1
+
+COMMANDS                                            *pandoc-syntax-commands*
+
++ *:PandocHighlight* LANG
+
+  Enable embedded highlighting for language LANG in codeblocks. Uses the
+  syntax for items in |g:pandoc_use_embeds_in_codeblocks_for_langs|.
+
++ *:PandocUnhighlight* LANG
+
+  Disable embedded highlighting for language LANG in coceblocks.
+
+FUNCTIONS                                           *pandoc-syntax-functions*
+
++ *EnableEmbedsForCodeblocksWithLang(langname)*
+  As |:PandocHighlight|.
+
++ *DisableEmbedsForCodeblocksWithLang(langname)*
+  As |:PandocUnhighlight|.
+
++ *s:WithConceal(RULE_GROUP,RULE,CONCEAL_RULE)*
+  Executes a |:syntax| command RULE, which could incorporate conceal rules
+  (CONCEAL_RULE) if  conceals are enabled. The rule gets named RULE_GROUP,
+  which can be used in |g:pandoc_use_conceal_for_rules|.
+
+  For example, if conceals are enabled
+
+      call s:WithConceal("atx", 'syn match AtxStart /#/ contained
+          containedin=pandocAtxHeader', 'conceal cchar='.s:cchars["atx"])
+
+  will execute
+
+      syn match AtxStart /#/ contained containedin=pandocAtxHeader conceal cchar=§
+
+  and 
+
+      syn match AtxStart /#/ contained containedin=pandocAtxHeader 
+
+  otherwise.
