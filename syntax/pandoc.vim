@@ -23,20 +23,9 @@ else
     endif
 endif
 "}}}2
-" what groups to use conceal in {{{2
-if !exists("g:pandoc_use_conceal_for_rules")
-    let g:pandoc_use_conceal_for_rules = [
-		\"titleblock", 
-		\"image", 
-		\"block", 
-		\"atx", 
-		\"codeblock_start", 
-		\"codeblock_delim", 
-		\"abbrev",
-		\"footnote",
-		\"definition",
-		\"list",
-		\"special"]
+" what groups not to use conceal in. works as a blacklist {{{2
+if !exists("g:pandoc_syntax_dont_use_conceal_for_rules")
+    let g:pandoc_syntax_dont_use_conceal_for_rules = []
 endif
 "}}}2
 " cchars used in conceal rules {{{2
@@ -83,7 +72,7 @@ endif
 " }}}
 
 " Functions: {{{1
-" {{{2
+" EnableEmbedsforCodeblocksWithLang {{{2
 function! EnableEmbedsforCodeblocksWithLang(entry)
     try
         let s:langname = matchstr(a:entry, "^[^=]*")
@@ -99,7 +88,7 @@ function! EnableEmbedsforCodeblocksWithLang(entry)
     endtry
 endfunction
 "}}}2
-"{{{2
+" DisableEmbedsforCodeblocksWithLang {{{2
 function! DisableEmbedsforCodeblocksWithLang(langname)
     try
       exe 'syn clear pandocDelimitedCodeBlock_'.a:langname
@@ -109,11 +98,11 @@ function! DisableEmbedsforCodeblocksWithLang(langname)
     endtry
 endfunction
 "}}}2
-" {{{2
+" WithConceal {{{2
 function! s:WithConceal(rule_group, rule, conceal_rule)
     let l:rule_tail = ""
     if g:pandoc_use_conceal != 0
-	if index(g:pandoc_use_conceal_for_rules, a:rule_group) > -1
+	if index(g:pandoc_syntax_dont_use_conceal_for_rules, a:rule_group) == -1
 	    let l:rule_tail = " " . a:conceal_rule
 	endif
     endif
@@ -230,21 +219,21 @@ call s:WithConceal("block", 'syn region pandocEmphasisInStrong matchgroup=Operat
 " Inline Code: {{{2
 
 " Using single back ticks
-call s:WithConceal("block", 'syn region pandocNoFormatted matchgroup=Operator start=/`/ end=/`/', 'concealends')
+call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/`/ end=/`/', 'concealends')
 " Using double back ticks
-call s:WithConceal("block", 'syn region pandocNoFormatted matchgroup=Operator start=/``/ end=/``/', 'concealends')
+call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/``/ end=/``/', 'concealends')
 "}}}
 " Subscripts: {{{2 
 syn region pandocSubscript start=/\~\(\([[:graph:]]\(\\ \)\=\)\{-}\~\)\@=/ end=/\~/ keepend
-call s:WithConceal("block", 'syn match pandocSubscriptMark /\~/ contained containedin=pandocSubscript', 'conceal cchar='.s:cchars["sub"])
+call s:WithConceal("subscript", 'syn match pandocSubscriptMark /\~/ contained containedin=pandocSubscript', 'conceal cchar='.s:cchars["sub"])
 "}}}
 " Superscript: {{{2
 syn region pandocSuperscript start=/\^\(\([[:graph:]]\(\\ \)\=\)\{-}\^\)\@=/ skip=/\\ / end=/\^/ keepend
-call s:WithConceal("block", 'syn match pandocSuperscriptMark /\^/ contained containedin=pandocSuperscript', 'conceal cchar='.s:cchars["super"])
+call s:WithConceal("superscript", 'syn match pandocSuperscriptMark /\^/ contained containedin=pandocSuperscript', 'conceal cchar='.s:cchars["super"])
 "}}}
 " Strikeout: {{{2
 syn region pandocStrikeout start=/\~\~/ end=/\~\~/ contains=@Spell keepend
-call s:WithConceal("block", 'syn match pandocStrikeoutMark /\~\~/ contained containedin=pandocStrikeout', 'conceal cchar='.s:cchars["strike"])
+call s:WithConceal("strikeout", 'syn match pandocStrikeoutMark /\~\~/ contained containedin=pandocStrikeout', 'conceal cchar='.s:cchars["strike"])
 " }}}
 " }}}
 
@@ -328,24 +317,23 @@ syn match pandocListItem /^\s*(*x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+/
 
 " Special: {{{1
 
-if index(g:pandoc_use_conceal_for_rules, "special") > -1
 " New_lines: {{{2
-exe 'syn match pandocNewLine /\(  \|\\\)$/ conceal cchar='.s:cchars["newline"]
+call s:WithConceal("newline", 'syn match pandocNewLine /\(  \|\\\)$/', 'conceal cchar='.s:cchars["newline"])
 "}}}
 " Dashes: {{{2
-syn match pandocEmDash /---/ conceal cchar=— 
-syn match pandocEnDash /---\@!/ conceal cchar=- 
-syn match pandocEllipses /\.\.\./ conceal cchar=…
+call s:WithConceal("dashes", 'syn match pandocEmDash /---/', 'conceal cchar=—')
+call s:WithConceal("dashes", 'syn match pandocEnDash /---\@!/', 'conceal cchar=-')
+call s:WithConceal("ellipses", 'syn match pandocEllipses /\.\.\./', 'conceal cchar=…')
 " }}}
 " Horizontal Rules: {{{2
-exe 'syn match pandocHRule /^\s\{,3}\([-*_]\s*\)\{3,}\n/ conceal cchar='.s:cchars["hr"]
+call s:WithConceal("hrule", 'syn match pandocHRule /^\s\{,3}\([-*_]\s*\)\{3,}\n/', 'conceal cchar='.s:cchars["hr"])
 "}}}
 " Quotes: {{{2
-syn match pandocBeginQuote /"\</ conceal cchar=“ containedin=pandocEmphasis,pandocStrong 
-syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="/ conceal cchar=” containedin=pandocEmphasis,pandocStrong
+call s:WithConceal("quotes", 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong', 'conceal cchar=“')
+call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="/  containedin=pandocEmphasis,pandocStrong', 'conceal cchar=”')
+
 " }}}
 "
-endif
 " }}}
 
 " Tables: {{{1

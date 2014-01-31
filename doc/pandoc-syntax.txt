@@ -5,10 +5,8 @@ CONFIGURATION				       *pandoc-syntax-confguration*
 + *g:pandoc_use_conceal*
   Use |conceal| for pretty highlighting. Default is 1 for vim version > 7.3
 
-+ *g:pandoc_use_conceal_for_rules* 
-  A list of rules |conceal| should be used
-  with. Defaults to ["titleblock", "image", "block", "atx", "codeblock_start",
-  "codeblock_delim", "abbrev", "footnote", "definition", "list", "special"]
++ *g:pandoc_syntax_dont_use_conceal_for_rules* A list of rules |conceal| should not be
+  used with. Works as a blacklist, and defaults to [] (use conceal everywhere).
 
   To review what are the rules for, look for the call to |s:WithConceal| in
   syntax/pandoc.vim that takes the corresponding  rulename as first argument.
@@ -60,7 +58,7 @@ FUNCTIONS                                           *pandoc-syntax-functions*
 + *s:WithConceal(RULE_GROUP,RULE,CONCEAL_RULE)*
   Executes a |:syntax| command RULE, which could incorporate conceal rules
   (CONCEAL_RULE) if  conceals are enabled. The rule gets named RULE_GROUP,
-  which can be used in |g:pandoc_use_conceal_for_rules|.
+  which can be used in |g:pandoc_syntax_dont_use_conceal_for_rules|.
 
   For example, if conceals are enabled
 
