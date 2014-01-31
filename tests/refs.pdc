@@ -6,9 +6,9 @@ well, [the example.com website](http://www.example.com)
 
 testing footnotes[^footnote1]. this is kinda silly.^[another footnote.] 
 ^superscrips^ are ok, but be careful to keep spaces between the inline
-footnotes and the superscripts.
+footnotes and the superscripts.^[inline footnotes-- *test*]
 
-[^footnote1]: this is a footnote.
+[^footnote1]: this is a footnote --.
 
 Mister @Lovejoy95, at [-@Lovejoy], cites @Lovejoy [pp. 12-12].
 
