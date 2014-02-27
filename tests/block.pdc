@@ -74,6 +74,10 @@ test
     test
     ~~~
 
+```vim
+:exe "cmd args"
+```
+
 # definitions
 
 hello
