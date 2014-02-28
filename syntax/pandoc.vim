@@ -378,7 +378,7 @@ hi link pandocTableHeaderWord pandocStrong
 " YAML: {{{1
 
 try
-    unlet b:current_syntax
+    unlet! b:current_syntax
     syn include @YAML colors/yaml.vim
 catch /E484/
 endtry
