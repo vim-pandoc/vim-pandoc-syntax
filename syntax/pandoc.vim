@@ -79,10 +79,12 @@ function! EnableEmbedsforCodeblocksWithLang(entry)
         let s:langsyntaxfile = matchstr(a:entry, "[^=]*$")
         unlet! b:current_syntax
         exe 'syn include @'.toupper(s:langname).' syntax/'.s:langsyntaxfile.'.vim'
-        exe "syn region pandocDelimitedCodeBlock_" . s:langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\).*' . s:langname . '.*\n\)\@<=\_^/' .
-        \' end=/\_$\n\(\(`\{3,}`*\|\~\{3,}\~*\)\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock' .
+        exe "syn region pandocDelimitedCodeBlock_" . s:langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\)\s*\%({[^.]*\.\)\=' . s:langname . '.*\n\)\@<=\_^/' .
+        \' end=/\_$\n\(\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\)\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock' .
         \' contains=@' . toupper(s:langname)
-        exe 'hi link pandocDelimitedCodeBlock_'.s:langname.' pandocDelimitedCodeBlock'
+        if g:pandoc_syntax_fill_codeblocks != 2
+            exe 'hi link pandocDelimitedCodeBlock_'.s:langname.' pandocDelimitedCodeBlock'
+        endif
     catch /E484/
       echo "No syntax file found for '" . s:langsyntaxfile . "'"
     endtry
