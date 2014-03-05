@@ -48,9 +48,9 @@ if exists("g:pandoc_syntax_user_cchars")
     let s:cchars = extend(s:cchars, g:pandoc_syntax_user_cchars)
 endif
 "}}}2
-" highlight codeblocks differently to normal text {{{2
-if !exists("g:pandoc_syntax_fill_codeblocks")
-    let g:pandoc_syntax_fill_codeblocks = 1
+" leave specified codeblocks as Normal (i.e. 'unhighlighted') {{{2
+if !exists("g:pandoc_syntax_ignore_codeblocks")
+    let g:pandoc_syntax_ignore_codeblocks = []
 endif
 "}}}2
 " use embedded highlighting for delimited codeblocks where a language is specifed. {{{2
@@ -158,7 +158,6 @@ syn match pandocBlockQuote /^>.*\n\(.*\n\@<!\n\)*/ contains=@Spell,pandocEmphasi
 
 " Code Blocks: {{{1
 "
-syn region pandocCodeBlock   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s\{4,}\|\t\+\)\).*\n/ end=/.\(\n^\s*\n\)\@=/
 syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s\{8,}\|\t\+\)\).*\n/ end=/.\(\n^\s*\n\)\@=/ contained
 "}}}
 
@@ -395,12 +394,18 @@ hi link pandocSetexHeader Title
 
 hi link pandocHTMLComment Comment
 hi link pandocBlockQuote Comment
-hi link pandocCodeBlock String
-hi link pandocCodeBlockInsideIndent String
-" if the user sets g:pandoc_syntax_fill_codeblocks to 0, we use Normal
-if !exists("g:pandoc_syntax_fill_codeblocks") || g:pandoc_syntax_fill_codeblocks != 0
-    hi link pandocDelimitedCodeBlock Special
+
+" if the user sets g:pandoc_syntax_ignore_codeblocks to contain
+" a codeblock type, don't highlight it so that it remains Normal
+
+if index(g:pandoc_syntax_ignore_codeblocks, 'definition') == -1
+  hi link pandocCodeBlockInsideIndent String
 endif
+
+if index(g:pandoc_syntax_ignore_codeblocks, 'delimited') == -1
+  hi link pandocDelimitedCodeBlock Special
+endif
+
 hi link pandocDelimitedCodeBlockStart Delimiter
 hi link pandocDelimitedCodeBlockEnd Delimiter
 hi link pandocDelimitedCodeBlockLanguage Comment

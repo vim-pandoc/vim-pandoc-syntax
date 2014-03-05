@@ -18,8 +18,10 @@ CONFIGURATION				       *pandoc-syntax-confguration*
 
       let g:pandoc_syntax_user_cchars = ["footnote" : "*"]
 
-+ *g:pandoc_syntax_fill_codeblocks*
-  Highlight codeblocks in a different color to normal text. Default = 1. 
++ *g:pandoc_syntax_ignore_codeblocks*
+  Prevent highlighting specific codeblock types so that they remain Normal.
+  Codeblock types include 'definition' for codeblocks inside definition blocks
+  and 'delimited' for delimited codeblocks. Default = []
 
 + *g:pandoc_use_embeds_in_codeblocks*
   Use embedded highlighting for delimited codeblocks where a language is
