@@ -127,7 +127,7 @@ syntax spell toplevel
 " HTML: {{{2
 " Set embedded HTML highlighting
 syn include @HTML syntax/html.vim
-syn match pandocHTML /<\a[^>]\+>/ contains=@HTML
+syn match pandocHTML /<\/\?\a[^>]\+>/ contains=@HTML
 " Support HTML multi line comments
 syn region pandocHTMLComment start=/<!--/ end=/-->/
 " }}}
