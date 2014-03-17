@@ -48,9 +48,9 @@ if exists("g:pandoc_syntax_user_cchars")
     let s:cchars = extend(s:cchars, g:pandoc_syntax_user_cchars)
 endif
 "}}}2
-" highlight codeblocks differently to normal text {{{2
-if !exists("g:pandoc_syntax_fill_codeblocks")
-    let g:pandoc_syntax_fill_codeblocks = 1
+" leave specified codeblocks as Normal (i.e. 'unhighlighted') {{{2
+if !exists("g:pandoc_syntax_ignore_codeblocks")
+    let g:pandoc_syntax_ignore_codeblocks = []
 endif
 "}}}2
 " use embedded highlighting for delimited codeblocks where a language is specifed. {{{2
@@ -79,12 +79,9 @@ function! EnableEmbedsforCodeblocksWithLang(entry)
         let s:langsyntaxfile = matchstr(a:entry, "[^=]*$")
         unlet! b:current_syntax
         exe 'syn include @'.toupper(s:langname).' syntax/'.s:langsyntaxfile.'.vim'
-        exe "syn region pandocDelimitedCodeBlock_" . s:langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\)\s*\%({[^.]*\.\)\=' . s:langname . '.*\n\)\@<=\_^/' .
+        exe "syn region pandocDelimitedCodeBlock_" . s:langname . ' start=/\(\_^\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\)\s*\%({[^.]*\.\)\=' . s:langname . '\>.*\n\)\@<=\_^/' .
         \' end=/\_$\n\(\(\s\{4,}\)\=\(`\{3,}`*\|\~\{3,}\~*\)\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock' .
         \' contains=@' . toupper(s:langname)
-        if g:pandoc_syntax_fill_codeblocks != 2
-            exe 'hi link pandocDelimitedCodeBlock_'.s:langname.' pandocDelimitedCodeBlock'
-        endif
     catch /E484/
       echo "No syntax file found for '" . s:langsyntaxfile . "'"
     endtry
@@ -130,7 +127,7 @@ syntax spell toplevel
 " HTML: {{{2
 " Set embedded HTML highlighting
 syn include @HTML syntax/html.vim
-syn match pandocHTML /<\a[^>]\+>/ contains=@HTML
+syn match pandocHTML /<\/\?\a[^>]\+>/ contains=@HTML
 " Support HTML multi line comments
 syn region pandocHTMLComment start=/<!--/ end=/-->/
 " }}}
@@ -161,14 +158,13 @@ syn match pandocBlockQuote /^>.*\n\(.*\n\@<!\n\)*/ contains=@Spell,pandocEmphasi
 
 " Code Blocks: {{{1
 "
-syn region pandocCodeBlock   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s\{4,}\|\t\+\)\).*\n/ end=/.\(\n^\s*\n\)\@=/
 syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s\{8,}\|\t\+\)\).*\n/ end=/.\(\n^\s*\n\)\@=/ contained
 "}}}
 
 " Links: {{{1
 "
 " Base: {{{2
-syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/\]\]\@=/ end=/\]/ keepend
+syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/[\]`][\]`]\@=/ end=/\]/ keepend
 syn region pandocReferenceURL matchgroup=Operator start=/\]\@<=(/ end=/)/ keepend
 syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocReferenceURL contains=@Spell
 call s:WithConceal("image", 'syn match pandocImageIcon /!\[\@=/', 'conceal cchar='. s:cchars["image"])
@@ -298,7 +294,7 @@ call s:WithConceal("footnote", 'syn match pandocFootnoteIDTail /\]/ contained co
 
 " Definitions: {{{1
 "
-syn region pandocDefinitionBlock start=/^\%(\_^\s*\([`~]\)\1\{2,}\)\@!.*\n\(^\s*\n\)*\s\{0,2}[:~]\(\~\{2,}\~*\)\@!/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent,pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocFootnoteID,pandocReferenceURL,pandocReferenceLabel,pandocAutomaticLink keepend 
+syn region pandocDefinitionBlock start=/^\%(\_^\s*\([`~]\)\1\{2,}\)\@!.*\n\(^\s*\n\)*\s\{0,2}[:~]\(\~\{2,}\~*\)\@!/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent,pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocFootnoteID,pandocReferenceURL,pandocReferenceLabel,pandocAutomaticLink,pandocEmDash,pandocEnDash keepend 
 syn match pandocDefinitionBlockTerm /^.*\n\(^\s*\n\)*\(\s*[:~]\)\@=/ contained contains=pandocNoFormatted,pandocEmphasis,pandocStrong
 call s:WithConceal("definition", 'syn match pandocDefinitionBlockMark /^\s*[:~]/ contained', 'conceal cchar='.s:cchars["definition"])
 " }}}
@@ -398,12 +394,18 @@ hi link pandocSetexHeader Title
 
 hi link pandocHTMLComment Comment
 hi link pandocBlockQuote Comment
-hi link pandocCodeBlock String
-hi link pandocCodeBlockInsideIndent String
-" if the user sets g:pandoc_syntax_fill_codeblocks to 0, we use Normal
-if !exists("g:pandoc_syntax_fill_codeblocks") || g:pandoc_syntax_fill_codeblocks != 0
-    hi link pandocDelimitedCodeBlock Special
+
+" if the user sets g:pandoc_syntax_ignore_codeblocks to contain
+" a codeblock type, don't highlight it so that it remains Normal
+
+if index(g:pandoc_syntax_ignore_codeblocks, 'definition') == -1
+  hi link pandocCodeBlockInsideIndent String
 endif
+
+if index(g:pandoc_syntax_ignore_codeblocks, 'delimited') == -1
+  hi link pandocDelimitedCodeBlock Special
+endif
+
 hi link pandocDelimitedCodeBlockStart Delimiter
 hi link pandocDelimitedCodeBlockEnd Delimiter
 hi link pandocDelimitedCodeBlockLanguage Comment

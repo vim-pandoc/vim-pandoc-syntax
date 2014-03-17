@@ -1,12 +1,49 @@
-*pandoc-syntax*
+*vim-pandoc-syntax*
 
-CONFIGURATION				       *pandoc-syntax-confguration*
+OVERVIEW
+
+vim-pandoc-syntax is a standalone syntax file for highlighting pandoc flavored
+markdown documents, to be used alongside vim-pantondoc (see |pantondoc|). It is
+based on the version provided by vim-pandoc, which it obsoletes.
+
+The project resides at http://www.github.com/vim-pandoc/vim-pandoc-syntax. You
+are welcome to help, suggesting ideas, reporting bugs or contributing code.
+
+ - TODO
+
+   This is a list of know stuff missing from the syntax file.
+
+   1. Allow attributes for verbatim text, like in
+
+          hey, `print 1 + 3`.{python} is no longer valid in python 3. 
+
+ 
+CONFIGURATION				       *vim-pandoc-syntax-confguration*
 
 + *g:pandoc_use_conceal*
   Use |conceal| for pretty highlighting. Default is 1 for vim version > 7.3
 
 + *g:pandoc_syntax_dont_use_conceal_for_rules* A list of rules |conceal| should not be
   used with. Works as a blacklist, and defaults to [] (use conceal everywhere).
+
+  This is a list of the rules wich can be used here:
+
+  - titleblock 
+  - image
+  - block
+  - subscript
+  - superscript
+  - strikeout
+  - atx
+  - codeblock_start
+  - codeblock_delim
+  - footnote
+  - definition
+  - list
+  - newline
+  - dashes
+  - ellipses
+  - quotes
 
   To review what are the rules for, look for the call to |s:WithConceal| in
   syntax/pandoc.vim that takes the corresponding  rulename as first argument.
@@ -18,8 +55,10 @@ CONFIGURATION				       *pandoc-syntax-confguration*
 
       let g:pandoc_syntax_user_cchars = ["footnote" : "*"]
 
-+ *g:pandoc_syntax_fill_codeblocks*
-  Highlight codeblocks in a different color to normal text. Default = 1. 
++ *g:pandoc_syntax_ignore_codeblocks*
+  Prevent highlighting specific codeblock types so that they remain Normal.
+  Codeblock types include 'definition' for codeblocks inside definition blocks
+  and 'delimited' for delimited codeblocks. Default = []
 
 + *g:pandoc_use_embeds_in_codeblocks*
   Use embedded highlighting for delimited codeblocks where a language is
@@ -45,7 +84,7 @@ COMMANDS                                            *pandoc-syntax-commands*
 
 + *:PandocUnhighlight* LANG
 
-  Disable embedded highlighting for language LANG in coceblocks.
+  Disable embedded highlighting for language LANG in codeblocks.
 
 FUNCTIONS                                           *pandoc-syntax-functions*
 
@@ -58,7 +97,7 @@ FUNCTIONS                                           *pandoc-syntax-functions*
 + *s:WithConceal(RULE_GROUP,RULE,CONCEAL_RULE)*
   Executes a |:syntax| command RULE, which could incorporate conceal rules
   (CONCEAL_RULE) if  conceals are enabled. The rule gets named RULE_GROUP,
-  which can be used in |g:pandoc_syntax_dont_use_conceal_for_rules|.
+  as used in |g:pandoc_syntax_dont_use_conceal_for_rules|.
 
   For example, if conceals are enabled
 
@@ -74,3 +113,9 @@ FUNCTIONS                                           *pandoc-syntax-functions*
       syn match AtxStart /#/ contained containedin=pandocAtxHeader 
 
   otherwise.
+
+MISC
+
+The plugin sets a global variable, *g:vim_pandoc_syntax_exists* to indicate its
+existence. This is currently used by vim-pantondoc to switch between syntax
+assisted and basic folding rules.
