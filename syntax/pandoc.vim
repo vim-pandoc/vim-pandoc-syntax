@@ -195,13 +195,13 @@ syn match pandocPCiteAnchor /@/ contained containedin=pandocPCite display
 
 " Emphasis: {{{2
 "
-call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@1<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell', 'concealends')
-call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@1<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell', 'concealends')
+call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@1<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell,pandocLatexInlineMath', 'concealends')
+call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@1<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell,pandocLatexInlineMath', 'concealends')
 " }}}
 " Strong: {{{2
 "
-call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/\*\*/ end=/\*\*/ contains=@Spell', 'concealends')
-call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/__/ end=/__/ contains=@Spell', 'concealends')
+call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/\*\*/ end=/\*\*/ contains=@Spell,pandocLatexInlineMath', 'concealends')
+call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/__/ end=/__/ contains=@Spell,pandocLatexInlineMath', 'concealends')
 "}}}
 " Strong Emphasis: {{{2
 "
