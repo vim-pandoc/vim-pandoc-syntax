@@ -328,7 +328,7 @@ call s:WithConceal("hrule", 'syn match pandocHRule /^\s\{,3}\([-*_]\s*\)\{3,}\n/
 "}}}
 " Quotes: {{{2
 call s:WithConceal("quotes", 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=“')
-call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="/  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=”')
+call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=”')
 
 " }}}
 "
