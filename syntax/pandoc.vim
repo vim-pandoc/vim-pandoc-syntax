@@ -211,8 +211,8 @@ call s:WithConceal("block", 'syn region pandocStrongEmphasis matchgroup=Operator
 " Mixed: {{{2
 call s:WithConceal("block", 'syn region pandocStrongInEmphasis matchgroup=Operator start=/\*\*/ end=/\*\*/ contained containedin=pandocEmphasis contains=@Spell', 'concealends')
 call s:WithConceal("block", 'syn region pandocStrongInEmphasis matchgroup=Operator start=/__/ end=/__/ contained containedin=pandocEmphasis contains=@Spell', 'concealends')
-call s:WithConceal("block", 'syn region pandocEmphasisInStrong matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=\*\([[:punct:]]\|\s\|\_$\)\@=/ contained containedin=pandocStrong contains=@Spell', 'concealends')
-call s:WithConceal("block", 'syn region pandocEmphasisInStrong matchgroup=Operator start=/\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=_\([[:punct:]]\|\s\|\_$\)\@=/ contained containedin=pandocStrong contains=@Spell', 'concealends')
+call s:WithConceal("block", 'syn region pandocEmphasisInStrong matchgroup=Operator start=/\\\@1!<\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=\*\([[:punct:]]\|\s\|\_$\)\@=/ contained containedin=pandocStrong contains=@Spell', 'concealends')
+call s:WithConceal("block", 'syn region pandocEmphasisInStrong matchgroup=Operator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=_\([[:punct:]]\|\s\|\_$\)\@=/ contained containedin=pandocStrong contains=@Spell', 'concealends')
 
 " Inline Code: {{{2
 
@@ -328,7 +328,7 @@ call s:WithConceal("hrule", 'syn match pandocHRule /^\s\{,3}\([-*_]\s*\)\{3,}\n/
 "}}}
 " Quotes: {{{2
 call s:WithConceal("quotes", 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=“')
-call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="/  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=”')
+call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=”')
 
 " }}}
 "
