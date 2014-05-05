@@ -361,7 +361,7 @@ hi link pandocGridTableHeader Delimiter
 "}}}2
 " Pipe: {{{2
 " with beginning and end pipes
-syn region pandocPipeTable start=/\([+|]\n\)\@<!\n\@1<=|/ end=/|\n\n/ keepend 
+syn region pandocPipeTable start=/\([+|]\n\)\@<!\n\@1<=|/ end=/|.*\n\n/ keepend 
 " without beginning and end pipes
 syn region pandocPipeTable start=/^.*\n-.\{-}|/ end=/|.*\n\n/ keepend
 syn match pandocPipeTableDelims /[\|\-:+]/ contained containedin=pandocPipeTable
