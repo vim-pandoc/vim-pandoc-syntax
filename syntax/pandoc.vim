@@ -182,13 +182,13 @@ syn match pandocAutomaticLink /<\(https\{0,1}.\{-}\|.\{-}@.\{-}\..\{-}\)>/
 
 " Citations: {{{1
 " parenthetical citations
-syn match pandocPCite /\[-\{0,1}@.\{-}\]/ contains=pandocEmphasis,pandocStrong,pandocLatex,@Spell display
-" in-text citations without location
-syn match pandocPCite /@[[:graph:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß]*/ display
-
+syn match pandocPCite /\[.\{-}-\{0,1}@.\{-}\]/ contains=pandocEmphasis,pandocStrong,pandocLatex,pandocCiteKey,@Spell display
 " in-text citations with location
-syn match pandocPCite /@[[:graph:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß]*\s\[.\{-}\]/ display
-syn match pandocPCiteAnchor /@/ contained containedin=pandocPCite display
+syn match pandocICite /@[[:graph:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß]*\s\[.\{-}\]/ contains=pandocCiteKey,@Spell display
+" cite keys
+syn match pandocCiteKey /-\=@[[:graph:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß]*/ containedin=pandocPCite,pandocICite contains=@NoSpell display
+syn match pandocCiteAnchor /[-@]/ contained containedin=pandocCiteKey display
+syn match pandocCiteLocator /[\[\]]/ contained containedin=pandocPCite,pandocICite
 " }}}
 
 " Text Styles: {{{1
@@ -444,8 +444,11 @@ hi link pandocFootnoteDefTail Type
 hi link pandocFootnoteBlock Comment
 hi link pandocFootnoteBlockSeparator Operator
 
-hi link pandocPCite Identifier
-hi link pandocPCiteAnchor Operator
+hi link pandocPCite Normal
+hi link pandocICite Normal
+hi link pandocCiteKey Identifier
+hi link pandocCiteAnchor Operator
+hi link pandocCiteLocator Operator
 
 hi pandocEmphasis gui=italic cterm=italic
 hi pandocStrong gui=bold cterm=bold
