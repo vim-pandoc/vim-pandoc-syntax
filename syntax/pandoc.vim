@@ -238,7 +238,7 @@ call s:WithConceal("strikeout", 'syn match pandocStrikeoutMark /\~\~/ contained 
 " Headers: {{{1
 "
 syn match pandocAtxHeader /^\s*#\{1,6}.*\n/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted display
-syn match pandocAtxHeaderMark /^\s*#\{1,6}/ contained containedin=pandocAtxHeader
+syn match pandocAtxHeaderMark /\(^\s*#\{1,6}\|#*\s*$\)/ contained containedin=pandocAtxHeader
 call s:WithConceal("atx", 'syn match AtxStart /#/ contained containedin=pandocAtxHeaderMark', 'conceal cchar='.s:cchars["atx"])
 syn match pandocSetexHeader /^.\+\n[=]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted
 syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted
