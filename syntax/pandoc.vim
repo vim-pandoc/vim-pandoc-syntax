@@ -96,7 +96,6 @@ function! DisableEmbedsforCodeblocksWithLang(langname)
     try
       exe 'syn clear pandocDelimitedCodeBlock_'.a:langname
       exe 'syn clear pandocDelimitedCodeBlockinBlockQuote_'.a:langname
-      exe 'hi clear pandocDefinitionBlock_'.a:langname
     catch /E28/
       echo "No existing highlight definitions found for '" . a:langname . "'"
     endtry
