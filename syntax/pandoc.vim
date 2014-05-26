@@ -258,7 +258,7 @@ syn match pandocSimpleTableHeader /\(^.*[[:graph:]].*\n\)\@<!\(^.*[[:graph:]].*\
 hi link pandocSimpleTableDelims Delimiter
 hi link pandocSimpleTableHeader pandocStrong
 
-syn region pandocTable start=/^\(-\+\s*\)\+\n\n\@!/ end=/^\(-\+\s*\)\+\n\n/ containedin=ALLBUT,pandocDelimitedCodeBloc keepend
+syn region pandocTable start=/^\(-\+\s*\)\+\n\n\@!/ end=/^\(-\+\s*\)\+\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock keepend
 syn match pandocTableDelims /\-/ contained containedin=pandocTable
 syn region pandocTableMultilineHeader start=/\(^-\+\n\)\@<=./ end=/\n-\@=/ contained containedin=pandocTable
 hi link pandocTableMultilineHeader pandocStrong
@@ -266,7 +266,7 @@ hi link pandocTableDelims Delimiter
 
 " }}}2
 " Grid: {{{2
-syn region pandocGridTable start=/\n\@1<=+-/ end=/+\n\n/ containedin=ALLBUT,pandocDelimitedCodeBloc keepend
+syn region pandocGridTable start=/\n\@1<=+-/ end=/+\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock keepend
 syn match pandocGridTableDelims /[\|=]/ contained containedin=pandocGridTable
 syn match pandocGridTableDelims /\([\-+][\-+=]\@=\|[\-+=]\@1<=[\-+]\)/ contained containedin=pandocGridTable
 syn match pandocGridTableHeader /\(^.*\n\)\(+=.*\)\@=/ contained containedin=pandocGridTable 
@@ -275,7 +275,7 @@ hi link pandocGridTableHeader Delimiter
 "}}}2
 " Pipe: {{{2
 " with beginning and end pipes
-syn region pandocPipeTable start=/\([+|]\n\)\@<!\n\@1<=|/ end=/|.*\n\n/ containedin=ALLBUT,pandocDelimitedCodeBloc keepend 
+syn region pandocPipeTable start=/\([+|]\n\)\@<!\n\@1<=|/ end=/|.*\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock keepend 
 " without beginning and end pipes
 syn region pandocPipeTable start=/^.*\n-.\{-}|/ end=/|.*\n\n/ keepend
 syn match pandocPipeTableDelims /[\|\-:+]/ contained containedin=pandocPipeTable
