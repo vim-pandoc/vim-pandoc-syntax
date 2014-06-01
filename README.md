@@ -1,23 +1,46 @@
 # vim-pandoc-syntax
 
-standalone pandoc syntax module.
+Standalone pandoc syntax module, to be used alongside
+[vim-pantondoc](http://github.vim/vim-pandoc/vim-pantondoc).
 
-forked from the version provided by `fmoralesc/vim-pantondoc`, in turn taken
+Forked from the version provided by `fmoralesc/vim-pantondoc`, in turn taken
 from `vim-pandoc/vim-pandoc`.
 
-compatible with vim versions having `+conceal`.
+## Requirements
 
-## features
+* A vim version with `+conceal`
+* [vim-pantondoc](http://github.vim/vim-pandoc/vim-pantondoc), to set the
+  `pandoc` filetype (otherwise you'll have to set it up yourself).
 
-* supports most (if not all) pandoc's markdown features.
-* can handle multiple embedded languages (LaTeX, YAML headers, many languages
+## Installation
+
+The repository follows the usual bundle structure, so it's easy to install it
+using [pathogen](https://github.com/tpope/vim-pathogen),
+[Vundle](https://github.com/gmarik/vundle) or NeoBundle.
+
+For Vundle users, it should be enough to add
+
+    Plugin 'vim-pandoc/vim-pandoc-syntax'
+
+to `.vimrc`, and then run `:PluginInstall`.
+
+For those who need it, a tarball is available from
+[here](https://github.com/vim-pandoc/vim-pandoc/archive/master.zip).
+
+## Features
+
+* Supports most (if not all) pandoc's markdown features, including tables,
+  delimited codeblocks, references, etc.
+* Can handle multiple embedded languages (LaTeX, YAML headers, many languages
   in delimited codeblocks). Some commands are provided to help with this (see
   `:help pandoc-syntax-commands`)
-* pretty display using `conceal`.
-* is configurable (see `:help pandoc-syntax-configuration`).
-* includes tests, to ease development.
+* Pretty display using `conceal` (optional).
+* Configurable (see `:help pandoc-syntax-configuration` for an overview of the
+  options).
 
-## obligatory screenshots
+## Screenshots
 
-![img1](http://i.imgur.com/YBABRYw.png)
-![img](http://i.imgur.com/QU7niN3.png)
+![img1](http://i.imgur.com/UKXbG2V.png)
+![img2](http://i.imgur.com/z8FpxRP.png)
+![img3](http://i.imgur.com/ziNjQiE.png)
+![img4](http://i.imgur.com/UKoOxzP.png)
