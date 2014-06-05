@@ -209,8 +209,8 @@ call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/
 "}}}
 " Strong Emphasis: {{{2
 "
-call s:WithConceal("block", 'syn region pandocStrongEmphasis matchgroup=Operator start=/\*\*\*\S\@=/ end=/\S\@<=\*\*\*/ contains=@Spell', 'concealends')
-call s:WithConceal("block", 'syn region pandocStrongEmphasis matchgroup=Operator start=/___\S\@=/ end=/\S\@<=___/ contains=@Spell', 'concealends')
+call s:WithConceal("block", 'syn region pandocStrongEmphasis matchgroup=Operator start=/\(\*\*\*\)\S\@=/ end=/\S\@<=\*\*\*/ contains=@Spell', 'concealends')
+call s:WithConceal("block", 'syn region pandocStrongEmphasis matchgroup=Operator start=/\(___\)\S\@=/ end=/\S\@<=___/ contains=@Spell', 'concealends')
 " }}}
 " Mixed: {{{2
 call s:WithConceal("block", 'syn region pandocStrongInEmphasis matchgroup=Operator start=/\*\*/ end=/\*\*/ contained containedin=pandocEmphasis contains=@Spell', 'concealends')
@@ -370,7 +370,7 @@ call s:WithConceal("dashes", 'syn match pandocEnDash /\s\@<=---\@![[:blank:][:pu
 call s:WithConceal("ellipses", 'syn match pandocEllipses /\.\.\./ display', 'conceal cchar=…')
 " }}}
 " Horizontal Rules: {{{2
-call s:WithConceal("hrule", 'syn match pandocHRule /^\s\{,3}\([-*_]\s*\)\{3,}\n/ display', 'conceal cchar='.s:cchars["hr"])
+call s:WithConceal("hrule", 'syn match pandocHRule /^\s\{,3}\([-*_]\s*\)\{3,}\n\@=/ display', 'conceal cchar='.s:cchars["hr"])
 "}}}
 " Quotes: {{{2
 call s:WithConceal("quotes", 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=“')
