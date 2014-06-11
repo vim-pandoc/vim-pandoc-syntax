@@ -467,11 +467,6 @@ hi link pandocCiteKey Identifier
 hi link pandocCiteAnchor Operator
 hi link pandocCiteLocator Operator
 
-hi pandocEmphasis gui=italic cterm=italic
-hi pandocStrong gui=bold cterm=bold
-hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
-hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
-hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
 if g:pandoc_syntax_style_emphases == 1
     hi pandocEmphasis gui=italic cterm=italic
     hi pandocStrong gui=bold cterm=bold
