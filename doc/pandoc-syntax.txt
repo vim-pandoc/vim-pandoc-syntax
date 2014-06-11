@@ -72,6 +72,11 @@ CONFIGURATION				       *vim-pandoc-syntax-confguration*
       let g:pandoc_use_embeds_in_codeblocks_for_langs = ["ruby",
       "literatehaskell=lhaskell"]
 
++ *g:pandoc_syntax_style_emphases*
+  Use italics and strong in emphases. Default = 1
+  0 will add "block" to |g:pandoc_syntax_dont_use_conceal_for_rules|, because otherwise
+  you couldn't tell where the styles are applied.
+
 + *g:pandoc_underline_special_blocks*
   Undeline subscript, superscript and strikeout text styles. Default = 1
 

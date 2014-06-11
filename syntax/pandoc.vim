@@ -64,6 +64,16 @@ if !exists("g:pandoc_use_embeds_in_codeblocks_for_langs")
     let g:pandoc_use_embeds_in_codeblocks_for_langs = []
 endif
 "}}}2
+" use italics ? {{{2
+if !exists("g:pandoc_syntax_style_emphases")
+    let g:pandoc_syntax_style_emphases = 1
+endif
+" if 0, we don't conceal the emphasis marks, otherwise there wouldn't be a way
+" to tell where the styles apply.
+if g:pandoc_syntax_style_emphases == 0
+    call add(g:pandoc_syntax_dont_use_conceal_for_rules, "block")
+endif
+" }}}2
 " underline subscript, superscript and strikeout? {{{2
 if !exists("g:pandoc_underline_special_blocks")
     let g:pandoc_underline_special_blocks = 1
@@ -462,6 +472,13 @@ hi pandocStrong gui=bold cterm=bold
 hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
 hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
 hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
+if g:pandoc_syntax_style_emphases == 1
+    hi pandocEmphasis gui=italic cterm=italic
+    hi pandocStrong gui=bold cterm=bold
+    hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
+    hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
+    hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
+endif
 hi link pandocNoFormatted String
 hi link pandocSubscriptMark Operator
 hi link pandocSuperscriptMark Operator
