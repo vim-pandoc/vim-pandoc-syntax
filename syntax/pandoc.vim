@@ -29,19 +29,39 @@ if !exists("g:pandoc_syntax_dont_use_conceal_for_rules")
 endif
 "}}}2
 " cchars used in conceal rules {{{2
-let s:cchars = { 
-	    \"newline": "↵", 
-	    \"image": "▨", 
-	    \"super": "ⁿ", 
-	    \"sub": "ₙ", 
-	    \"strike": "x̶", 
-	    \"atx": "§",  
-	    \"codelang": "λ",
-	    \"abbrev": "→",
-	    \"footnote": "†",
-	    \"definition": " ",
-	    \"li": "•",
-	    \"hr": "—" }
+" utf-8 defaults (preferred)
+if &encoding == "utf-8"
+    let s:cchars = { 
+		\"newline": "↵", 
+		\"image": "▨", 
+		\"super": "ⁿ", 
+		\"sub": "ₙ", 
+		\"strike": "x̶", 
+		\"atx": "§",  
+		\"codelang": "λ",
+		\"abbrev": "→",
+		\"footnote": "†",
+		\"definition": " ",
+		\"li": "•",
+		\"hr": "—", 
+		\"em": "—"}
+else
+    " ascii defaults
+    let s:cchars = { 
+		\"newline": " ", 
+		\"image": "i", 
+		\"super": "^", 
+		\"sub": "_", 
+		\"strike": "~", 
+		\"atx": "#",  
+		\"codelang": "l",
+		\"abbrev": "a",
+		\"footnote": "f",
+		\"definition": " ",
+		\"li": "*",
+		\"hr": "-",
+		\"em": "-"}
+endif
 "}}}2
 " if the user has a dictionary with replacements for the default cchars, use those {{{2
 if exists("g:pandoc_syntax_user_cchars")
@@ -375,16 +395,20 @@ syn match pandocListItem /^\s*(*x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+/ display
 call s:WithConceal("newline", 'syn match pandocNewLine /\(  \|\\\)$/ display', 'conceal cchar='.s:cchars["newline"])
 "}}}
 " Dashes: {{{2
-call s:WithConceal("dashes", 'syn match pandocEmDash /\s\@<=---\s\@=/ display', 'conceal cchar=—')
+call s:WithConceal("dashes", 'syn match pandocEmDash /\s\@<=---\s\@=/ display', 'conceal cchar='.s:cchars["em"])
 call s:WithConceal("dashes", 'syn match pandocEnDash /\s\@<=---\@![[:blank:][:punct:]]\@=/ display', 'conceal cchar=-')
-call s:WithConceal("ellipses", 'syn match pandocEllipses /\.\.\./ display', 'conceal cchar=…')
+if &encoding == "utf-8"
+    call s:WithConceal("ellipses", 'syn match pandocEllipses /\.\.\./ display', 'conceal cchar=…')
+endif
 " }}}
 " Horizontal Rules: {{{2
 call s:WithConceal("hrule", 'syn match pandocHRule /^\s\{,3}\([-*_]\s*\)\{3,}\n\@=/ display', 'conceal cchar='.s:cchars["hr"])
 "}}}
 " Quotes: {{{2
-call s:WithConceal("quotes", 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=“')
-call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=”')
+if &encoding == "utf-8"
+    call s:WithConceal("quotes", 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=“')
+    call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=”')
+endif
 " }}}
 " }}}
 "
