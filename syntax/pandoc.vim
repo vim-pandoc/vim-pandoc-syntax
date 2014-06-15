@@ -10,22 +10,22 @@
 " Configuration: {{{1
 "
 " use conceal {{{2
-if !exists("g:pandoc_use_conceal")
+if !exists("g:pandoc#syntax#conceal#use")
     if v:version < 703
-	let g:pandoc_use_conceal = 0
+	let g:pandoc#syntax#conceal#use = 0
     else
-	let g:pandoc_use_conceal = 1
+	let g:pandoc#syntax#conceal#use = 1
     endif
 else
     " exists, but we cannot use it, disable anyway
     if v:version < 703
-	let g:pandoc_use_conceal = 0
+	let g:pandoc#syntax#conceal#use = 0
     endif
 endif
 "}}}2
 " what groups not to use conceal in. works as a blacklist {{{2
-if !exists("g:pandoc_syntax_dont_use_conceal_for_rules")
-    let g:pandoc_syntax_dont_use_conceal_for_rules = []
+if !exists("g:pandoc#syntax#conceal#blacklist")
+    let g:pandoc#syntax#conceal#blacklist = []
 endif
 "}}}2
 " cchars used in conceal rules {{{2
@@ -64,39 +64,39 @@ else
 endif
 "}}}2
 " if the user has a dictionary with replacements for the default cchars, use those {{{2
-if exists("g:pandoc_syntax_user_cchars")
-    let s:cchars = extend(s:cchars, g:pandoc_syntax_user_cchars)
+if exists("g:pandoc#syntax#conceal#cchar_overrides")
+    let s:cchars = extend(s:cchars, g:pandoc#syntax#conceal#cchar_overrides)
 endif
 "}}}2
 " leave specified codeblocks as Normal (i.e. 'unhighlighted') {{{2
-if !exists("g:pandoc_syntax_ignore_codeblocks")
-    let g:pandoc_syntax_ignore_codeblocks = []
+if !exists("g:pandoc#syntax#codeblocks#ignore")
+    let g:pandoc#syntax#codeblocks#ignore = []
 endif
 "}}}2
 " use embedded highlighting for delimited codeblocks where a language is specifed. {{{2
-if !exists("g:pandoc_use_embeds_in_codeblocks")
-    let g:pandoc_use_embeds_in_codeblocks = 1
+if !exists("g:pandoc#syntax#codeblocks#embeds#use")
+    let g:pandoc#syntax#codeblocks#embeds#use = 1
 endif
 "}}}2
 " for what languages and using what vim syntax files highlight those embeds. {{{2
 " defaults to None.
-if !exists("g:pandoc_use_embeds_in_codeblocks_for_langs")
-    let g:pandoc_use_embeds_in_codeblocks_for_langs = []
+if !exists("g:pandoc#syntax#codeblocks#embeds#langs")
+    let g:pandoc#syntax#codeblocks#embeds#langs = []
 endif
 "}}}2
 " use italics ? {{{2
-if !exists("g:pandoc_syntax_style_emphases")
-    let g:pandoc_syntax_style_emphases = 1
+if !exists("g:pandoc#syntax#style#emphases")
+    let g:pandoc#syntax#style#emphases = 1
 endif
 " if 0, we don't conceal the emphasis marks, otherwise there wouldn't be a way
 " to tell where the styles apply.
-if g:pandoc_syntax_style_emphases == 0
-    call add(g:pandoc_syntax_dont_use_conceal_for_rules, "block")
+if g:pandoc#syntax#style#emphases == 0
+    call add(g:pandoc#syntax#conceal#blacklist, "block")
 endif
 " }}}2
 " underline subscript, superscript and strikeout? {{{2
-if !exists("g:pandoc_underline_special_blocks")
-    let g:pandoc_underline_special_blocks = 1
+if !exists("g:pandoc#syntax#style#underline_special")
+    let g:pandoc#syntax#style#underline_special = 1
 endif
 " }}}2
 " }}}
@@ -134,8 +134,8 @@ endfunction
 " WithConceal {{{2
 function! s:WithConceal(rule_group, rule, conceal_rule)
     let l:rule_tail = ""
-    if g:pandoc_use_conceal != 0
-	if index(g:pandoc_syntax_dont_use_conceal_for_rules, a:rule_group) == -1
+    if g:pandoc#syntax#conceal#use != 0
+	if index(g:pandoc#syntax#conceal#blacklist, a:rule_group) == -1
 	    let l:rule_tail = " " . a:conceal_rule
 	endif
     endif
@@ -151,7 +151,7 @@ command! -buffer -nargs=1 -complete=syntax PandocUnhighlight call DisableEmbedsf
 
 " BASE: {{{1
 syntax clear
-if g:pandoc_use_conceal != 0
+if g:pandoc#syntax#conceal#use != 0
     setlocal conceallevel=2
 endif
 syntax spell toplevel
@@ -330,14 +330,14 @@ syn match pandocCodePre /<pre>.\{-}<\/pre>/ skipnl
 syn match pandocCodePre /<code>.\{-}<\/code>/ skipnl
 
 " enable highlighting for embedded region in codeblocks if there exists a
-" g:pandoc_use_embeds_in_codeblocks_for_langs *list*.
+" g:pandoc#syntax#codeblocks#embeds#langs *list*.
 "
 " entries in this list are the language code interpreted by pandoc,
 " if this differs from the name of the vim syntax file, append =vimname
-" e.g. let g:pandoc_use_embeds_in_codeblocks_for_langs = ["haskell", "literatehaskell=lhaskell"]
+" e.g. let g:pandoc#syntax#codeblocks#embeds#langs = ["haskell", "literatehaskell=lhaskell"]
 "
-if g:pandoc_use_embeds_in_codeblocks != 0
-    for l in g:pandoc_use_embeds_in_codeblocks_for_langs
+if g:pandoc#syntax#codeblocks#embeds#use != 0
+    for l in g:pandoc#syntax#codeblocks#embeds#langs
       call EnableEmbedsforCodeblocksWithLang(l)
     endfor
 endif
@@ -435,14 +435,14 @@ hi link pandocSetexHeader Title
 hi link pandocHTMLComment Comment
 hi link pandocBlockQuote Comment
 
-" if the user sets g:pandoc_syntax_ignore_codeblocks to contain
+" if the user sets g:pandoc#syntax#codeblocks#ignore to contain
 " a codeblock type, don't highlight it so that it remains Normal
 
-if index(g:pandoc_syntax_ignore_codeblocks, 'definition') == -1
+if index(g:pandoc#syntax#codeblocks#ignore, 'definition') == -1
   hi link pandocCodeBlockInsideIndent String
 endif
 
-if index(g:pandoc_syntax_ignore_codeblocks, 'delimited') == -1
+if index(g:pandoc#syntax#codeblocks#ignore, 'delimited') == -1
   hi link pandocDelimitedCodeBlock Special
 endif
 
@@ -491,7 +491,7 @@ hi link pandocCiteKey Identifier
 hi link pandocCiteAnchor Operator
 hi link pandocCiteLocator Operator
 
-if g:pandoc_syntax_style_emphases == 1
+if g:pandoc#syntax#style#emphases == 1
     hi pandocEmphasis gui=italic cterm=italic
     hi pandocStrong gui=bold cterm=bold
     hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
@@ -502,7 +502,7 @@ hi link pandocNoFormatted String
 hi link pandocSubscriptMark Operator
 hi link pandocSuperscriptMark Operator
 hi link pandocStrikeoutMark Operator
-if g:pandoc_underline_special_blocks == 1
+if g:pandoc#syntax#style#underline_special == 1
     hi pandocSubscript gui=underline cterm=underline
     hi pandocSuperscript gui=underline cterm=underline
     hi pandocStrikeout gui=underline cterm=underline
