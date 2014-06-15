@@ -108,31 +108,12 @@ hello
 
 # smart punctuation
 
-an em-dash --- in some text.
-an en-dash: --.
 ellipses: ....
 quote "signs". This only works at the beggining and end of words.
 quote "signs."
-
---" "test" "test," "test--" --"test" (issue #30) 
 
 issue #31:
 
 "Foo"
 *"Foo"*
 **"Foo"**
-
-# horizontal rules
-
----
-
-- - -
-
-***
-
-___ 
-
-aaaaaa
-
----
-
