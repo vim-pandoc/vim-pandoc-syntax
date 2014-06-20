@@ -272,6 +272,7 @@ syn match pandocAtxHeaderMark /\(^\s*#\{1,6}\|#*\s*$\)/ contained containedin=pa
 call s:WithConceal("atx", 'syn match AtxStart /#/ contained containedin=pandocAtxHeaderMark', 'conceal cchar='.s:cchars["atx"])
 syn match pandocSetexHeader /^.\+\n[=]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,@Spell
 syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,@Spell
+syn match pandocHeaderAttr /{.*}/ contained containedin=pandocAtxHeader,pandocSetexHeader
 "}}}
 
 " Tables: {{{1
@@ -422,6 +423,7 @@ hi link pandocTitleBlockTitle Directory
 hi link pandocAtxHeader Title
 hi link AtxStart Operator
 hi link pandocSetexHeader Title
+hi link pandocHeaderAttr Comment
 
 hi link pandocHTMLComment Comment
 hi link pandocBlockQuote Comment
