@@ -187,7 +187,8 @@ syn match pandocBlockQuote /^>.*\n\(.*\n\@1<!\n\)*/ contains=@Spell,pandocEmphas
 " }}}
 
 " Code Blocks: {{{1
-"
+
+syn match pandocCodeblock /\s\{4}.*$/
 syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s\{8,}\|\t\+\)\).*\n/ end=/.\(\n^\s*\n\)\@=/ contained
 "}}}
 
@@ -402,8 +403,6 @@ if &encoding == "utf-8"
     call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=”')
 endif
 " }}}
-" }}}
-"
 " }}}
 
 " YAML: {{{1
