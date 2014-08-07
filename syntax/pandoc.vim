@@ -276,6 +276,7 @@ call s:WithConceal("atx", 'syn match AtxStart /#/ contained containedin=pandocAt
 syn match pandocSetexHeader /^.\+\n[=]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,@Spell
 syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,@Spell
 syn match pandocHeaderAttr /{.*}/ contained containedin=pandocAtxHeader,pandocSetexHeader
+syn match pandocHeaderID /#[-_:.[:alpha:]]*/ contained containedin=pandocHeaderAttr
 "}}}
 
 " Tables: {{{1
@@ -425,6 +426,7 @@ hi link pandocAtxHeader Title
 hi link AtxStart Operator
 hi link pandocSetexHeader Title
 hi link pandocHeaderAttr Comment
+hi link pandocHeaderID Identifier
 
 hi link pandocHTMLComment Comment
 hi link pandocBlockQuote Comment
