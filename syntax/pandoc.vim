@@ -166,7 +166,9 @@ syn region pandocHTMLComment start=/<!--/ end=/-->/
 " Unset current_syntax so the 2nd include will work
 unlet b:current_syntax
 syn include @LATEX syntax/tex.vim
-syn region pandocLaTeXInlineMath start=/\(\\\)\@<!\${\@![[:graph:]]\@=/ end=/\$/ keepend contains=@LATEX
+syn region pandocLaTeXInlineMath start=/\\\@<!\$[[:graph:]]\@=/ end=/\\\@<!\$/ keepend contains=@LATEX 
+syn match pandocProtectedFromInlineLaTeX /\\\@<!\${.*}\(\s\([^$]*\|.*\(\\\$.*\)\{2}\)\n\n\|$\)\@=/ display
+" contains=@LATEX
 syn region pandocLaTeXMathBlock start=/\$\$/ end=/\$\$/ keepend contains=@LATEX 
 syn match pandocLaTeXCommand /\\[[:alpha:]]\+\(\({.\{-}}\)\=\(\[.\{-}\]\)\=\)*/ contains=@LATEX 
 syn region pandocLaTeXRegion start=/\\begin{\z(.\{-}\)}/ end=/\\end{\z1}/ keepend contains=@LATEX
