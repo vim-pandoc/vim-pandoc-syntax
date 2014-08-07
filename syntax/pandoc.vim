@@ -198,7 +198,9 @@ syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s
 "
 " Base: {{{2
 syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/[\]`][\]`]\@=/ end=/\]/ keepend display
-syn region pandocReferenceURL matchgroup=Operator start=/\]\@1<=(/ end=/)/ keepend display 
+syn region pandocReferenceURL matchgroup=Operator start=/\]\@1<=(/ end=/)/ keepend display
+" let's not consider "a [label] a" as a label, remove formatting - Note: breaks implicit links
+syn match pandocNoLabel /\]\@<!\s\[[^\[\]]\{-}\]\s\[\@!/
 syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocReferenceURL contains=@Spell display
 call s:WithConceal("image", 'syn match pandocImageIcon /!\[\@=/ display', 'conceal cchar='. s:cchars["image"]) 
 " }}}
