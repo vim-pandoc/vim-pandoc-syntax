@@ -395,7 +395,7 @@ syn match pandocListItem /^\s*(*x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+/ display
 " Special: {{{1
 
 " New_lines: {{{2
-call s:WithConceal("newline", 'syn match pandocNewLine /\(  \|\\\)$/ display', 'conceal cchar='.s:cchars["newline"])
+call s:WithConceal("newline", 'syn match pandocNewLine /\(  \|\\\)$/ display containedin=pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocStrongInEmphasis,pandocEmphasisInStrong', 'conceal cchar='.s:cchars["newline"])
 "}}}
 " Ellipses: {{{2
 if &encoding == "utf-8"
