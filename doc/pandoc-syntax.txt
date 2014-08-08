@@ -4,11 +4,11 @@
 OVERVIEW
 
 vim-pandoc-syntax is a standalone syntax file for highlighting pandoc flavored
-markdown documents, to be used alongside vim-pantondoc (see |pantondoc|). It is
-based on the version provided by vim-pandoc, which it obsoletes.
+markdown documents, to be used alongside vim-pandoc (see |pandoc|). It is
+based on the version once provided by vim-pandoc-legacy, which it obsoletes.
 
 The project resides at http://www.github.com/vim-pandoc/vim-pandoc-syntax. You
-are welcome to help, suggesting ideas, reporting bugs or contributing code.
+are welcome to help, suggest ideas, report bugs or contribute code.
 
  
 CONFIGURATION				       *vim-pandoc-syntax-confguration*
@@ -124,5 +124,5 @@ TODO
 MISC
 
 The plugin sets a global variable, *g:vim_pandoc_syntax_exists* to indicate its
-existence. This is currently used by vim-pantondoc to switch between syntax
+existence. This is currently used by vim-pandoc to switch between syntax
 assisted and basic folding rules.
