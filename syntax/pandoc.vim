@@ -281,6 +281,11 @@ syn match pandocHeaderAttr /{.*}/ contained containedin=pandocAtxHeader,pandocSe
 syn match pandocHeaderID /#[-_:.[:alpha:]]*/ contained containedin=pandocHeaderAttr
 "}}}
 
+" Line Blocks: {{{1
+syn match pandocLineBlockDelimiter /^|/ 
+hi link pandocLineBlockDelimiter Delimiter
+"}}}
+
 " Tables: {{{1
 
 " Simple: {{{2
@@ -308,7 +313,7 @@ hi link pandocGridTableHeader Delimiter
 "}}}2
 " Pipe: {{{2
 " with beginning and end pipes
-syn region pandocPipeTable start=/\%#=2\([+|]\n\)\@<!\n\@1<=|/ end=/|.*\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock keepend 
+syn region pandocPipeTable start=/\%#=2\([+|]\n\)\@<!\n\@1<=|\(.*|\)\@=/ end=/|.*\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock keepend 
 " without beginning and end pipes
 syn region pandocPipeTable start=/\%#=2^.*\n-.\{-}|/ end=/|.*\n\n/ keepend
 syn match pandocPipeTableDelims /[\|\-:+]/ contained containedin=pandocPipeTable
