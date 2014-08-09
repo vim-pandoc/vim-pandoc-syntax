@@ -252,9 +252,9 @@ call s:WithConceal("block", 'syn region pandocEmphasisInStrong matchgroup=Operat
 " Inline Code: {{{2
 
 " Using single back ticks
-call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/`/ end=/`/', 'concealends')
+call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/\\\@<!`/ end=/\\\@<!`/', 'concealends')
 " Using double back ticks
-call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/``/ end=/``/', 'concealends')
+call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/', 'concealends')
 "}}}
 " Subscripts: {{{2 
 syn region pandocSubscript start=/\~\(\([[:graph:]]\(\\ \)\=\)\{-}\~\)\@=/ end=/\~/ keepend
