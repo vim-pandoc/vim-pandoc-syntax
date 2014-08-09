@@ -407,6 +407,8 @@ if &encoding == "utf-8"
     call s:WithConceal("quotes", 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=“')
     call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong display', 'conceal cchar=”')
 endif
+" Hrule: {{{2
+syn match pandocHRule /\*\{3}$/ display
 " }}}
 " }}}
 
