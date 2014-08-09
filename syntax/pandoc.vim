@@ -172,6 +172,12 @@ syn match pandocProtectedFromInlineLaTeX /\\\@<!\${.*}\(\(\s\|[[:punct:]]\)\([^$
 syn region pandocLaTeXMathBlock start=/\$\$/ end=/\$\$/ keepend contains=@LATEX 
 syn match pandocLaTeXCommand /\\[[:alpha:]]\+\(\({.\{-}}\)\=\(\[.\{-}\]\)\=\)*/ contains=@LATEX 
 syn region pandocLaTeXRegion start=/\\begin{\z(.\{-}\)}/ end=/\\end{\z1}/ keepend contains=@LATEX
+" we rehighlight sectioning commands, because otherwise tex.vim captures all text until EOF or a new sectioning command
+syn region pandocLaTexSection start=/\\\(part\|chapter\|\(sub\)\{,2}section\|\(sub\)\=paragraph\)\*\=\(\[.*\]\)\={/ end=/\}\n/ keepend
+syn match pandocLaTexSectionCmd /\\\(part\|chapter\|\(sub\)\{,2}section\|\(sub\)\=paragraph\)/ contained containedin=pandocLaTexSection 
+syn match pandocLaTeXDelimiter /[[\]{}]/ contained containedin=pandocLaTexSection
+hi link pandocLaTexSectionCmd texSection
+hi link pandocLaTeXDelimiter texDelimiter
 " }}}}
 " }}}
 
