@@ -114,9 +114,10 @@ FUNCTIONS                                           *pandoc-syntax-functions*
 
 TODO
 
-   This is a list of know stuff missing from the syntax file.
+This is a list of know stuff missing from the syntax file.
 
-   1. Allow attributes for verbatim text, like in
+   1. Highlight code within verbatim text when a language is specified in the attrib, 
+   like in
 
           hey, `print 1 + 3`.{python} is no longer valid in python 3. 
 
