@@ -281,7 +281,7 @@ call s:WithConceal("strikeout", 'syn match pandocStrikeoutMark /\~\~/ contained 
 "
 syn match pandocAtxHeader /^\s*#\{1,6}.*\n/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,@Spell display
 syn match pandocAtxHeaderMark /\(^\s*#\{1,6}\|\\\@<!#*\(\s*.*$\)\@=\)/ contained containedin=pandocAtxHeader
-call s:WithConceal("atx", 'syn match AtxStart /#/ contained containedin=pandocAtxHeaderMark', 'conceal cchar='.s:cchars["atx"])
+call s:WithConceal("atx", 'syn match pandocAtxStart /#/ contained containedin=pandocAtxHeaderMark', 'conceal cchar='.s:cchars["atx"])
 syn match pandocSetexHeader /^.\+\n[=]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,@Spell
 syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,@Spell
 syn match pandocHeaderAttr /{.*}/ contained containedin=pandocAtxHeader,pandocSetexHeader
@@ -439,7 +439,7 @@ syn region pandocYAMLHeader matchgroup=Delimiter start=/\%^\-\{3}\s*$/ end=/[\-|
 hi pandocTitleBlock term=italic gui=italic
 hi link pandocTitleBlockTitle Directory
 hi link pandocAtxHeader Title
-hi link AtxStart Operator
+hi link pandocAtxStart Operator
 hi link pandocSetexHeader Title
 hi link pandocHeaderAttr Comment
 hi link pandocHeaderID Identifier
