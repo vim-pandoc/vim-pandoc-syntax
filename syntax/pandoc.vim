@@ -236,13 +236,13 @@ syn match pandocCiteLocator /[\[\]]/ contained containedin=pandocPCite,pandocICi
 
 " Emphasis: {{{2
 "
-call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell,pandocLatexInlineMath', 'concealends')
-call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell,pandocLatexInlineMath', 'concealends')
+call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell,pandocNoFormattedInEmphasis,pandocLatexInlineMath', 'concealends')
+call s:WithConceal("block", 'syn region pandocEmphasis matchgroup=Operator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell,pandocNoFormattedInEmphasis,pandocLatexInlineMath', 'concealends')
 " }}}
 " Strong: {{{2
 "
-call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/\*\*/ end=/\*\*/ contains=@Spell,pandocLatexInlineMath', 'concealends')
-call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/__/ end=/__/ contains=@Spell,pandocLatexInlineMath', 'concealends')
+call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/\*\*/ end=/\*\*/ contains=@Spell,pandocNoFormattedInStrong,pandocLatexInlineMath', 'concealends')
+call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/__/ end=/__/ contains=@Spell,pandocNoFormattedInStrong,pandocLatexInlineMath', 'concealends')
 "}}}
 " Strong Emphasis: {{{2
 "
@@ -259,9 +259,13 @@ call s:WithConceal("block", 'syn region pandocEmphasisInStrong matchgroup=Operat
 
 " Using single back ticks
 call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/\\\@<!`/ end=/\\\@<!`/ nextgroup=pandocNoFormattedAttrs', 'concealends')
+syn region pandocNoFormattedInEmphasis matchgroup=Operator start=/\\\@<!`/ end=/\\\@<!`/ nextgroup=pandocNoFormattedAttrs contained
+syn region pandocNoFormattedInStrong matchgroup=Operator start=/\\\@<!`/ end=/\\\@<!`/ nextgroup=pandocNoFormattedAttrs contained
 " Using double back ticks
 call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/', 'concealends')
-syn match pandocNoFormattedAttrs /{.*}/ contained containedin=pandocNoFormatted 
+syn region pandocNoFormattedInEmphasis matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/ contained
+syn region pandocNoFormattedInStrong matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/ contained
+syn match pandocNoFormattedAttrs /{.*}/ contained containedin=pandocNoFormatted,pandocNoFormattedInEmphasis,pandocNoFormattedInStrong
 "}}}
 " Subscripts: {{{2 
 syn region pandocSubscript start=/\~\(\([[:graph:]]\(\\ \)\=\)\{-}\~\)\@=/ end=/\~/ keepend
@@ -509,6 +513,8 @@ if g:pandoc#syntax#style#emphases == 1
     hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
     hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
     hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
+    hi pandocNoFormattedInEmphasis gui=italic cterm=italic
+    hi pandocNoFormattedInStrong gui=bold cterm=bold
 endif
 hi link pandocNoFormatted String
 hi link pandocNoFormattedAttrs Comment
