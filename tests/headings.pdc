@@ -2,11 +2,11 @@
 % vim-pandoc-syntax  
   with multiple lines
 
-# heading 
+# heading #
 
 a
 
-## heading
+## heading with # in it ##
 
 a
 
