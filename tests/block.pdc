@@ -38,9 +38,11 @@ of spaces.
 
 oh no! mix and match *is **hard** stuff*, real hard.
 
-mixing is **quite *the* problem**.
+mixing is **quite *the* problem**. 
 
-but... we ***kinda tackled it*** ;)
+but... we ***kinda tackled it*** ;) 
+
+We once had problems with ***quite* the problem**, but not anymore.
 
 # blockquotes
 
@@ -78,6 +80,14 @@ test
 :exe "cmd args"
 ```
 
+> ``` c
+> void (*signal(int sig, void (*disp)(int)))(int);
+> ```
+> 
+> If `signal()` is used, `disp` is the address of a signal handler, and `sig`
+> is not `SIGILL`, `SIGTRAP`, or `SIGPWR`, the system first sets the signal's
+> disposition to `SIG_DFL` before executing the signal handler.
+
 # definitions
 
 hello
@@ -98,28 +108,12 @@ hello
 
 # smart punctuation
 
-an em-dash --- in some text.
-an en-dash: --.
 ellipses: ....
 quote "signs". This only works at the beggining and end of words.
 quote "signs."
-
---" "test" "test," "test--" --"test" (issue #30) 
 
 issue #31:
 
 "Foo"
 *"Foo"*
 **"Foo"**
-
-# horizontal rules
-
----
-
-- - -
-
-***
-
-___
-
-

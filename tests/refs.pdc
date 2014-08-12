@@ -10,6 +10,8 @@ footnotes and the superscripts.^[inline footnotes-- *test*]
 
 [^footnote1]: this is a footnote --.
 
+[see @Lovejoy, pp. 12]
+
 Mister @Lovejoy95, at [-@Lovejoy], cites @Lovejoy [pp. 12-12].
 
 Some printable characters might not be matched (in @Krämer, `ä` caused
