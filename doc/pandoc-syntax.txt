@@ -11,7 +11,7 @@ The project resides at http://www.github.com/vim-pandoc/vim-pandoc-syntax. You
 are welcome to help, suggest ideas, report bugs or contribute code.
 
  
-CONFIGURATION				       *vim-pandoc-syntax-confguration*
+CONFIGURATION				       *vim-pandoc-syntax-configuration*
 
 + *g:pandoc#syntax#conceal#use*
   Use |conceal| for pretty highlighting. Default is 1 for vim version > 7.3
