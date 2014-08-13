@@ -42,7 +42,8 @@ if &encoding == "utf-8"
 		\"abbrev": "→",
 		\"footnote": "†",
 		\"definition": " ",
-		\"li": "•"}
+		\"li": "•",
+                \"html_c": "◀"}
 else
     " ascii defaults
     let s:cchars = { 
@@ -56,7 +57,8 @@ else
 		\"abbrev": "a",
 		\"footnote": "f",
 		\"definition": " ",
-		\"li": "*"}
+		\"li": "*",
+                \"html_c": "+"}
 endif
 "}}}2
 " if the user has a dictionary with replacements for the default cchars, use those {{{2
@@ -159,7 +161,7 @@ syntax spell toplevel
 syn include @HTML syntax/html.vim
 syn match pandocHTML /<\/\?\a[^>]\+>/ contains=@HTML
 " Support HTML multi line comments
-syn region pandocHTMLComment start=/<!--/ end=/-->/
+call s:WithConceal('html_c', 'syn region pandocHTMLComment matchgroup=Delimiter start=/<!--\s\=/ end=/\s\=-->/',  'concealends cchar='.s:cchars['html_c'])
 " }}}
 " LaTeX: {{{2
 " Set embedded LaTex (pandoc extension) highlighting
