@@ -259,13 +259,13 @@ call s:WithConceal("block", 'syn region pandocEmphasisInStrong matchgroup=Operat
 
 " Using single back ticks
 call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/\\\@<!`/ end=/\\\@<!`/ nextgroup=pandocNoFormattedAttrs', 'concealends')
-syn region pandocNoFormattedInEmphasis matchgroup=Operator start=/\\\@<!`/ end=/\\\@<!`/ nextgroup=pandocNoFormattedAttrs contained
-syn region pandocNoFormattedInStrong matchgroup=Operator start=/\\\@<!`/ end=/\\\@<!`/ nextgroup=pandocNoFormattedAttrs contained
+call s:WithConceal("inlinecode", 'syn region pandocNoFormattedInEmphasis matchgroup=Operator start=/\\\@<!`/ end=/\\\@<!`/ nextgroup=pandocNoFormattedAttrs contained', 'concealends')
+call s:WithConceal("inlinecode", 'syn region pandocNoFormattedInStrong matchgroup=Operator start=/\\\@<!`/ end=/\\\@<!`/ nextgroup=pandocNoFormattedAttrs contained', 'concealends')
 " Using double back ticks
-call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/', 'concealends')
-syn region pandocNoFormattedInEmphasis matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/ contained
-syn region pandocNoFormattedInStrong matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/ contained
-syn match pandocNoFormattedAttrs /{.*}/ contained containedin=pandocNoFormatted,pandocNoFormattedInEmphasis,pandocNoFormattedInStrong
+call s:WithConceal("inlinecode", 'syn region pandocNoFormatted matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/ nextgroup=pandocNoFormattedAttrs', 'concealends')
+call s:WithConceal("inlinecode", 'syn region pandocNoFormattedInEmphasis matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/ nextgroup=pandocNoFormattedAttrs contained', 'concealends')
+call s:WithConceal("inlinecode", 'syn region pandocNoFormattedInStrong matchgroup=Operator start=/\\\@<!``/ end=/\\\@<!``/ nextgroup=pandocNoFormattedAttrs contained', 'concealends')
+syn match pandocNoFormattedAttrs /{.*}/ contained
 "}}}
 " Subscripts: {{{2 
 syn region pandocSubscript start=/\~\(\([[:graph:]]\(\\ \)\=\)\{-}\~\)\@=/ end=/\~/ keepend
@@ -513,8 +513,12 @@ if g:pandoc#syntax#style#emphases == 1
     hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
     hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
     hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
-    hi pandocNoFormattedInEmphasis gui=italic cterm=italic
-    hi pandocNoFormattedInStrong gui=bold cterm=bold
+    let fg = synIDattr(synIDtrans(hlID("String")), "fg")
+    let fg = (fg == -1 || empty(fg) ? '' : (has('gui_running') ? ' guifg=' : ' ctermfg=')).fg
+    let bg = synIDattr(synIDtrans(hlID("String")), "bg")
+    let bg = (bg == -1 || empty(bg) ? '' : (has('gui_running') ? ' guibg=' : ' ctermbg=')).bg
+    exe 'hi pandocNoFormattedInEmphasis gui=italic cterm=italic'.fg.bg
+    exe 'hi pandocNoFormattedInStrong gui=bold cterm=bold'.fg.bg
 endif
 hi link pandocNoFormatted String
 hi link pandocNoFormattedAttrs Comment
