@@ -1,7 +1,7 @@
 # vim-pandoc-syntax
 
 Standalone pandoc syntax module, to be used alongside
-[vim-pandoc](http://github.comm/vim-pandoc/vim-pandoc).
+[vim-pandoc](http://github.com/vim-pandoc/vim-pandoc).
 
 Forked from the version provided by `fmoralesc/vim-pantondoc`, in turn taken
 from `vim-pandoc/vim-pandoc`.
