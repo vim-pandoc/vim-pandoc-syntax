@@ -43,7 +43,8 @@ if &encoding == "utf-8"
 		\"footnote": "†",
 		\"definition": " ",
 		\"li": "•",
-                \"html_c": "◀"}
+                \"html_c_s": "◀",
+                \"html_c_e": "▶"}
 else
     " ascii defaults
     let s:cchars = { 
@@ -58,7 +59,8 @@ else
 		\"footnote": "f",
 		\"definition": " ",
 		\"li": "*",
-                \"html_c": "+"}
+                \"html_c_s": "+",
+                \"html_c_e": "+"}
 endif
 "}}}2
 " if the user has a dictionary with replacements for the default cchars, use those {{{2
@@ -161,7 +163,9 @@ syntax spell toplevel
 syn include @HTML syntax/html.vim
 syn match pandocHTML /<\/\?\a[^>]\+>/ contains=@HTML
 " Support HTML multi line comments
-call s:WithConceal('html_c', 'syn region pandocHTMLComment matchgroup=Delimiter start=/<!--\s\=/ end=/\s\=-->/',  'concealends cchar='.s:cchars['html_c'])
+syn region pandocHTMLComment start=/<!--\s\=/ end=/\s\=-->/ keepend contains=pandocHTMLCommentStart,pandocHTMLCommentEnd
+call s:WithConceal('html_c_s', 'syn match pandocHTMLCommentStart /<!--/ contained', 'conceal cchar='.s:cchars['html_c_s'])
+call s:WithConceal('html_c_e', 'syn match pandocHTMLCommentEnd /-->/ contained', 'conceal cchar='.s:cchars['html_c_e'])
 " }}}
 " LaTeX: {{{2
 " Set embedded LaTex (pandoc extension) highlighting
@@ -451,6 +455,8 @@ hi link pandocHeaderAttr Comment
 hi link pandocHeaderID Identifier
 
 hi link pandocHTMLComment Comment
+hi link pandocHTMLCommentStart Delimiter
+hi link pandocHTMLCommentEnd Delimiter
 hi link pandocBlockQuote Comment
 
 " if the user sets g:pandoc#syntax#codeblocks#ignore to contain
