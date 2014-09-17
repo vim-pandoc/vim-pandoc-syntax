@@ -189,7 +189,7 @@ hi link pandocLaTeXDelimiter texDelimiter
 
 " Titleblock: {{{1
 "
-syn region pandocTitleBlock start=/\%^%/ end=/\n\n/ contains=pandocReferenceLabel,pandocReferenceURL,pandocNewLine
+syn region pandocTitleBlock start=/\%^%/ end=/\n\n/ contains=pandocReferenceLabel,pandocReferenceURL,pandocNewLine 
 call s:WithConceal("titleblock", 'syn match pandocTitleBlockMark /%\ / contained containedin=pandocTitleBlock,pandocTitleBlockTitle', 'conceal')
 syn match pandocTitleBlockTitle /\%^%.*\n/ contained containedin=pandocTitleBlock
 "}}}
@@ -209,10 +209,10 @@ syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s
 " Links: {{{1
 "
 " Base: {{{2
-syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/[\]`][\]`]\@=/ end=/\]/ keepend display
+syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/\]\]\@=/ end=/\]/ keepend display
 syn region pandocReferenceURL matchgroup=Operator start=/\]\@1<=(/ end=/)/ keepend display
 " let's not consider "a [label] a" as a label, remove formatting - Note: breaks implicit links
-syn match pandocNoLabel /\]\@<!\s\[[^\[\]]\{-}\]\s\[\@!/ contains=pandocPCite
+syn match pandocNoLabel /\]\@<!\s*\[[^\[\]]\{-}\]\s*\[\@!/ contains=pandocPCite
 syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocReferenceURL contains=@Spell display
 call s:WithConceal("image", 'syn match pandocImageIcon /!\[\@=/ display', 'conceal cchar='. s:cchars["image"]) 
 " }}}
@@ -441,7 +441,7 @@ try
     syn include @YAML colors/yaml.vim
 catch /E484/
 endtry
-syn region pandocYAMLHeader matchgroup=Delimiter start=/\%^\-\{3}\s*$/ end=/[\-|\.]\{3}\s*$/ contains=@YAML 
+syn region pandocYAMLHeader matchgroup=Delimiter start=/\(\%^\|^\)\-\{3}\s*$/ end=/[\-|\.]\{3}\s*$/ contains=@YAML 
 "}}}
 
 " Styling: {{{1
@@ -547,4 +547,3 @@ let b:current_syntax = "pandoc"
 
 syntax sync clear
 syntax sync minlines=100
-
