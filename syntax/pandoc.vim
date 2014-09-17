@@ -201,8 +201,13 @@ syn match pandocBlockQuote /^>.*\n\(.*\n\@1<!\n\)*/ contains=@Spell,pandocEmphas
 " }}}
 
 " Code Blocks: {{{1
+if !exists("g:pandoc#syntax#protect#codeblocks")
+    let g:pandoc#syntax#protect#codeblocks = 1
+endif
 
-syn match pandocCodeblock /\s\{4}.*$/
+if g:pandoc#syntax#protect#codeblocks != 0
+    syn match pandocCodeblock /\s\{4}.*$/
+endif
 syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s\{8,}\|\t\+\)\).*\n/ end=/.\(\n^\s*\n\)\@=/ contained
 "}}}
 
