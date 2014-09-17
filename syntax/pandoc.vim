@@ -252,7 +252,7 @@ call s:WithConceal("block", 'syn region pandocStrong matchgroup=Operator start=/
 "}}}
 " Strong Emphasis: {{{2
 "
-call s:WithConceal("block", 'syn region pandocStrongEmphasis matchgroup=Operator start=/\*\{3}\(\S[^*]*\(\*\S\|\n\)\)\@=/ end=/\S\@<=\*\{3}/ contains=@Spell', 'concealends')
+call s:WithConceal("block", 'syn region pandocStrongEmphasis matchgroup=Operator start=/\*\{3}\(\S[^*]*\(\*\S\|\n[^*]*\*\S\)\)\@=/ end=/\S\@<=\*\{3}/ contains=@Spell', 'concealends')
 call s:WithConceal("block", 'syn region pandocStrongEmphasis matchgroup=Operator start=/\(___\)\S\@=/ end=/\S\@<=___/ contains=@Spell', 'concealends')
 " }}}
 " Mixed: {{{2
