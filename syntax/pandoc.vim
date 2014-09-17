@@ -99,6 +99,11 @@ if !exists("g:pandoc#syntax#style#underline_special")
     let g:pandoc#syntax#style#underline_special = 1
 endif
 " }}}2
+" protect code blocks? {{{2
+if !exists("g:pandoc#syntax#protect#codeblocks")
+    let g:pandoc#syntax#protect#codeblocks = 1
+endif
+" }}}2
 " }}}
 
 " Functions: {{{1
@@ -201,11 +206,7 @@ syn match pandocBlockQuote /^>.*\n\(.*\n\@1<!\n\)*/ contains=@Spell,pandocEmphas
 " }}}
 
 " Code Blocks: {{{1
-if !exists("g:pandoc#syntax#protect#codeblocks")
-    let g:pandoc#syntax#protect#codeblocks = 1
-endif
-
-if g:pandoc#syntax#protect#codeblocks = 1
+if g:pandoc#syntax#protect#codeblocks == 1
     syn match pandocCodeblock /\s\{4}.*$/
 endif
 syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s\{8,}\|\t\+\)\).*\n/ end=/.\(\n^\s*\n\)\@=/ contained
