@@ -233,7 +233,7 @@ syn match pandocPCite /\[.\{-}-\{0,1}@.\{-}\]/ contains=pandocEmphasis,pandocStr
 " in-text citations with location
 syn match pandocICite /@[[:graph:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß]*\s\[.\{-}\]/ contains=pandocCiteKey,@Spell display
 " cite keys
-syn match pandocCiteKey /-\=@[[:graph:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß]*/ containedin=pandocPCite,pandocICite contains=@NoSpell display
+syn match pandocCiteKey /-\=@[[:graph:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß]*\(\]\|\>\)\@=/ containedin=pandocPCite,pandocICite contains=@NoSpell display
 syn match pandocCiteAnchor /[-@]/ contained containedin=pandocCiteKey display
 syn match pandocCiteLocator /[\[\]]/ contained containedin=pandocPCite,pandocICite
 " }}}
