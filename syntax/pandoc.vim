@@ -305,7 +305,8 @@ syn match pandocHeaderID /#[-_:.[:alpha:]]*/ contained containedin=pandocHeaderA
 "}}}
 
 " Line Blocks: {{{1
-syn match pandocLineBlockDelimiter /^|/ 
+syn region pandocLineBlock start=/^|/ end=/\(^|\(.*\n|\@!\)\@=.*\)\@<=\n/ 
+syn match pandocLineBlockDelimiter /^|/ contained containedin=pandocLineBlock
 hi link pandocLineBlockDelimiter Delimiter
 "}}}
 
