@@ -410,17 +410,17 @@ call s:WithConceal("definition", 'syn match pandocDefinitionBlockMark /^\s*[:~]/
 " List Items: {{{1
 "
 " Unordered lists
-syn match pandocUListItem /^>\=\s*[*+-]\s\+-\@!.*$/ nextgroup=pandocUListItem,pandocListItemContinuation skipempty display
+syn match pandocUListItem /^>\=\s*[*+-]\s\+-\@!.*$/ nextgroup=pandocUListItem,pandocListItemContinuation contains=@Spell skipempty display
 call s:WithConceal('list', 'syn match pandocUListItemBullet /[*+-]/ contained containedin=pandocUListItem', 'conceal cchar='.s:cchars['li'])
 
 " Ordered lists
-syn match pandocListItem /^\s*(\?\(\d\+\|\l\|\#\|@.\{-}\)[.)]\+.*$/ nextgroup=pandocListItem,pandocListItemContinuation skipempty display
+syn match pandocListItem /^\s*(\?\(\d\+\|\l\|\#\|@.\{-}\)[.)]\+.*$/ nextgroup=pandocListItem,pandocListItemContinuation contains=@Spell skipempty display
 " support for roman numerals up to 'c'
 syn match pandocListItem /^\s*(\?x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+.*$/ nextgroup=pandocListItem,pandocListItemContinuation skipempty display
 syn match pandocListItemBullet /(\?.*[.)]\+/ contained containedin=pandocListItem
 syn match pandocListItemBulletId /\(\d\+\|\l\|\#\|@.\{-}\|x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}\)/ contained containedin=pandocListItemBullet
 
-syn match pandocListItemContinuation /\(^\s\)\+\((\?.*[.)]\+\)\@!.*$/ nextgroup=pandocListItemContinuation,pandocListItem contained skipempty display
+syn match pandocListItemContinuation /\(^\s\)\+\((\?.*[.)]\+\)\@!.*$/ nextgroup=pandocListItemContinuation,pandocListItem contains=@Spell contained skipempty display
 " }}}
 
 " Special: {{{1
