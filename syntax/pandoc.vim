@@ -409,16 +409,18 @@ call s:WithConceal("definition", 'syn match pandocDefinitionBlockMark /^\s*[:~]/
 
 " List Items: {{{1
 "
-" Unordered lists 
-syn match pandocUListItem /^>\=\s*[*+-]\s\+-\@!/he=e-1,hs=s+1 display
-call s:WithConceal("list", 'syn match pandocUListItemBullet /[*+-]/ contained containedin=pandocUListItem', 'conceal cchar='.s:cchars["li"])
+" Unordered lists
+syn match pandocUListItem /^>\=\s*[*+-]\s\+-\@!.*$/ nextgroup=pandocUListItem,pandocListItemContinuation skipempty display
+call s:WithConceal('list', 'syn match pandocUListItemBullet /[*+-]/ contained containedin=pandocUListItem', 'conceal cchar='.s:cchars['li'])
+
 " Ordered lists
-syn match pandocListItem /^\s*\(\((*\d\+[.)]\+\)\|\((*\l[.)]\+\)\)\s\+/he=e-1 display
-syn match pandocListItem /^\s*(*\u[.)]\+\s\{2,}/he=e-1 display
-syn match pandocListItem /^\s*(*[#][.)]\+\s\{1,}/he=e-1 display
-syn match pandocListItem /^\s*(*@.\{-}[.)]\+\s\{1,}/he=e-1 display
-" roman numerals, up to 'c', for now
-syn match pandocListItem /^\s*(*x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+/ display 
+syn match pandocListItem /^\s*(\?\(\d\+\|\l\|\#\|@.\{-}\)[.)]\+.*$/ nextgroup=pandocListItem,pandocListItemContinuation skipempty display
+" support for roman numerals up to 'c'
+syn match pandocListItem /^\s*(\?x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+.*$/ nextgroup=pandocListItem,pandocListItemContinuation skipempty display
+syn match pandocListItemBullet /(\?.*[.)]\+/ contained containedin=pandocListItem
+syn match pandocListItemBulletId /\(\d\+\|\l\|\#\|@.\{-}\|x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}\)/ contained containedin=pandocListItemBullet
+
+syn match pandocListItemContinuation /\(^\s\)\+\((\?.*[.)]\+\)\@!.*$/ nextgroup=pandocListItemContinuation,pandocListItem contained skipempty display
 " }}}
 
 " Special: {{{1
@@ -482,9 +484,9 @@ hi link pandocDelimitedCodeBlockEnd Delimiter
 hi link pandocDelimitedCodeBlockLanguage Comment
 hi link pandocBlockQuoteinDelimitedCodeBlock pandocBlockQuote
 hi link pandocCodePre String
-hi link pandocUListItem Operator
-hi link pandocListItem Operator
+hi link pandocListItemBullet Operator
 hi link pandocUListItemBullet Operator
+hi link pandocListItemBulletId Identifier
 
 hi link pandocReferenceLabel Label
 hi link pandocReferenceURL Underlined
