@@ -414,13 +414,13 @@ syn match pandocUListItem /^>\=\s*[*+-]\s\+-\@!.*$/ nextgroup=pandocUListItem,pa
 call s:WithConceal('list', 'syn match pandocUListItemBullet /[*+-]/ contained containedin=pandocUListItem', 'conceal cchar='.s:cchars['li'])
 
 " Ordered lists
-syn match pandocListItem /^\s*(\?\(\d\+\|\l\|\#\|@.\{-}\)[.)]\+.*$/ nextgroup=pandocListItem,pandocLaTeXMathBlock,pandocDelimitedCodeBlock,pandocListItemContinuation contains=@Spell,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocStrongEmphasis,pandocStrongEmphasis,pandocPCite,pandocICite,pandocCiteKey,pandocReferenceLabel,pandocLaTeXMathBlock skipempty display 
+syn match pandocListItem /^\s*(\?\(\d\+\|\l\|\#\|@.\{-}\)[.)].*$/ nextgroup=pandocListItem,pandocLaTeXMathBlock,pandocDelimitedCodeBlock,pandocListItemContinuation contains=@Spell,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocStrongEmphasis,pandocStrongEmphasis,pandocPCite,pandocICite,pandocCiteKey,pandocReferenceLabel,pandocLaTeXMathBlock skipempty display 
 " support for roman numerals up to 'c'
-syn match pandocListItem /^\s*(\?x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)]\+.*$/ nextgroup=pandocListItem,pandocLaTeXMathBlock,pandocDelimitedCodeBlock,pandocListItemContinuation skipempty display 
-syn match pandocListItemBullet /(\?.*[.)]\+/ contained containedin=pandocListItem
+syn match pandocListItem /^\s*(\?x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)].*$/ nextgroup=pandocListItem,pandocLaTeXMathBlock,pandocDelimitedCodeBlock,pandocListItemContinuation skipempty display 
+syn match pandocListItemBullet /^.\{-}(\?.\{-}[.)]/ contained containedin=pandocListItem
 syn match pandocListItemBulletId /\(\d\+\|\l\|\#\|@.\{-}\|x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}\)/ contained containedin=pandocListItemBullet
 
-syn match pandocListItemContinuation /\(^\s\)\+\((\?.*[.)]\+\)\@!.*$/ nextgroup=pandocLaTeXMathBlock,pandocDelimitedCodeBlock,pandocListItemContinuation,pandocListItem contains=@Spell,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocStrongEmphasis,pandocStrongEmphasis,pandocPCite,pandocICite,pandocCiteKey,pandocReferenceLabel,pandocLaTeXMathBlock contained skipempty display 
+syn match pandocListItemContinuation /\(^\s\)\+\((\?.*[.)]\)\@!.*$/ nextgroup=pandocLaTeXMathBlock,pandocDelimitedCodeBlock,pandocListItemContinuation,pandocListItem contains=@Spell,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocStrongEmphasis,pandocStrongEmphasis,pandocPCite,pandocICite,pandocCiteKey,pandocReferenceLabel,pandocLaTeXMathBlock contained skipempty display 
 " }}}
 
 " Special: {{{1
