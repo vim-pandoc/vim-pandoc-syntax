@@ -417,7 +417,7 @@ call s:WithConceal('list', 'syn match pandocUListItemBullet /[*+-]/ contained co
 syn match pandocListItem /^\s*(\?\(\d\+\|\l\|\#\|@.\{-}\)[.)].*$/ nextgroup=pandocListItem,pandocLaTeXMathBlock,pandocDelimitedCodeBlock,pandocListItemContinuation contains=@Spell,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocStrongEmphasis,pandocStrongEmphasis,pandocPCite,pandocICite,pandocCiteKey,pandocReferenceLabel,pandocLaTeXMathBlock skipempty display 
 " support for roman numerals up to 'c'
 syn match pandocListItem /^\s*(\?x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)].*$/ nextgroup=pandocListItem,pandocLaTeXMathBlock,pandocDelimitedCodeBlock,pandocListItemContinuation skipempty display 
-syn match pandocListItemBullet /^.\{-}(\?.\{-}[.)]/ contained containedin=pandocListItem
+syn match pandocListItemBullet /^(\?.\{-}[.)]/ contained containedin=pandocListItem
 syn match pandocListItemBulletId /\(\d\+\|\l\|\#\|@.\{-}\|x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}\)/ contained containedin=pandocListItemBullet
 
 syn match pandocListItemContinuation /\(^\s\)\+\((\?.*[.)]\)\@!.*$/ nextgroup=pandocLaTeXMathBlock,pandocDelimitedCodeBlock,pandocListItemContinuation,pandocListItem contains=@Spell,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocStrongEmphasis,pandocStrongEmphasis,pandocPCite,pandocICite,pandocCiteKey,pandocReferenceLabel,pandocLaTeXMathBlock contained skipempty display 
