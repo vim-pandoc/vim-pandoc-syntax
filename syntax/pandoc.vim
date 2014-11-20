@@ -414,7 +414,7 @@ syn match pandocUListItem /^>\=\s*[*+-]\s\+-\@!.*$/ nextgroup=pandocUListItem,pa
 call s:WithConceal('list', 'syn match pandocUListItemBullet /^>\=\s*\zs[*+-]/ contained containedin=pandocUListItem', 'conceal cchar='.s:cchars['li'])
 
 " Ordered lists
-syn match pandocListItem /^\s*(\?\(\d\+\|\l\|\#\|@.\{-}\)[.)].*$/ nextgroup=pandocListItem,pandocLaTeXMathBlock,pandocLaTeXInlineMath,pandocDelimitedCodeBlock,pandocListItemContinuation contains=@Spell,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocStrongEmphasis,pandocStrongEmphasis,pandocPCite,pandocICite,pandocCiteKey,pandocReferenceLabel,pandocLaTeXMathBlock,pandocLaTeXInlineMath skipempty display 
+syn match pandocListItem /^\s*(\?\(\d\+\|\l\|\#\|@\)[.)].*$/ nextgroup=pandocListItem,pandocLaTeXMathBlock,pandocLaTeXInlineMath,pandocDelimitedCodeBlock,pandocListItemContinuation contains=@Spell,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocStrongEmphasis,pandocStrongEmphasis,pandocPCite,pandocICite,pandocCiteKey,pandocReferenceLabel,pandocLaTeXMathBlock,pandocLaTeXInlineMath skipempty display 
 " support for roman numerals up to 'c'
 syn match pandocListItem /^\s*(\?x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}[.)].*$/ nextgroup=pandocListItem,pandocLaTeXMathBlock,pandocLaTeXInlineMath,pandocDelimitedCodeBlock,pandocListItemContinuation skipempty display 
 syn match pandocListItemBullet /^(\?.\{-}[.)]/ contained containedin=pandocListItem
