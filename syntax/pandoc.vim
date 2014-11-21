@@ -530,12 +530,19 @@ if g:pandoc#syntax#style#emphases == 1
     hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
     hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
     hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
-    let fg = synIDattr(synIDtrans(hlID("String")), "fg")
-    let fg = (fg == -1 || empty(fg) ? '' : (has('gui_running') ? ' guifg=' : ' ctermfg=')).fg
-    let bg = synIDattr(synIDtrans(hlID("String")), "bg")
-    let bg = (bg == -1 || empty(bg) ? '' : (has('gui_running') ? ' guibg=' : ' ctermbg=')).bg
-    exe 'hi pandocNoFormattedInEmphasis gui=italic cterm=italic'.fg.bg
-    exe 'hi pandocNoFormattedInStrong gui=bold cterm=bold'.fg.bg
+    if !exists('s:hi_tail')
+        for s:i in ["fg", "bg"]
+            let s:tmp_val = synIDattr(synIDtrans(hlID("String")), s:i)
+            if !empty(s:tmp_val) && s:tmp_val != -1
+                exe 'let s:'.s:i . ' = "gui'.s:i.'='.s:tmp_val.'"'
+            else
+                exe 'let s:'.s:i . ' = ""'
+            endif
+        endfor
+        let s:hi_tail = ' '.s:fg.' '.s:bg
+    endif
+    exe 'hi pandocNoFormattedInEmphasis gui=italic cterm=italic'.s:hi_tail
+    exe 'hi pandocNoFormattedInStrong gui=bold cterm=bold'.s:hi_tail
 endif
 hi link pandocNoFormatted String
 hi link pandocNoFormattedAttrs Comment
