@@ -68,6 +68,11 @@ if exists("g:pandoc#syntax#conceal#cchar_overrides")
     let s:cchars = extend(s:cchars, g:pandoc#syntax#conceal#cchar_overrides)
 endif
 "}}}2
+"should the urls in links be concealed? {{{2
+if !exists("g:pandoc#syntax#conceal#urls")
+    let g:pandoc#syntax#conceal#urls = 0
+endif
+"}}}2
 " leave specified codeblocks as Normal (i.e. 'unhighlighted') {{{2
 if !exists("g:pandoc#syntax#codeblocks#ignore")
     let g:pandoc#syntax#codeblocks#ignore = []
@@ -216,7 +221,11 @@ syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s
 "
 " Base: {{{2
 syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/\]\]\@=/ end=/\]/ keepend display
-syn region pandocReferenceURL matchgroup=Operator start=/\]\@1<=(/ end=/)/ keepend display
+if g:pandoc#syntax#conceal#urls == 1
+    syn region pandocReferenceURL matchgroup=Operator start=/\]\@1<=(/ end=/)/ keepend display conceal
+else
+    syn region pandocReferenceURL matchgroup=Operator start=/\]\@1<=(/ end=/)/ keepend display 
+endif
 " let's not consider "a [label] a" as a label, remove formatting - Note: breaks implicit links
 syn match pandocNoLabel /\]\@1<!\s*\[[^\[\]]\{-}\]\s*[\[(]\@!/ contains=pandocPCite
 syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocReferenceURL contains=@Spell display
@@ -533,7 +542,7 @@ if g:pandoc#syntax#style#emphases == 1
     if !exists('s:hi_tail')
         for s:i in ["fg", "bg"]
             let s:tmp_val = synIDattr(synIDtrans(hlID("String")), s:i)
-            let s:tmp_ui =  has('gui_running') ? ' gui' : ' cterm'
+            let s:tmp_ui =  has('gui_running') ? 'gui' : 'cterm'
             if !empty(s:tmp_val) && s:tmp_val != -1
                 exe 'let s:'.s:i . ' = "'.s:tmp_ui.s:i.'='.s:tmp_val.'"'
             else

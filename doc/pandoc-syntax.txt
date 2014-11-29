@@ -48,6 +48,9 @@ CONFIGURATION				       *vim-pandoc-syntax-configuration*
 
       let g:pandoc#syntax#conceal#cchar_overrides = ["footnote" : "*"]
 
++ *g:pandoc#syntax#conceal#urls*
+  Conceal the urls in links.
+
 + *g:pandoc#syntax#codeblocks#ignore*
   Prevent highlighting specific codeblock types so that they remain Normal.
   Codeblock types include 'definition' for codeblocks inside definition blocks
