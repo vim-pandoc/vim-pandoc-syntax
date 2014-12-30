@@ -108,6 +108,10 @@ endif
 if !exists("g:pandoc#syntax#protect#codeblocks")
     let g:pandoc#syntax#protect#codeblocks = 1
 endif
+" use color column? {{{2
+if !exists("g:pandoc#syntax#colorcolumn")
+    let g:pandoc#syntax#colorcolumn = 0
+endif
 " }}}2
 " }}}
 
@@ -573,3 +577,7 @@ let b:current_syntax = "pandoc"
 
 syntax sync clear
 syntax sync minlines=100
+
+if g:pandoc#syntax#colorcolumn == 1
+    exe "setlocal colorcolumn=".string(&textwidth+5)
+endif
