@@ -220,14 +220,14 @@ syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s
 " Links: {{{1
 "
 " Base: {{{2
-syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/\]\]\@=/ end=/\]/ keepend display
+syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/\(\]\]\@=\|`.*].*`\)/ end=/\]/ keepend display
 if g:pandoc#syntax#conceal#urls == 1
     syn region pandocReferenceURL matchgroup=Operator start=/\]\@1<=(/ end=/)/ keepend display conceal
 else
     syn region pandocReferenceURL matchgroup=Operator start=/\]\@1<=(/ end=/)/ keepend display 
 endif
 " let's not consider "a [label] a" as a label, remove formatting - Note: breaks implicit links
-syn match pandocNoLabel /\]\@1<!\s*\[[^\[\]]\{-}\]\s*[\[(]\@!/ contains=pandocPCite
+syn match pandocNoLabel /\]\@1<!\s\+\[[^\[\]]\{-}\]\s\+[\[(]\@!/ contains=pandocPCite
 syn match pandocLinkTip /\s*".\{-}"/ contained containedin=pandocReferenceURL contains=@Spell display
 call s:WithConceal("image", 'syn match pandocImageIcon /!\[\@=/ display', 'conceal cchar='. s:cchars["image"]) 
 " }}}
