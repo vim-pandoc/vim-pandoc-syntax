@@ -210,7 +210,7 @@ syn match pandocTitleBlockTitle /\%^%.*\n/ contained containedin=pandocTitleBloc
 
 " Blockquotes: {{{1
 "
-syn match pandocBlockQuote /^>.*\n\(.*\n\@1<!\n\)*/ contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem,pandocNoFormatted skipnl
+syn match pandocBlockQuote /^\s\{,3}>.*\n\(.*\n\@1<!\n\)*/ contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem,pandocNoFormatted skipnl
 
 " }}}
 
@@ -310,7 +310,8 @@ call s:WithConceal("strikeout", 'syn match pandocStrikeoutMark /\~\~/ contained 
 "
 syn match pandocAtxHeader /\(\%^\|^\s*\n\)\@<=#\{1,6}.*\n/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,pandocLaTeXInlineMath,@Spell, display
 syn match pandocAtxHeaderMark /\(^#\{1,6}\|\\\@<!#\+\(\s*.*$\)\@=\)/ contained containedin=pandocAtxHeader
-call s:WithConceal("atx", 'syn match pandocAtxStart /#/ contained containedin=pandocAtxHeaderMark', 'conceal cchar='.s:cchars["atx"])
+"call s:WithConceal("atx", 'syn match pandocAtxStart /#/ contained containedin=pandocAtxHeaderMark', 'conceal cchar='.s:cchars["atx"])
+syn match pandocAtxStart /#\+\s*/ contained containedin=pandocAtxHeaderMark conceal
 syn match pandocSetexHeader /^.\+\n[=]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,pandocLaTeXInlineMath,@Spell
 syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,pandocLaTeXInlineMath,@Spell
 syn match pandocHeaderAttr /{.*}/ contained containedin=pandocAtxHeader,pandocSetexHeader
