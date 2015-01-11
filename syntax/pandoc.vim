@@ -43,8 +43,8 @@ if &encoding == "utf-8"
 		\"footnote": "†",
 		\"definition": " ",
 		\"li": "•",
-                \"html_c_s": "◀",
-                \"html_c_e": "▶"}
+                \"html_c_s": "‹",
+                \"html_c_e": "›"}
 else
     " ascii defaults
     let s:cchars = { 
