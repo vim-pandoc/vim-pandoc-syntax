@@ -448,8 +448,8 @@ endif
 " }}}
 " Quotes: {{{2
 if &encoding == "utf-8"
-    call s:WithConceal("quotes", 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation display', 'conceal cchar=“')
-    call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation display', 'conceal cchar=”')
+    call s:WithConceal("quotes", 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation,pandocUListItem display', 'conceal cchar=“')
+    call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong,pandocUListItem,pandocListItem,pandocListItemContinuation display', 'conceal cchar=”')
 endif
 " Hrule: {{{2
 syn match pandocHRule /\*\{3}$/ display
