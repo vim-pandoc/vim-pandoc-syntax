@@ -580,4 +580,6 @@ syntax sync minlines=100
 
 if g:pandoc#syntax#colorcolumn == 1
     exe "setlocal colorcolumn=".string(&textwidth+5)
+elseif g:pandoc#syntax#colorcolumn == 2
+    exe "setlocal colorcolumn=".join(range(&textwidth+5, 2*&columns), ',')
 endif
