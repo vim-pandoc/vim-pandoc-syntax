@@ -232,7 +232,7 @@ syn region pandocCodeBlockInsideIndent   start=/\(\(\d\|\a\|*\).*\n\)\@<!\(^\(\s
 " Links: {{{2
 "
 " Base: {{{3
-syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\[/ skip=/\(\]\]\@=\|`.*].*`\)/ end=/\]/ keepend display
+syn region pandocReferenceLabel matchgroup=Operator start=/!\{,1}\\\@<!\[/ skip=/\(\\\@<!\]\]\@=\|`.*\\\@<!].*`\)/ end=/\\\@<!\]/ keepend display
 if g:pandoc#syntax#conceal#urls == 1
     syn region pandocReferenceURL matchgroup=Operator start=/\]\@1<=(/ end=/)/ keepend display conceal
 else
