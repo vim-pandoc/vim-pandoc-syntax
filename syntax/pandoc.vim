@@ -74,6 +74,10 @@ endif
 if !exists("g:pandoc#syntax#conceal#urls")
     let g:pandoc#syntax#conceal#urls = 0
 endif
+" should backslashes in escapes be concealed? {{{2
+if !exists("g:pandoc#syntax#conceal#backslash") 
+    let g:pandoc#syntax#conceal#backslash = 0
+endif
 "}}}2
 " leave specified codeblocks as Normal (i.e. 'unhighlighted') {{{2
 if !exists("g:pandoc#syntax#codeblocks#ignore")
@@ -442,6 +446,10 @@ if &encoding == "utf-8"
 endif
 " Hrule: {{{3
 syn match pandocHRule /\*\{3}$/ display
+" Backslashes: {{{3
+if g:pandoc#syntax#conceal#backslash == 1
+    syn match pandocBackslash /\\\@<!\\/ containedin=ALLBUT,pandocCodeblock,pandocCodeBlockInsideIndent,pandocNoFormatted,pandocNoFormattedInEmphasis,pandocNoFormattedInStrong,pandocDelimitedCodeBlock,pandocLineBlock conceal
+endif
 " }}}
 " }}}
 " YAML: {{{2
