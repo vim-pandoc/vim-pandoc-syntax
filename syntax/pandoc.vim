@@ -193,7 +193,7 @@ endif
 " HTML: {{{3
 " Set embedded HTML highlighting
 syn include @HTML syntax/html.vim
-syn match pandocHTML /<\/\?\a[^>]\+>/ contains=@HTML
+syn match pandocHTML /<\/\?\a.\{-}>/ contains=@HTML
 " Support HTML multi line comments
 syn region pandocHTMLComment start=/<!--\s\=/ end=/\s\=-->/ keepend contains=pandocHTMLCommentStart,pandocHTMLCommentEnd
 call s:WithConceal('html_c_s', 'syn match pandocHTMLCommentStart /<!--/ contained', 'conceal cchar='.s:cchars['html_c_s'])
