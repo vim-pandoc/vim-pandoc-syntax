@@ -445,7 +445,7 @@ if &encoding == "utf-8"
     call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong,pandocUListItem,pandocListItem,pandocListItemContinuation display', 'conceal cchar=”')
 endif
 " Hrule: {{{3
-syn match pandocHRule /\*\{3}$/ display
+syn match pandocHRule /^\s*\([*-_]\)\s*\%(\1\s*\)\{2,}$/ display
 " Backslashes: {{{3
 if g:pandoc#syntax#conceal#backslash == 1
     syn match pandocBackslash /\\\@<!\\/ containedin=ALLBUT,pandocCodeblock,pandocCodeBlockInsideIndent,pandocNoFormatted,pandocNoFormattedInEmphasis,pandocNoFormattedInStrong,pandocDelimitedCodeBlock,pandocLineBlock conceal
@@ -459,7 +459,7 @@ try
     syn include @YAML colors/yaml.vim
 catch /E484/
 endtry
-syn region pandocYAMLHeader matchgroup=Delimiter start=/\(\%^\|\(\s*.*\n\)\)\@<=\-\{3}\s*$/ end=/[\-|\.]\{3}\s*$/ contains=@YAML containedin=TOP 
+syn region pandocYAMLHeader matchgroup=Delimiter start=/\%(\%^\|\_^\s*\n\)\@<=\_^-\{3}\ze\n.\+/ end=/^\([-.]\)\1\{2}$/ contains=@YAML containedin=TOP
 "}}}
 "}}}1
 
