@@ -456,7 +456,7 @@ endif
 
 try
     unlet! b:current_syntax
-    syn include @YAML colors/yaml.vim
+    syn include @YAML syntax/yaml.vim
 catch /E484/
 endtry
 syn region pandocYAMLHeader matchgroup=Delimiter start=/\%(\%^\|\_^\s*\n\)\@<=\_^-\{3}\ze\n.\+/ end=/^\([-.]\)\1\{2}$/ contains=@YAML containedin=TOP
