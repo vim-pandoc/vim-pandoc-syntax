@@ -225,6 +225,7 @@ syn match pandocTitleBlockTitle /\%^%.*\n/ contained containedin=pandocTitleBloc
 " Blockquotes: {{{2
 "
 syn match pandocBlockQuote /^\s\{,3}>.*\n\(.*\n\@1<!\n\)*/ contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem,pandocNoFormatted skipnl
+syn match pandocBlockQuoteMark /\_^\s\{,3}>/ contained containedin=pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem,pandocNoFormatted
 
 " }}}
 " Code Blocks: {{{2
@@ -406,12 +407,6 @@ syn match pandocFootnoteID /\[\^.\{-}\]/ contained containedin=pandocFootnoteBlo
 call s:WithConceal("footnote", 'syn match pandocFootnoteIDHead /\[\^/ contained containedin=pandocFootnoteID', 'conceal cchar='.s:cchars["footnote"])
 call s:WithConceal("footnote", 'syn match pandocFootnoteIDTail /\]/ contained containedin=pandocFootnoteID', 'conceal')
 " }}}
-" Definitions: {{{2
-"
-syn region pandocDefinitionBlock start=/^\%(\_^\s*\([`~]\)\1\{2,}\)\@!.*\n\(^\s*\n\)*\s\{0,2}[:~]\(\~\{2,}\~*\)\@!/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent,pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocFootnoteID,pandocReferenceURL,pandocReferenceLabel,pandocLaTeXMathBlock,pandocLaTeXInlineMath,pandocAutomaticLink,pandocEmDash,pandocEnDash keepend 
-syn match pandocDefinitionBlockTerm /^.*\n\(^\s*\n\)*\(\s*[:~]\)\@=/ contained contains=pandocNoFormatted,pandocEmphasis,pandocStrong
-call s:WithConceal("definition", 'syn match pandocDefinitionBlockMark /^\s*[:~]/ contained', 'conceal cchar='.s:cchars["definition"])
-" }}}
 " List Items: {{{2
 "
 " Unordered lists
@@ -426,6 +421,12 @@ syn match pandocListItemBullet /^(\?.\{-}[.)]/ contained containedin=pandocListI
 syn match pandocListItemBulletId /\(\d\+\|\l\|\#\|@.\{-}\|x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}\)/ contained containedin=pandocListItemBullet
 
 syn match pandocListItemContinuation /^\s\+\(\([-+*]\|(\?.\+[).]\)\@<![[:alpha:]ñäëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß_"[]\)\@=.*$/ nextgroup=pandocLaTeXMathBlock,pandocLaTeXInlineMath,pandocDelimitedCodeBlock,pandocListItemContinuation,pandocListItem contains=@Spell,pandocEmphasis,pandocStrong,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocStrongEmphasis,pandocStrongEmphasis,pandocPCite,pandocICite,pandocCiteKey,pandocReferenceLabel,pandocReferenceURL,pandocLaTeXMathBlock,pandocLaTeXInlineMath,pandocAutomaticLink contained skipempty display 
+" }}}
+" Definitions: {{{2
+"
+syn region pndocDefinitionBlock start=/^\%(\_^\s*\([`~]\)\1\{2,}\)\@!.*\n\(^\s*\n\)\=\s\{0,2}[:~]\(\~\{2,}\~*\)\@!/ skip=/\n\n\zs\s/ end=/\n\n/ contains=pandocDefinitionBlockMark,pandocDefinitionBlockTerm,pandocCodeBlockInsideIndent,pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocNoFormatted,pandocStrikeout,pandocSubscript,pandocSuperscript,pandocFootnoteID,pandocReferenceURL,pandocReferenceLabel,pandocLaTeXMathBlock,pandocLaTeXInlineMath,pandocAutomaticLink,pandocEmDash,pandocEnDash
+syn match pandocDefinitionBlockTerm /^.*\n\(^\s*\n\)\=\(\s*[:~]\)\@=/ contained contains=pandocNoFormatted,pandocEmphasis,pandocStrong nextgroup=pandocDefinitionBlockMark
+call s:WithConceal("definition", 'syn match pandocDefinitionBlockMark /^\s*[:~]/ contained', 'conceal cchar='.s:cchars["definition"])
 " }}}
 " Special: {{{2
 
@@ -480,6 +481,7 @@ hi link pandocHTMLComment Comment
 hi link pandocHTMLCommentStart Delimiter
 hi link pandocHTMLCommentEnd Delimiter
 hi link pandocBlockQuote Comment
+hi link pandocBlockQuoteMark Comment
 
 " if the user sets g:pandoc#syntax#codeblocks#ignore to contain
 " a codeblock type, don't highlight it so that it remains Normal
