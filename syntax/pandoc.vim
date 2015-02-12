@@ -333,24 +333,24 @@ syn match pandocLineBlockDelimiter /^|/ contained containedin=pandocLineBlock
 
 " Simple: {{{3
 
-syn region pandocSimpleTable start=/\%#=2\(^.*[[:graph:]].*\n\)\@<!\(^.*[[:graph:]].*\n\)\(-\+\s*\)\+\n\n\@!/ end=/\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock keepend
+syn region pandocSimpleTable start=/\%#=2\(^.*[[:graph:]].*\n\)\@<!\(^.*[[:graph:]].*\n\)\(-\+\s*\)\+\n\n\@!/ end=/\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock,pandocYAMLHeader keepend
 syn match pandocSimpleTableDelims /\-/ contained containedin=pandocSimpleTable
 syn match pandocSimpleTableHeader /\%#=2\(^.*[[:graph:]].*\n\)\@<!\(^.*[[:graph:]].*\n\)/ contained containedin=pandocSimpleTable
 
-syn region pandocTable start=/\%#=2^\(-\+\s*\)\+\n\n\@!/ end=/\%#=2^\(-\+\s*\)\+\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock keepend
+syn region pandocTable start=/\%#=2^\(-\+\s*\)\+\n\n\@!/ end=/\%#=2^\(-\+\s*\)\+\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock,pandocYAMLHeader keepend
 syn match pandocTableDelims /\-/ contained containedin=pandocTable
 syn region pandocTableMultilineHeader start=/\%#=2\(^-\+\n\)\@<=./ end=/\%#=2\n-\@=/ contained containedin=pandocTable
 
 " }}}3
 " Grid: {{{3
-syn region pandocGridTable start=/\%#=2\n\@1<=+-/ end=/+\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock keepend
+syn region pandocGridTable start=/\%#=2\n\@1<=+-/ end=/+\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock,pandocYAMLHeader keepend
 syn match pandocGridTableDelims /[\|=]/ contained containedin=pandocGridTable
 syn match pandocGridTableDelims /\%#=2\([\-+][\-+=]\@=\|[\-+=]\@1<=[\-+]\)/ contained containedin=pandocGridTable
 syn match pandocGridTableHeader /\%#=2\(^.*\n\)\(+=.*\)\@=/ contained containedin=pandocGridTable 
 "}}}3
 " Pipe: {{{3
 " with beginning and end pipes
-syn region pandocPipeTable start=/\%#=2\([+|]\n\)\@<!\n\@1<=|\(.*|\)\@=/ end=/|.*\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock keepend 
+syn region pandocPipeTable start=/\%#=2\([+|]\n\)\@<!\n\@1<=|\(.*|\)\@=/ end=/|.*\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock,pandocYAMLHeader keepend 
 " without beginning and end pipes
 syn region pandocPipeTable start=/\%#=2^.*\n-.\{-}|/ end=/|.*\n\n/ keepend
 syn match pandocPipeTableDelims /[\|\-:+]/ contained containedin=pandocPipeTable
@@ -445,10 +445,10 @@ if &encoding == "utf-8"
     call s:WithConceal("quotes", 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong,pandocUListItem,pandocListItem,pandocListItemContinuation display', 'conceal cchar=”')
 endif
 " Hrule: {{{3
-syn match pandocHRule /\*\{3}$/ display
+syn match pandocHRule /^\s*\([*\-_]\)\s*\%(\1\s*\)\{2,}$/ display
 " Backslashes: {{{3
 if g:pandoc#syntax#conceal#backslash == 1
-    syn match pandocBackslash /\\\@<!\\/ containedin=ALLBUT,pandocCodeblock,pandocCodeBlockInsideIndent,pandocNoFormatted,pandocNoFormattedInEmphasis,pandocNoFormattedInStrong,pandocDelimitedCodeBlock,pandocLineBlock conceal
+    syn match pandocBackslash /\\\@<!\\/ containedin=ALLBUT,pandocCodeblock,pandocCodeBlockInsideIndent,pandocNoFormatted,pandocNoFormattedInEmphasis,pandocNoFormattedInStrong,pandocDelimitedCodeBlock,pandocLineBlock,pandocYAMLHeader conceal
 endif
 " }}}
 " }}}
@@ -456,10 +456,10 @@ endif
 
 try
     unlet! b:current_syntax
-    syn include @YAML colors/yaml.vim
+    syn include @YAML syntax/yaml.vim
 catch /E484/
 endtry
-syn region pandocYAMLHeader matchgroup=Delimiter start=/\(\%^\|\(\s*.*\n\)\)\@<=\-\{3}\s*$/ end=/[\-|\.]\{3}\s*$/ contains=@YAML containedin=TOP 
+syn region pandocYAMLHeader start=/\%(\%^\|\_^\s*\n\)\@<=\_^-\{3}\ze\n.\+/ end=/^\([-.]\)\1\{2}$/ keepend contains=@YAML containedin=TOP
 "}}}
 "}}}1
 
