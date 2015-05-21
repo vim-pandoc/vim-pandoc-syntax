@@ -25,7 +25,7 @@ For Vundle users, it should be enough to add
 to `.vimrc`, and then run `:PluginInstall`.
 
 For those who need it, a tarball is available from
-[here](https://github.com/vim-pandoc/vim-pandoc/archive/master.zip).
+[here](https://github.com/vim-pandoc/vim-pandoc-syntax/archive/master.zip).
 
 ## Features
 
