@@ -1,3 +1,4 @@
+scriptencoding utf-8
 " vim: set fdm=marker foldlevel=0:
 " 
 " Vim syntax file
