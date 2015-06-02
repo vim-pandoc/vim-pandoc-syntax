@@ -27,6 +27,17 @@ to `.vimrc`, and then run `:PluginInstall`.
 For those who need it, a tarball is available from
 [here](https://github.com/vim-pandoc/vim-pandoc-syntax/archive/master.zip).
 
+### Standalone
+
+If you want to use `vim-pandoc-syntax` without vim-pandoc, you'll need to tell
+Vim to load it for certain files. Just add something like this to your vimrc:
+
+~~~ vim
+    augroup pandoc_syntax
+        au! BufNewFile,BufFilePRe,BufRead *.md set filetype=markdown.pandoc
+    augroup END
+~~~
+
 ## Features
 
 * Supports most (if not all) pandoc's markdown features, including tables,
