@@ -333,7 +333,7 @@ syn match pandocHeaderAttr /{.*}/ contained containedin=pandocAtxHeader,pandocSe
 syn match pandocHeaderID /#[-_:.[:alpha:]]*/ contained containedin=pandocHeaderAttr
 "}}}
 " Line Blocks: {{{2
-syn region pandocLineBlock start=/^|/ end=/\(^|\(.*\n|\@!\)\@=.*\)\@<=\n/ 
+syn region pandocLineBlock start=/^|/ end=/\(^|\(.*\n|\@!\)\@=.*\)\@<=\n/ transparent
 syn match pandocLineBlockDelimiter /^|/ contained containedin=pandocLineBlock
 "}}}
 " Tables: {{{2
