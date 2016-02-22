@@ -444,6 +444,16 @@ if g:pandoc#syntax#newlines == 1
     call s:WithConceal("newline", 'syn match pandocNewLine /\(  \|\\\)$/ display containedin=pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocStrongInEmphasis,pandocEmphasisInStrong', 'conceal cchar='.s:cchars["newline"])
 endif
 "}}}
+" Emdashes: {{{3
+if &encoding == "utf-8"
+  call s:WithConceal("emdashes", 'syn match pandocEllipses /\([^-]\)\@<=---\([^-]\)\@=/ display', 'conceal cchar=—')
+endif
+" }}}
+" Endashes: {{{3
+if &encoding == "utf-8"
+  call s:WithConceal("endashes", 'syn match pandocEllipses /\([^-]\)\@<=--\([^-]\)\@=/ display', 'conceal cchar=–')
+endif
+" }}}
 " Ellipses: {{{3
 if &encoding == "utf-8"
     call s:WithConceal("ellipses", 'syn match pandocEllipses /\.\.\./ display', 'conceal cchar=…')
