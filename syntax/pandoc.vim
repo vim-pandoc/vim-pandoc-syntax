@@ -7,6 +7,7 @@ scriptencoding utf-8
 " Maintainer: Felipe Morales <hel.sheep@gmail.com>
 " Contributor: David Sanson <dsanson@gmail.com>
 " Contributor: Jorge Israel Peña <jorge.israel.p@gmail.com>
+" Contributor: Caleb Maclennan <caleb@alerque.com>
 " OriginalAuthor: Jeremy Schultz <taozhyn@gmail.com>
 " Version: 5.0
 
@@ -130,6 +131,11 @@ endif
 " detect roman-numeral list items? {{{2
 if !exists('g:pandoc#syntax#roman_lists')
     let g:pandoc#syntax#roman_lists = 0
+endif
+" }}}
+" highlight CriticMarkup? {{{2
+if !exists('g:pandoc#syntax#critic_markup')
+    let g:pandoc#syntax#critic_markup = 1
 endif
 " }}}
 "}}}1
@@ -474,6 +480,15 @@ if g:pandoc#syntax#conceal#backslash == 1
 endif
 " }}}
 " }}}
+" CriticMarkup: {{{3
+if g:pandoc#syntax#critic_markup == 1
+  syn region pandocCriticMarkupAdd start="\S\@<={++\|{++" end="++}\|++}\S\@=" keepend contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem,pandocNoFormatted
+  syn region pandocCriticMarkupDelete start="\S\@<={--\|{--" end="--}\|--}\S\@=" keepend contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem,pandocNoFormatted
+  syn region pandocCriticMarkupSubstitute start="\S\@<={\~\~\|{\~\~" end="\~\~}\|\~\~}\S\@=" keepend contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem,pandocNoFormatted
+  syn region pandocCriticMarkupHighlight start="\S\@<={==\|{==" end="==}\|==}\S\@=" keepend contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem,pandocNoFormatted
+  syn region pandocCriticMarkupComment start="\S\@<={>>\|{>>" end="<<}\|<<}\S\@=" keepend contains=@Spell,pandocEmphasis,pandocStrong,pandocPCite,pandocSuperscript,pandocSubscript,pandocStrikeout,pandocUListItem,pandocNoFormatted
+endif
+" }}}
 " YAML: {{{2
 
 try
@@ -572,6 +587,12 @@ hi link pandocICite Normal
 hi link pandocCiteKey Identifier
 hi link pandocCiteAnchor Operator
 hi link pandocCiteLocator Operator
+
+hi link pandocCriticMarkupAdd Todo
+hi link pandocCriticMarkupDelete Error
+hi link pandocCriticMarkupSubstitute Search
+hi link pandocCriticMarkupHighlight Debug
+hi link pandocCriticMarkupComment Comment
 
 if g:pandoc#syntax#style#emphases == 1
     hi pandocEmphasis gui=italic cterm=italic
