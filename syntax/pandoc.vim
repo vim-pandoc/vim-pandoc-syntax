@@ -59,7 +59,7 @@ else
 		\"strike": "~", 
 		\"atx": "#",  
 		\"codelang": "l",
-		\"codelang": "-",
+		\"codeend": "-",
 		\"abbrev": "a",
 		\"footnote": "f",
 		\"definition": " ",
