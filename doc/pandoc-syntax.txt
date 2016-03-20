@@ -47,7 +47,7 @@ CONFIGURATION				       *vim-pandoc-syntax-configuration*
   override the defaults (see those in |s:cchars|). For example, if you prefer
   to mark footnotes with the `*` symbol:
 
-      let g:pandoc#syntax#conceal#cchar_overrides = ["footnote" : "*"]
+      let g:pandoc#syntax#conceal#cchar_overrides = {"footnote" : "*"}
 
 + *g:pandoc#syntax#conceal#urls*
   Conceal the urls in links.
