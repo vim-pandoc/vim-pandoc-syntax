@@ -584,7 +584,7 @@ if g:pandoc#syntax#style#emphases == 1
     if !exists('s:hi_tail')
         for s:i in ["fg", "bg"]
             let s:tmp_val = synIDattr(synIDtrans(hlID("String")), s:i)
-            let s:tmp_ui =  has('gui_running') || has('nvim') ? 'gui' : 'cterm'
+            let s:tmp_ui =  has('gui_running') || (has('termguicolors') && &termguicolors) ? 'gui' : 'cterm'
             if !empty(s:tmp_val) && s:tmp_val != -1
                 exe 'let s:'.s:i . ' = "'.s:tmp_ui.s:i.'='.s:tmp_val.'"'
             else
