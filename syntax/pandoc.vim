@@ -269,7 +269,7 @@ syn match pandocAutomaticLink /<\(https\{0,1}.\{-}\|[A-Za-z0-9!#$%&'*+\-/=?^_`{|
 "}}}
 " Citations: {{{2
 " parenthetical citations
-syn match pandocPCite /\[.\{-}-\{0,1}@.\{-}\]/ contains=pandocEmphasis,pandocStrong,pandocLatex,pandocCiteKey,@Spell display
+syn match pandocPCite /\^\@!\[[^\[\]]\{-}-\{0,1}@.\{-}\]/ contains=pandocEmphasis,pandocStrong,pandocLatex,pandocCiteKey,@Spell display
 " in-text citations with location
 syn match pandocICite /@[[:graph:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß]*\s\[.\{-}\]/ contains=pandocCiteKey,@Spell display
 " cite keys
