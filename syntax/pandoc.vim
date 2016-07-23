@@ -563,10 +563,10 @@ hi link pandocAbbreviationDefinition Comment
 hi link pandocFootnoteID Label
 hi link pandocFootnoteIDHead Type
 hi link pandocFootnoteIDTail Type
-hi link pandocFootnoteDef Type
+hi link pandocFootnoteDef Comment
 hi link pandocFootnoteDefHead Type
 hi link pandocFootnoteDefTail Type
-hi link pandocFootnoteBlock Type
+hi link pandocFootnoteBlock Comment
 hi link pandocFootnoteBlockSeparator Operator
 
 hi link pandocPCite Operator
