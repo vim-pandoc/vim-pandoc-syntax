@@ -269,7 +269,7 @@ syn match pandocAutomaticLink /<\(https\{0,1}.\{-}\|[A-Za-z0-9!#$%&'*+\-/=?^_`{|
 "}}}
 " Citations: {{{2
 " parenthetical citations
-syn match pandocPCite /\^\@!\[[^\[\]]\{-}-\{0,1}@[[:alnum:]_][[:alnum:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß_:.#$%&\-+?<>~\/]\{-}\([ ,;]\+.\{-}\)\{-}\]/ contains=pandocEmphasis,pandocStrong,pandocLatex,pandocCiteKey,@Spell display
+syn match pandocPCite /\^\@<!\[[^\[\]]\{-}-\{0,1}@[[:alnum:]_][[:alnum:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß_:.#$%&\-+?<>~\/]\{-}\([ ,;]\+.\{-}\)\{-}\]/ contains=pandocEmphasis,pandocStrong,pandocLatex,pandocCiteKey,@Spell display
 " in-text citations with location
 syn match pandocICite /@[[:alnum:]_][[:alnum:]äëïöüáéíóúàèìòùłßÄËÏÖÜÁÉÍÓÚÀÈÌÒÙŁß_:.#$%&\-+?<>~\/]\{-}\s\[.\{-1,}\]/ contains=pandocCiteKey,@Spell display
 " cite keys
@@ -615,4 +615,3 @@ let b:current_syntax = "pandoc"
 
 syntax sync clear
 syntax sync minlines=100
-
