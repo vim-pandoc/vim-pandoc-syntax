@@ -571,7 +571,7 @@ hi link pandocFootnoteBlockSeparator Operator
 
 hi link pandocPCite Normal
 hi link pandocICite Normal
-hi link pandocCiteKey Identifier
+hi link pandocCiteKey Label
 hi link pandocCiteAnchor Operator
 hi link pandocCiteLocator Operator
 
