@@ -264,7 +264,7 @@ syn match pandocReferenceDefinitionAddress /:\s*\zs.*/ contained containedin=pan
 syn match pandocReferenceDefinitionTip /\s*".\{-}"/ contained containedin=pandocReferenceDefinition,pandocReferenceDefinitionAddress contains=@Spell
 "}}}
 " Automatic_links: {{{3
-syn match pandocAutomaticLink /<\(https\{0,1}.\{-}\|.\{-}@.\{-}\..\{-}\)>/ contains=NONE
+syn match pandocAutomaticLink /<\(https\{0,1}.\{-}\|[A-Za-z0-9!#$%&'*+\-/=?^_`{|}~.]\{-}@[A-Za-z0-9\-]\{-}\.\w\{-}\)>/ contains=NONE
 " }}}
 "}}}
 " Citations: {{{2
