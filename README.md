@@ -34,7 +34,7 @@ Vim to load it for certain files. Just add something like this to your vimrc:
 
 ~~~ vim
     augroup pandoc_syntax
-        au! BufNewFile,BufFilePRe,BufRead *.md set filetype=markdown.pandoc
+        au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
     augroup END
 ~~~
 
