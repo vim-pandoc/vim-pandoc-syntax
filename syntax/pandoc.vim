@@ -473,6 +473,8 @@ if g:pandoc#syntax#conceal#backslash == 1
     syn match pandocBackslash /\v\\@<!\\((re)?newcommand)@!/ containedin=ALLBUT,pandocCodeblock,pandocCodeBlockInsideIndent,pandocNoFormatted,pandocNoFormattedInEmphasis,pandocNoFormattedInStrong,pandocDelimitedCodeBlock,pandocLineBlock,pandocYAMLHeader conceal
 endif
 " }}}
+" &-escaped Special Characters: {{{3
+syn match pandocAmpersandEscape /&\(#\d\+\|#x\x\+\|\S\+\);/ contains=NoSpell
 " }}}
 " YAML: {{{2
 
@@ -505,6 +507,7 @@ hi link pandocHTMLCommentStart Delimiter
 hi link pandocHTMLCommentEnd Delimiter
 hi link pandocBlockQuote Comment
 hi link pandocBlockQuoteMark Comment
+hi link pandocAmpersandEscape Special
 
 " if the user sets g:pandoc#syntax#codeblocks#ignore to contain
 " a codeblock type, don't highlight it so that it remains Normal
