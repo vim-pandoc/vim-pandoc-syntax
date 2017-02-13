@@ -77,6 +77,10 @@ CONFIGURATION				       *vim-pandoc-syntax-configuration*
 + *g:pandoc#syntax#style#underline_special*
   Undeline subscript, superscript and strikeout text styles. Default = 1
 
++ *g:pandoc#syntax#style#use_definition_lists*
+  Detect and highlight definition lists. Disabling this can improve
+  performance. Default = 1 (i.e., enabled by default)
+
 COMMANDS                                            *pandoc-syntax-commands*
 
 + *:PandocHighlight* LANG
