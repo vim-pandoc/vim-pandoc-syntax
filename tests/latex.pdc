@@ -1,5 +1,7 @@
 This is a paragraph with $\text{inline} \LaTeX$.
 This is a paragraph with \(\text{inline} \LaTeX\) using the tex_math_single_backslash extension.
+LaTeX: \(m\)
+LaTeX: \(m\)1 (safe for decimal to follow)
 \[
   \frac{1}{2}
 \]
