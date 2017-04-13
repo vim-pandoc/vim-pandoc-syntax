@@ -474,7 +474,7 @@ if g:pandoc#syntax#conceal#backslash == 1
 endif
 " }}}
 " &-escaped Special Characters: {{{3
-syn match pandocAmpersandEscape /&\(#\d\+\|#x\x\+\|\S\+\);/ contains=NoSpell
+syn match pandocAmpersandEscape /\v\&(#\d+|#x\x+|[[:alnum:]]+)\;/ contains=NoSpell
 " }}}
 " YAML: {{{2
 
