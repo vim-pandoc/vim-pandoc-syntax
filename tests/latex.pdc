@@ -1,5 +1,10 @@
 This is a paragraph with $\text{inline} \LaTeX$.
 This is a paragraph with \(\text{inline} \LaTeX\) using the tex_math_single_backslash extension.
+LaTeX: \(m\)
+LaTeX: \(m\)1 (safe for decimal to follow)
+\[
+  \frac{1}{2}
+\]
 
 This \$ is a dollar sign. $ this too. $30000 dollars are mentioned in pandoc's
 Example. I don't have that amount.
