@@ -462,6 +462,13 @@ endtry
 syn region pandocYAMLHeader matchgroup=Delimiter start=/\(\%^\|\(%.*\n\)\)\@<=\-\{3}\s*$/ end=/[\-|\.]\{3}\s*$/ contains=@YAML containedin=TOP 
 "}}}
 
+" Pandoc-Crossref: {{{1
+
+syn match pandocCrossrefAttr /{.*}$/
+syn match pandocCrossrefID /#eq:\w*/ contained containedin=pandocCrossrefAttr
+
+" }}}
+
 " Styling: {{{1
 " override this for consistency
 hi pandocTitleBlock term=italic gui=italic
@@ -471,6 +478,9 @@ hi link pandocAtxStart Operator
 hi link pandocSetexHeader Title
 hi link pandocHeaderAttr Comment
 hi link pandocHeaderID Identifier
+
+hi link pandocCrossrefAttr pandocHeaderAttr
+hi link pandocCrossrefID pandocHeaderID
 
 hi link pandocHTMLComment Comment
 hi link pandocHTMLCommentStart Delimiter
