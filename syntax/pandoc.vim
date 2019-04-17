@@ -304,9 +304,9 @@ syn match pandocAutomaticLink /<\(https\{0,1}.\{-}\|[A-Za-z0-9!#$%&'*+\-/=?^_`{|
 
 " Citations: {{{2
 " parenthetical citations
-syn match pandocPCite /\^\@<!\[[^\[\]]\{-}-\{0,1}@[[:alnum:]_][[:digit:][:lower:][:upper:]_:.#$%&\-+?<>~/]*.\{-}\]/ contains=pandocEmphasis,pandocStrong,pandocLatex,pandocCiteKey,@Spell,pandocAmpersandEscape display
+syn match pandocPCite "\^\@<!\[[^\[\]]\{-}-\{0,1}@[[:alnum:]_][[:digit:][:lower:][:upper:]_:.#$%&\-+?<>~/]*.\{-}\]" contains=pandocEmphasis,pandocStrong,pandocLatex,pandocCiteKey,@Spell,pandocAmpersandEscape display
 " in-text citations with location
-syn match pandocICite /@[[:alnum:]_][[:digit:][:lower:][:upper:]_:.#$%&\-+?<>~/]*\s\[.\{-1,}\]/ contains=pandocCiteKey,@Spell display
+syn match pandocICite "@[[:alnum:]_][[:digit:][:lower:][:upper:]_:.#$%&\-+?<>~/]*\s\[.\{-1,}\]" contains=pandocCiteKey,@Spell display
 " cite keys
 syn match pandocCiteKey /\(-\=@[[:alnum:]_][[:digit:][:lower:][:upper:]_:.#$%&\-+?<>~/]*\)/ containedin=pandocPCite,pandocICite contains=@NoSpell display
 syn match pandocCiteAnchor /[-@]/ contained containedin=pandocCiteKey display
