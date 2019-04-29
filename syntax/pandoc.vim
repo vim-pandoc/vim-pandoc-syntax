@@ -410,7 +410,7 @@ syn match pandocPipeTableHeader /\(^.*\n\)\(|-\)\@=/ contained containedin=pando
 syn match pandocPipeTableHeader /\(^.*\n\)\(-\)\@=/ contained containedin=pandocPipeTable
 " }}}3
 
-syn match pandocTableHeaderWord /\<.\{-}\>/ contained containedin=pandocGridTableHeader,pandocPipeTableHeader
+syn match pandocTableHeaderWord /\<.\{-}\>/ contained containedin=pandocGridTableHeader,pandocPipeTableHeader contains=@Spell
 " }}}2
 
 " Delimited Code Blocks: {{{2
