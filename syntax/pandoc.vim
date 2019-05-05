@@ -676,4 +676,4 @@ hi link pandocHRule Delimiter
 let b:current_syntax = "pandoc"
 
 syntax sync clear
-syntax sync minlines=100
+syntax sync minlines=1000
