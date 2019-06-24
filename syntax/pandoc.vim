@@ -494,7 +494,7 @@ endif
 
 " New_lines: {{{3
 if g:pandoc#syntax#newlines == 1
-    call s:WithConceal("newline", 'syn match pandocNewLine /\(  \|\\\)$/ display containedin=pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocStrongInEmphasis,pandocEmphasisInStrong', 'conceal cchar='.s:cchars["newline"])
+  call s:WithConceal("newline", 'syn match pandocNewLine /\( \{4,4}\@<=  \|\S\@<=  \|\\\)$/ display containedin=pandocEmphasis,pandocStrong,pandocStrongEmphasis,pandocStrongInEmphasis,pandocEmphasisInStrong', 'conceal cchar='.s:cchars["newline"])
 endif
 " }}}3
 
