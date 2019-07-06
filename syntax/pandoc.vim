@@ -368,9 +368,19 @@ call s:WithConceal("strikeout", 'syn match pandocStrikeoutMark /\~\~/ contained 
 " }}}2
 
 " Headers: {{{2
-syn match pandocAtxHeader /\(\%^\|<.\+>.*\n\|^\s*\n\)\@<=#\{1,6}.*\n/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,pandocLaTeXInlineMath,pandocEscapedDollar,@Spell,pandocAmpersandEscape,pandocReferenceLabel,pandocReferenceURL display
+
+syn match pandocAtxHeader /\(\%^\|<.\+>.*\n\|^\s*\n\)\@<=#\{1}.*\n/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,pandocLaTeXInlineMath,pandocEscapedDollar,@Spell,pandocAmpersandEscape,pandocReferenceLabel,pandocReferenceURL display
 syn match pandocAtxHeaderMark /\(^#\{1,6}\|\\\@<!#\+\(\s*.*$\)\@=\)/ contained containedin=pandocAtxHeader
 call s:WithConceal("atx", 'syn match pandocAtxStart /#/ contained containedin=pandocAtxHeaderMark', 'conceal cchar='.s:cchars["atx"])
+
+syn match pandocAtxHeaderm /\(\%^\|<.\+>.*\n\|^\s*\n\)\@<=#\{2}.*\n/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,pandocLaTeXInlineMath,pandocEscapedDollar,@Spell,pandocAmpersandEscape,pandocReferenceLabel,pandocReferenceURL display
+syn match pandocAtxHeaderMarkm /\(^#\{1,6}\|\\\@<!#\+\(\s*.*$\)\@=\)/ contained containedin=pandocAtxHeaderm
+call s:WithConceal("atx", 'syn match pandocAtxStart /#/ contained containedin=pandocAtxHeaderMarkm', 'conceal cchar='.s:cchars["atx"])
+
+syn match pandocAtxHeadern /\(\%^\|<.\+>.*\n\|^\s*\n\)\@<=#\{3,6}.*\n/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,pandocLaTeXInlineMath,pandocEscapedDollar,@Spell,pandocAmpersandEscape,pandocReferenceLabel,pandocReferenceURL display
+syn match pandocAtxHeaderMarkn /\(^#\{1,6}\|\\\@<!#\+\(\s*.*$\)\@=\)/ contained containedin=pandocAtxHeadern
+call s:WithConceal("atx", 'syn match pandocAtxStart /#/ contained containedin=pandocAtxHeaderMarkn', 'conceal cchar='.s:cchars["atx"])
+
 syn match pandocSetexHeader /^.\+\n[=]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,pandocLaTeXInlineMath,pandocEscapedDollar,@Spell,pandocAmpersandEscape
 syn match pandocSetexHeader /^.\+\n[-]\+$/ contains=pandocEmphasis,pandocStrong,pandocNoFormatted,pandocLaTeXInlineMath,pandocEscapedDollar,@Spell,pandocAmpersandEscape
 syn match pandocHeaderAttr /{.*}/ contained containedin=pandocAtxHeader,pandocSetexHeader
@@ -555,6 +565,9 @@ hi link pandocOperator Operator
 hi pandocTitleBlock term=italic gui=italic
 hi link pandocTitleBlockTitle Directory
 hi link pandocAtxHeader Title
+hi link pandocAtxHeaderm Constant
+hi link pandocAtxHeadern String
+hi link pandocAtxStart Operator
 hi link pandocAtxStart Operator
 hi link pandocSetexHeader Title
 hi link pandocHeaderAttr Comment
