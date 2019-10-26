@@ -1,5 +1,7 @@
 # vim-pandoc-syntax
 
+[![Vint](https://github.com/vim-pandoc/vim-pandoc-syntax/workflows/Vint/badge.svg)](https://github.com/vim-pandoc/vim-pandoc-syntax/actions?workflow=Vint)
+
 Standalone pandoc syntax module, to be used alongside
 [vim-pandoc](http://github.com/vim-pandoc/vim-pandoc).
 
