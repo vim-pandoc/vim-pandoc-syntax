@@ -85,9 +85,9 @@ function! s:Hex2RGB(hex) "{{{2
 endfunction
 
 function! s:RGB2Hex(r, g, b) "{{{2
-    let h_r = printf("%02x", a:r)
-    let h_g = printf("%02x", a:g)
-    let h_b = printf("%02x", a:b)
+    let h_r = printf('%02x', a:r)
+    let h_g = printf('%02x', a:g)
+    let h_b = printf('%02x', a:b)
     return join([h_r, h_g, h_b], '')
 endfunction
 
@@ -105,7 +105,7 @@ function! pandoc#syntax#color#Instrospect(group)
     else
         let info = {}
         for i in parts
-            let data = split(i, "=")
+            let data = split(i, '=')
             let info[data[0]] = data[1]
         endfor
     endif
