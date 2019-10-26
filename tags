@@ -14,7 +14,7 @@ PandocUnhighlight	syntax/pandoc.vim	/^command! -buffer -nargs=1 -complete=syntax
 Requirements	README.md	/^## Requirements$/;"	s
 Screenshots	README.md	/^## Screenshots$/;"	s
 Standalone	README.md	/^### Standalone$/;"	S
-b:current_syntax	syntax/pandoc.vim	/^let b:current_syntax = "pandoc"$/;"	v
+b:current_syntax	syntax/pandoc.vim	/^let b:current_syntax = 'pandoc'$/;"	v
 g:pandoc#syntax#codeblocks#embeds#langs	syntax/pandoc.vim	/^    let g:pandoc#syntax#codeblocks#embeds#langs = []$/;"	v
 g:pandoc#syntax#codeblocks#embeds#use	syntax/pandoc.vim	/^    let g:pandoc#syntax#codeblocks#embeds#use = 1$/;"	v
 g:pandoc#syntax#codeblocks#ignore	syntax/pandoc.vim	/^    let g:pandoc#syntax#codeblocks#ignore = []$/;"	v
@@ -42,5 +42,5 @@ s:cchars	syntax/pandoc.vim	/^    let s:cchars = extend(s:cchars, g:pandoc#syntax
 s:cchars	syntax/pandoc.vim	/^    let s:cchars = {$/;"	v
 s:hi_tail	syntax/pandoc.vim	/^        let s:hi_tail = ' '.s:fg.' '.s:bg$/;"	v
 s:tmp_ui	syntax/pandoc.vim	/^            let s:tmp_ui =  has('gui_running') || (has('termguicolors') && &termguicolors) ? 'gu/;"	v
-s:tmp_val	syntax/pandoc.vim	/^            let s:tmp_val = synIDattr(synIDtrans(hlID("String")), s:i)$/;"	v
+s:tmp_val	syntax/pandoc.vim	/^            let s:tmp_val = synIDattr(synIDtrans(hlID('String')), s:i)$/;"	v
 vim-pandoc-syntax	README.md	/^# vim-pandoc-syntax$/;"	c
