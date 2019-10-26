@@ -645,6 +645,8 @@ if g:pandoc#syntax#style#emphases == 1
     hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
     hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
     if !exists('s:hi_tail')
+        let s:fg = '' " Vint can't figure ou these get set dynamically
+        let s:bg = '' " so initialize them manually first
         for s:i in ['fg', 'bg']
             let s:tmp_val = synIDattr(synIDtrans(hlID('String')), s:i)
             let s:tmp_ui =  has('gui_running') || (has('termguicolors') && &termguicolors) ? 'gui' : 'cterm'
