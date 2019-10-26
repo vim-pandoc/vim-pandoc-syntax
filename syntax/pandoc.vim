@@ -36,7 +36,7 @@ endif
 
 " cchars used in conceal rules {{{2
 " utf-8 defaults (preferred)
-if &encoding == 'utf-8'
+if &encoding ==# 'utf-8'
     let s:cchars = {
                 \'newline': '↵',
                 \'image': '▨',
@@ -499,25 +499,25 @@ endif
 " }}}3
 
 " Emdashes: {{{3
-if &encoding == 'utf-8'
+if &encoding ==# 'utf-8'
   call s:WithConceal('emdashes', 'syn match pandocEllipses /\([^-]\)\@<=---\([^-]\)\@=/ display', 'conceal cchar=—')
 endif
 " }}}3
 
 " Endashes: {{{3
-if &encoding == 'utf-8'
+if &encoding ==# 'utf-8'
   call s:WithConceal('endashes', 'syn match pandocEllipses /\([^-]\)\@<=--\([^-]\)\@=/ display', 'conceal cchar=–')
 endif
 " }}}3
 
 " Ellipses: {{{3
-if &encoding == 'utf-8'
+if &encoding ==# 'utf-8'
     call s:WithConceal('ellipses', 'syn match pandocEllipses /\.\.\./ display', 'conceal cchar=…')
 endif
 " }}}3
 
 " Quotes: {{{3
-if &encoding == 'utf-8'
+if &encoding ==# 'utf-8'
     call s:WithConceal('quotes', 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation,pandocUListItem display', 'conceal cchar=“')
     call s:WithConceal('quotes', 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong,pandocUListItem,pandocListItem,pandocListItemContinuation display', 'conceal cchar=”')
 endif

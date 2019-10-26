@@ -99,7 +99,7 @@ function! pandoc#syntax#color#Instrospect(group)
     redir END
     let hi_output = split(hi_output, '\n')[0]
     let parts = split(hi_output, '\s\+')[2:]
-    if parts[0] == 'links'
+    if parts[0] ==# 'links'
         let info = Hi_Info(parts[2])
         let info['linked_to'] = parts[2]
     else
