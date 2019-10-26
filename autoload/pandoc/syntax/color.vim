@@ -9,7 +9,7 @@
 "
 " color conversion algorithms adapted from http://www.cs.rit.edu/~ncs/color/t_convert.html
 
-function! s:RGB2HSV(r, g, b) "{{{2
+function! s:RGB2HSV(r, g, b) abort "{{{2
     let rp = a:r/255.0
     let gp = a:g/255.0
     let bp = a:b/255.0
@@ -37,7 +37,7 @@ function! s:RGB2HSV(r, g, b) "{{{2
     return [h, s, v]
 endfunction
 
-function! s:HSV2RGB(h, s, v) "{{{2
+function! s:HSV2RGB(h, s, v) abort "{{{2
     if a:s == 0 "achromatic
         return [a:v, a:v, a:v]
     endif
@@ -76,7 +76,7 @@ function! s:HSV2RGB(h, s, v) "{{{2
     return [float2nr(r*255), float2nr(g*255), float2nr(b*255)]
 endfunction
 
-function! s:Hex2RGB(hex) "{{{2
+function! s:Hex2RGB(hex) abort "{{{2
     let hex = split(a:hex, '\zs')
     let h_r = '0x'.join(hex[:1], '')
     let h_g = '0x'.join(hex[2:3], '')
@@ -84,7 +84,7 @@ function! s:Hex2RGB(hex) "{{{2
     return map([h_r, h_g, h_b], 'eval(v:val)')
 endfunction
 
-function! s:RGB2Hex(r, g, b) "{{{2
+function! s:RGB2Hex(r, g, b) abort "{{{2
     let h_r = printf('%02x', a:r)
     let h_g = printf('%02x', a:g)
     let h_b = printf('%02x', a:b)
@@ -93,7 +93,7 @@ endfunction
 
 " Instrospection: {{{1
 
-function! pandoc#syntax#color#Instrospect(group)
+function! pandoc#syntax#color#Instrospect(group) abort
     redir => hi_output
     exe 'silent hi '. a:group
     redir END
@@ -114,7 +114,7 @@ endfunction
 
 " Palette: {{{1
 
-function! pandoc#syntax#color#SaturationPalette(hex, partitions)
+function! pandoc#syntax#color#SaturationPalette(hex, partitions) abort
     let rgb = s:Hex2RGB(a:hex)
     let hsv = s:RGB2HSV(rgb[0], rgb[1], rgb[2])
     let hsv_palette = []
