@@ -227,10 +227,10 @@ endif
 " corrects distracting conceal (ligature) background colors, blue makes 
 " it obvious that the character is a ligature instead of an actual Unicode
 " character since both can exist in the same file
-au syntax * hi Conceal ctermbg=none ctermfg=Blue
+hi Conceal ctermbg=none ctermfg=Blue
 
 " preferable link color to underlining
-au syntax * hi link pandocDelimitedCodeBlock pandocNoFormatted
+hi link pandocDelimitedCodeBlock pandocNoFormatted
 
 " Embeds: {{{2
 
