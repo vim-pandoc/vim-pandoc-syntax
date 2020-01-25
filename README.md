@@ -5,8 +5,7 @@
 Standalone pandoc syntax module, to be used alongside
 [vim-pandoc](http://github.com/vim-pandoc/vim-pandoc).
 
-Forked from the version provided by `fmoralesc/vim-pantondoc`, in turn taken
-from `vim-pandoc/vim-pandoc`.
+Forked from the version provided by `fmoralesc/vim-pantondoc`, in turn taken from `vim-pandoc/vim-pandoc`.
 
 ## Requirements
 
@@ -16,44 +15,52 @@ from `vim-pandoc/vim-pandoc`.
 
 ## Installation
 
-The repository follows the usual bundle structure, so it's easy to install it
-using [pathogen](https://github.com/tpope/vim-pathogen),
-[Vundle](https://github.com/gmarik/vundle) or NeoBundle.
+The repository follows the usual bundle structure, so it's easy to install it using [Plug](https://github.com/junegunn/vim-plug), [pathogen](https://github.com/tpope/vim-pathogen), [Vundle](https://github.com/gmarik/vundle) or NeoBundle. 
 
-For Vundle users, it should be enough to add
+**Plug** adds something like the following lines to `.vimrc`:
 
-    Plugin 'vim-pandoc/vim-pandoc-syntax'
+```vim
+Plug 'vim-pandoc/vim-pandoc-syntax'
+```
 
-to `.vimrc`, and then run `:PluginInstall`.
+**Vundle** users should add:
 
-For those who need it, a tarball is available from
-[here](https://github.com/vim-pandoc/vim-pandoc-syntax/archive/master.zip).
+```vim
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+```
+
+Run `:PluginInstall` after making the changes from within a `vim` session, or you can just run `vim +':PlugInstall' +':q!' +':q!'` from the command line.
+
+A [tarball](https://github.com/vim-pandoc/vim-pandoc-syntax/archive/master.zip) is also available.
 
 ### Standalone
 
 If you want to use `vim-pandoc-syntax` without vim-pandoc, you'll need to tell
 Vim to load it for certain files. Just add something like this to your vimrc:
 
-~~~ vim
-    augroup pandoc_syntax
-        au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-    augroup END
-~~~
+```vim
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
+```
 
 ## Features
 
-* Supports most (if not all) pandoc's markdown features, including tables,
+* Supports most (if not all) Pandoc's markdown features, including tables,
   delimited codeblocks, references, etc.
+
 * Can handle multiple embedded languages (LaTeX, YAML headers, many languages
   in delimited codeblocks). Some commands are provided to help with this (see
   `:help pandoc-syntax-commands`)
+
 * Pretty display using `conceal` (optional).
+
 * Configurable (see `:help pandoc-syntax-configuration` for an overview of the
   options).
 
 ## Screenshots
 
-![img1](http://i.imgur.com/UKXbG2V.png)
-![img2](http://i.imgur.com/z8FpxRP.png)
-![img3](http://i.imgur.com/ziNjQiE.png)
-![img4](http://i.imgur.com/UKoOxzP.png)
+![img1](doc/UKXbG2V.png)
+![img2](doc/z8FpxRP.png)
+![img3](doc/ziNjQiE.png)
+![img4](doc/UKoOxzP.png)

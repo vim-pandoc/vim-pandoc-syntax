@@ -106,14 +106,3 @@ hello
 1) a
 2) b
 
-# smart punctuation
-
-ellipses: ....
-quote "signs". This only works at the beggining and end of words.
-quote "signs."
-
-issue #31:
-
-"Foo"
-*"Foo"*
-**"Foo"**
