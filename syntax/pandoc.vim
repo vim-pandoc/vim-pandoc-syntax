@@ -159,6 +159,11 @@ endif
 " Functions: {{{1
 " EnableEmbedsforCodeblocksWithLang {{{2
 function! EnableEmbedsforCodeblocksWithLang(entry)
+    " prevent embedded language syntaxes from changing 'foldmethod' 
+    if has('folding')
+        let s:foldmethod = &l:foldmethod
+    endif
+
     try
         let s:langname = matchstr(a:entry, '^[^=]*')
         let s:langsyntaxfile = matchstr(a:entry, '[^=]*$')
@@ -174,6 +179,10 @@ function! EnableEmbedsforCodeblocksWithLang(entry)
     catch /E484/
       echo "No syntax file found for '" . s:langsyntaxfile . "'"
     endtry
+
+    if exists('s:foldmethod') && s:foldmethod !=# &l:foldmethod
+        let &l:foldmethod = s:foldmethod
+    endif
 endfunction
 " }}}2
 
@@ -225,6 +234,11 @@ endif
 
 " Embeds: {{{2
 
+" prevent embedded language syntaxes from changing 'foldmethod' 
+if has('folding')
+    let s:foldmethod = &l:foldmethod
+endif
+
 " HTML: {{{3
 " Set embedded HTML highlighting
 syn include @HTML syntax/html.vim
@@ -254,6 +268,10 @@ syn region pandocLaTexSection start=/\\\(part\|chapter\|\(sub\)\{,2}section\|\(s
 syn match pandocLaTexSectionCmd /\\\(part\|chapter\|\(sub\)\{,2}section\|\(sub\)\=paragraph\)/ contained containedin=pandocLaTexSection
 syn match pandocLaTeXDelimiter /[[\]{}]/ contained containedin=pandocLaTexSection
 " }}}3
+
+if exists('s:foldmethod') && s:foldmethod !=# &l:foldmethod
+    let &l:foldmethod = s:foldmethod
+endif
 
 " }}}2
 
