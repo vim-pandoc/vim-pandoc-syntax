@@ -1,12 +1,13 @@
-# vim-pandoc-syntax
+# Vim Syntax for Simplified Pandoc
 
-[![Vint](https://github.com/vim-pandoc/vim-pandoc-syntax/workflows/Vint/badge.svg)](https://github.com/vim-pandoc/vim-pandoc-syntax/actions?workflow=Vint)
+[![Vint](https://github.com/rwxrob/vim-pandoc-syntax-ez/workflows/Vint/badge.svg)](https://github.com/rwxrob/vim-pandoc-syntax-ez/actions?workflow=Vint)
 
-Standalone pandoc syntax module, to be used alongside
-[vim-pandoc](http://github.com/vim-pandoc/vim-pandoc).
+The `vim-pandoc-simple-syntax` standalone Pandoc syntax module is a fork from the [vim-pandoc/vim-pandoc-syntax](https://github.com/vim-pandoc/vim-pandoc-syntax):
 
-Forked from the version provided by `fmoralesc/vim-pantondoc`, in turn taken
-from `vim-pandoc/vim-pandoc`.
+* Corrects faults in highlighting and smart punctuation
+* Adds opinionated color settings
+* Removes many confusing default conceals
+* Removes (and flags) common departures from Simplified Pandoc
 
 ## Requirements
 
@@ -16,40 +17,36 @@ from `vim-pandoc/vim-pandoc`.
 
 ## Installation
 
-The repository follows the usual bundle structure, so it's easy to install it
-using [pathogen](https://github.com/tpope/vim-pathogen),
-[Vundle](https://github.com/gmarik/vundle) or NeoBundle.
+Add something like the following to your `.vimrc` after installing the [`Plug`](https://github.com/junegunn/vim-plug) Vim package manager (all the others are rather dated and don't allow storing plugins separated):
 
-For Vundle users, it should be enough to add
 
-    Plugin 'vim-pandoc/vim-pandoc-syntax'
-
-to `.vimrc`, and then run `:PluginInstall`.
-
-For those who need it, a tarball is available from
-[here](https://github.com/vim-pandoc/vim-pandoc-syntax/archive/master.zip).
+```
+call plug#begin('~/.vimplugins')
+Plug 'vim-pandoc/vim-pandoc'
+Plug 'rwxrob/vim-pandoc-syntax-simple'
+call plug#end()
+```
 
 ### Standalone
 
-If you want to use `vim-pandoc-syntax` without vim-pandoc, you'll need to tell
-Vim to load it for certain files. Just add something like this to your vimrc:
+If you want to use `vim-pandoc-syntax` without vim-pandoc, you'll need to tell Vim to load it for certain files. Just add something like this to your vimrc:
 
-~~~ vim
-    augroup pandoc_syntax
-        au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-    augroup END
-~~~
+```vim
+augroup pandoc_syntax
+  au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
+```
 
 ## Features
 
-* Supports most (if not all) pandoc's markdown features, including tables,
+* Supports most (if not all) Pandoc's markdown features, including tables,
   delimited codeblocks, references, etc.
-* Can handle multiple embedded languages (LaTeX, YAML headers, many languages
-  in delimited codeblocks). Some commands are provided to help with this (see
-  `:help pandoc-syntax-commands`)
+
+* Can handle multiple embedded languages (LaTeX, YAML headers, many languages in delimited codeblocks). Some commands are provided to help with this (see `:help pandoc-syntax-commands`)
+
 * Pretty display using `conceal` (optional).
-* Configurable (see `:help pandoc-syntax-configuration` for an overview of the
-  options).
+
+* Configurable (see `:help pandoc-syntax-configuration` for an overview of the options).
 
 ## Screenshots
 
@@ -57,3 +54,13 @@ Vim to load it for certain files. Just add something like this to your vimrc:
 ![img2](http://i.imgur.com/z8FpxRP.png)
 ![img3](http://i.imgur.com/ziNjQiE.png)
 ![img4](http://i.imgur.com/UKoOxzP.png)
+
+## TODO
+
+* ***Remove*** conceal ligatures for section and lists.
+* Correct syntax highlighting of Pandoc Tables.
+* Integrated better defaults colors.
+* Consider adding themes for better color customization.
+* Add ellipsis smart punctuation from list context. 
+* Other stuff ...
+
