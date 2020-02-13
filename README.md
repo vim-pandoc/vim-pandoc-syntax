@@ -62,5 +62,5 @@ augroup END
 * Integrated better defaults colors.
 * Consider adding themes for better color customization.
 * Add ellipsis smart punctuation from list context. 
+* Correct en-dash and em-dash missing contexts.
 * Other stuff ...
-

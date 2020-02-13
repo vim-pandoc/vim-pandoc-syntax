@@ -3,12 +3,12 @@ scriptencoding utf-8
 "
 " Vim syntax file
 "
-" Language: Pandoc (superset of Markdown)
-" Maintainer: Felipe Morales <hel.sheep@gmail.com>
-" Maintainer: Caleb Maclennan <caleb@alerque.com>
+" Language: Simplified Pandoc (superset of Markdown)
+" Maintainer: Rob Muhlestein (twitch.tv/rwxrob) <rwx@robs.io>
+" Contributor: Felipe Morales <hel.sheep@gmail.com>
+" Contributor: Caleb Maclennan <caleb@alerque.com>
 " Contributor: David Sanson <dsanson@gmail.com>
 " Contributor: Jorge Israel Peña <jorge.israel.p@gmail.com>
-" Contributor: Rob Muhlestein (twitch.tv/rwxrob) <rwx@robs.io>
 " OriginalAuthor: Jeremy Schultz <taozhyn@gmail.com>
 " Version: 5.1
 
@@ -509,19 +509,19 @@ endif
 
 " Emdashes: {{{3
 if &encoding ==# 'utf-8'
-  call s:WithConceal('emdashes', 'syn match pandocEllipses /\([^-]\)\@<=---\([^-]\)\@=/ display', 'conceal cchar=—')
+  call s:WithConceal('emdashes', 'syn match pandocEmdashes /---/ containedin=pandocSetexHeader,pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation,pandocUListItem display', 'conceal cchar=—')
 endif
 " }}}3
 
 " Endashes: {{{3
 if &encoding ==# 'utf-8'
-  call s:WithConceal('endashes', 'syn match pandocEllipses /\([^-]\)\@<=--\([^-]\)\@=/ display', 'conceal cchar=–')
+  call s:WithConceal('endashes', 'syn match pandocEndashes /\([^-]\)\@<=--\([^-]\)\@=/ display', 'conceal cchar=–')
 endif
 " }}}3
 
 " Ellipses: {{{3
 if &encoding ==# 'utf-8'
-    call s:WithConceal('ellipses', 'syn match pandocEllipses /\.\.\./ display', 'conceal cchar=…')
+    call s:WithConceal('ellipses', 'syn match pandocEllipses /\.\.\./ containedin=pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation,pandocUListItem  display', 'conceal cchar=…')
 endif
 " }}}3
 
