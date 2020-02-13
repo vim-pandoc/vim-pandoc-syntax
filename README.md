@@ -1,7 +1,5 @@
 # Vim Syntax for Simplified Pandoc
 
-[![Vint](https://github.com/rwxrob/vim-pandoc-syntax-simple/workflows/Vint/badge.svg)](https://github.com/rwxrob/vim-pandoc-syntax-simple/actions?workflow=Vint)
-
 The `vim-pandoc-simple-syntax` standalone Pandoc syntax module is a fork from the [vim-pandoc/vim-pandoc-syntax](https://github.com/vim-pandoc/vim-pandoc-syntax):
 
 * Corrects faults in highlighting and smart punctuation
