@@ -48,16 +48,10 @@ augroup END
 
 * Configurable (see `:help pandoc-syntax-configuration` for an overview of the options).
 
-## Screenshots
-
-![img1](http://i.imgur.com/UKXbG2V.png)
-![img2](http://i.imgur.com/z8FpxRP.png)
-![img3](http://i.imgur.com/ziNjQiE.png)
-![img4](http://i.imgur.com/UKoOxzP.png)
-
 ## TODO
 
 * ***Remove*** conceal ligatures for section and lists.
+* Add back screenshots (from imgur to keep plugin light).
 * Correct syntax highlighting of Pandoc Tables.
 * Integrated better defaults colors.
 * Consider adding themes for better color customization.
