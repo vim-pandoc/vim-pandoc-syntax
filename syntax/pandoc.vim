@@ -501,19 +501,19 @@ endif
 
 " Emdashes: {{{3
 if &encoding ==# 'utf-8'
-  call s:WithConceal('emdashes', 'syn match pandocEllipses /\([^-]\)\@<=---\([^-]\)\@=/ display', 'conceal cchar=—')
+  call s:WithConceal('emdashes', 'syn match pandocEmdashes /---/ containedin=pandocSetexHeader,pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation,pandocUListItem display', 'conceal cchar=—')
 endif
 " }}}3
 
 " Endashes: {{{3
 if &encoding ==# 'utf-8'
-  call s:WithConceal('endashes', 'syn match pandocEllipses /\([^-]\)\@<=--\([^-]\)\@=/ display', 'conceal cchar=–')
+  call s:WithConceal('endashes', 'syn match pandocEndashes /\([^-]\)\@<=--\([^-]\)\@=/ display', 'conceal cchar=–')
 endif
 " }}}3
 
 " Ellipses: {{{3
 if &encoding ==# 'utf-8'
-    call s:WithConceal('ellipses', 'syn match pandocEllipses /\.\.\./ display', 'conceal cchar=…')
+    call s:WithConceal('ellipses', 'syn match pandocEllipses /\.\.\./ containedin=pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation,pandocUListItem  display', 'conceal cchar=…')
 endif
 " }}}3
 
