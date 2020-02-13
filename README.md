@@ -20,7 +20,7 @@ The `vim-pandoc-simple-syntax` standalone Pandoc syntax module is a fork from th
 Add something like the following to your `.vimrc` after installing the [`Plug`](https://github.com/junegunn/vim-plug) Vim package manager (all the others are rather dated and don't allow storing plugins separated):
 
 
-```
+```vim
 call plug#begin('~/.vimplugins')
 Plug 'vim-pandoc/vim-pandoc'
 Plug 'rwxrob/vim-pandoc-syntax-simple'
