@@ -37,6 +37,9 @@ syn region pdcBlockQuote start=/^\s\{,3}>\s\?/ end=/[[:print:]]\(\n\s*\n\)\@=/ k
 syn region pdcUList start=/^>\=\s*[*=-]\ze\s*[[:print:]]$/ end=/[[:print:]]\(\n\s*\n\)\@=/ keepend
 syn region pdcOList start=/^(\?\(\d\+\|\l\|\#\|@.\{-}\|x\=l\=\(i\{,3}[vx]\=\)\{,3}c\{,3}\)[.)]/ end=/[[:print:]]\(\n\s*\n\)\@=/ keepend
 
+" Definitions
+syn region pdcDefinition matchgroup=Label start=/^[[:print:]]\{1,}\ze\s*\n\~/ end=/[[:print:]]\zs\(\n\s*\n\)\@=/ keepend contains=@Spell
+
 " Fenced DIVS
 syn region pdcFencedDiv matchgroup=Delimiter start=/^:::.*$/ end=/:::\n\s*\n/ keepend contains=@LATEX,pdcPar contains=@Spell
 
