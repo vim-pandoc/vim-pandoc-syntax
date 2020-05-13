@@ -23,7 +23,6 @@ unlet! b:current_syntax
 syn include @LATEX syntax/tex.vim
 syn region pdcLaTeXEnv start=/\\begin{\z(.\{-}\)}/ end=/\\end{\z1}/ keepend contains=@LATEX
 syn region pdcLaTeXDisplayMath start=/\z(\\\@<!\$\{1,2}\)/ end=/\z1/ keepend contains=@LATEX containedin=pdcPar,pdcBlockQuote,pdcOList,pdcUList,pdcFootnote,pdcFootnotePar
-"syn match pdcLaTeXCmd /\\\S\{1,}/ contains=@LATEX keepend containedin=pdcPar
 syn match pdcLaTeXCmd /\\[[:alpha:]]\+\(\({.\{-}}\)\=\(\[.\{-}\]\)\=\)*/ contains=@LATEX keepend containedin=pdcPar,pdcBlockQuote,pdcOList,pdcUList,pdcFootnote,pdcFootnotePar
 
 " Code Blocks
