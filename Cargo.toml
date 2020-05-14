@@ -5,3 +5,4 @@ authors = ["Caleb Maclennan <caleb@alerque.com>"]
 edition = "2018"
 
 [dependencies]
+pulldown-cmark = "0.7.1"
