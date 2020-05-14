@@ -3,3 +3,4 @@
 *.swp
 tags
 doc/tags
+/target
