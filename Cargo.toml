@@ -4,6 +4,9 @@ version = "0.0.0"
 authors = ["Caleb Maclennan <caleb@alerque.com>"]
 edition = "2018"
 
+[lib]
+crate-type = ["cdylib"]
+
 [dependencies]
 pulldown-cmark = "0.7.1"
 mlua = "0.3.2"
