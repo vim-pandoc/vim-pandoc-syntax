@@ -6,3 +6,5 @@ edition = "2018"
 
 [dependencies]
 pulldown-cmark = "0.7.1"
+mlua = "0.3.2"
+mlua_derive = "0.3.0"
