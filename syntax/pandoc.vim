@@ -15,6 +15,8 @@ endif
 
 if exists('g:pandoc#syntax#flavor#commonmark') || exists('b:pandoc#syntax#flavor#commonmark')
     runtime syntax/pandoc_commonmark.vim
+elseif exists('g:pandoc#syntax#flavor#minimized') || exists('b:pandoc#syntax#flavor#minimized')
+    runtime syntax/pandoc_minimized.vim
 else
     runtime syntax/pandoc_legacy.vim
 endif
