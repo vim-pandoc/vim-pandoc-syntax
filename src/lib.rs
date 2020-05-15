@@ -15,15 +15,19 @@ fn render_html(_: &Lua, buffer: String) -> LuaResult<String> {
 fn get_offsets(lua: &Lua, buffer: String) -> LuaResult<LuaTable> {
     let options = Options::all();
     let parser = Parser::new_ext(buffer.as_str(), options);
-    let starts = lua.create_table()?;
+    let events = lua.create_table()?;
     let mut i: u32 = 1;
     for (event, range) in parser.into_offset_iter() {
         if let Event::Start(tag) = event {
-            starts.set(i, format!("event at {:?} = {:#?}", range, tag))?;
+            let info = lua.create_table()?;
+            info.set("tag", format!("{:?}", tag))?;
+            info.set("start", range.start)?;
+            info.set("end", range.end)?;
+            events.set(i, info)?;
             i += 1;
         }
     }
-    Ok(starts)
+    Ok(events)
 }
 
 #[lua_module]
