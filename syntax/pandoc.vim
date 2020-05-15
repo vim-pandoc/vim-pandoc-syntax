@@ -14,7 +14,8 @@ if exists('b:current_syntax')
 endif
 
 if exists('g:pandoc#syntax#flavor#commonmark') || exists('b:pandoc#syntax#flavor#commonmark')
-    runtime syntax/pandoc_commonmark.vim
+	lua sm = require("syntax_commonmark")
+	lua sm.foobar()
 else
     runtime syntax/pandoc_legacy.vim
 endif
