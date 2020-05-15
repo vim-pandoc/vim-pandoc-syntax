@@ -21,8 +21,12 @@ fn libvim_pandoc_syntax(lua: &Lua) -> LuaResult<LuaTable> {
 
 #[cfg(test)]
 mod tests {
+    use crate::*;
+    use mlua::Lua;
+
     #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
+    fn can_render_html() {
+        let ret = render_html(&Lua::new(), String::from("# thing")).unwrap();
+        assert_eq!(ret, "<h1>thing</h1>\n");
     }
 }
