@@ -7,12 +7,10 @@ scriptencoding utf-8
 
 syntax clear
 
-lua s = require("libvim_pandoc_syntax")
-lua foo = s.render_html("# foo")
-lua print(foo)
-
 lua << EOC
-s = require("libvim_pandoc_syntax")
-bar = s.render_html("*bar*")
-print(bar)
+vps = require("libvim_pandoc_syntax")
+offsets = vps.get_offsets(vim.api.nvim_get_current_buf())
+for i, event in ipairs(offsets) do
+	print(event.tag, event.start)
+end
 EOC
