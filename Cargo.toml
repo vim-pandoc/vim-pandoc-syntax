@@ -9,5 +9,5 @@ crate-type = ["cdylib"]
 
 [dependencies]
 pulldown-cmark = "0.7.1"
-mlua = "0.3.2"
+mlua = { version = "0.3.2", default-features = false, features = [ "luajit" ] }
 mlua_derive = "0.3.0"
