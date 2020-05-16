@@ -16,7 +16,7 @@ endif
 if exists('g:pandoc#syntax#flavor#commonmark') || exists('b:pandoc#syntax#flavor#commonmark')
 	lua package.loaded["syntax_commonmark"] = nil -- Force module reload during dev
 	lua vcs = require("syntax_commonmark")
-	lua vcs.highlight(vim.api.nvim_get_current_buf())
+	lua vcs.attach(vim.api.nvim_get_current_buf())
 else
     runtime syntax/pandoc_legacy.vim
 endif
