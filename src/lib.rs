@@ -31,13 +31,27 @@ fn get_offsets(buffer: String) -> Result<Events> {
     let parser = Parser::new_ext(buffer.as_str(), options);
     let mut events = Events::new();
     for (event, range) in parser.into_offset_iter() {
-        if let Event::Start(tag) = event {
-            let group: String = match tag {
+        let first = range.start + 1;
+        let last = range.end + 1;
+        let group = match event {
+            Event::Start(tag) => Some(match tag {
                 Tag::Heading(level) => format!("cmarkHeading{}", level),
+                Tag::CodeBlock(kind) => format!("cmarkCodeBlock{}", kind),
+                Tag::Link { .. } => String::from("cmarkLink"),
                 _ => format!("cmark{:?}", tag),
-            };
-            let first = range.start + 1;
-            let last = range.end + 1;
+            }),
+            Event::End { .. } => None,
+            Event::Text { .. } => Some(String::from("cmarkText")),
+            // Event::Code { .. } => {}
+            // Event::Html { .. } => {}
+            // Event::FootnoteReference { .. }=> {}
+            Event::SoftBreak => None,
+            // Event::HardBreak => {}
+            Event::Rule => Some(String::from("cmarkRule")),
+            // Event::TaskListMarker { .. }=> {}
+            _other => Some(format!("cmark{:?}", _other)),
+        };
+        if let Some(group) = group {
             events.push(MdTag { group, first, last });
         }
     }
