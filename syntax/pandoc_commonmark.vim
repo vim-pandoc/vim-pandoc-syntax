@@ -6,3 +6,5 @@
 scriptencoding utf-8
 
 syntax clear
+
+lua include("commonmark")
