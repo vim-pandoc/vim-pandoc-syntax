@@ -39,8 +39,6 @@ function highlight (buffer)
 				sline = sline + 1
 			end
 			buf_add_highlight(buffer, rustymarks, event.group, sline - 1, 0, ecol)
-			-- vim.api.nvim_err_writeln("did a "..event.group.." byte "..event.first.." at "..sline .." col "..scol)
-			-- vim.api.nvim_err_writeln("to an "..event.group.." byte "..event.last.." at "..eline .." col "..ecol)
 		else
 			buf_add_highlight(buffer, rustymarks, event.group, sline - 1, scol, ecol)
 		end

@@ -13,7 +13,7 @@ fn get_offsets(lua: &Lua, buffer: String) -> LuaResult<LuaTable> {
         info.set("group", event.group.as_str()).unwrap();
         info.set("first", event.first).unwrap();
         info.set("last", event.last).unwrap();
-        table.set(i, info).unwrap();
+        table.set(i + 1, info).unwrap();
     }
     Ok(table)
 }
