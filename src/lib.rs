@@ -33,7 +33,7 @@ fn get_offsets(buffer: String) -> Result<Events> {
     for (event, range) in parser.into_offset_iter() {
         if let Event::Start(tag) = event {
             let group: String = match tag {
-                Tag::Heading(n) => format!("cmarkHeading{}", n),
+                Tag::Heading(level) => format!("cmarkHeading{}", level),
                 _ => format!("cmark{:?}", tag),
             };
             let first = range.start + 1;

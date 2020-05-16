@@ -32,7 +32,7 @@ function highlight (buffer)
 		local sline, scol = byte2pos(buffer, event.first)
 		local eline, ecol = byte2pos(buffer, event.last)
 		if sline < eline then
-			buf_add_highlight(buffer, rustymarks, event.group, sline - 1, scol + 1, -1)
+			buf_add_highlight(buffer, rustymarks, event.group, sline - 1, scol, -1)
 			sline = sline + 1
 			while sline < eline do
 				buf_add_highlight(buffer, rustymarks, event.group, sline - 1, 0, -1)
@@ -42,7 +42,7 @@ function highlight (buffer)
 			-- vim.api.nvim_err_writeln("did a "..event.group.." byte "..event.first.." at "..sline .." col "..scol)
 			-- vim.api.nvim_err_writeln("to an "..event.group.." byte "..event.last.." at "..eline .." col "..ecol)
 		else
-			buf_add_highlight(buffer, rustymarks, event.group, sline - 1, scol + 1, ecol)
+			buf_add_highlight(buffer, rustymarks, event.group, sline - 1, scol, ecol)
 		end
 	end
 end

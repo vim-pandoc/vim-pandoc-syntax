@@ -14,23 +14,12 @@ if exists('b:current_syntax')
 endif
 
 if exists('g:pandoc#syntax#flavor#commonmark') || exists('b:pandoc#syntax#flavor#commonmark')
+    runtime syntax/pandoc_cmark_colors.vim
 	lua package.loaded["syntax_commonmark"] = nil -- Force module reload during dev
 	lua vcs = require("syntax_commonmark")
 	lua vcs.attach(vim.api.nvim_get_current_buf())
 else
     runtime syntax/pandoc_legacy.vim
 endif
-
-hi link cmarkHeading1 Title
-hi link cmarkHeading2 Title
-hi link cmarkHeading3 Title
-hi link cmarkHeading4 Title
-hi link cmarkHeading5 Title
-hi link cmarkHeading6 Title
-hi link cmarkParagraph Integer
-hi link cmarkBlockquote Integer
-hi link cmarkComment Comment
-hi cmarkEmphasis gui=italic cterm=italic
-hi cmarkStrong gui=bold cterm=bold
 
 let b:current_syntax = 'pandoc'
