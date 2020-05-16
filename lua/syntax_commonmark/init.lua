@@ -12,6 +12,15 @@ local buf_clear_namespace = vim.api.nvim_buf_clear_namespace
 
 local _attachments = {}
 
+function dump(...)
+	if select("#", ...) == 1 then
+		vim.api.nvim_out_write(vim.inspect((...)))
+	else
+		vim.api.nvim_out_write(vim.inspect {...})
+	end
+	vim.api.nvim_out_write("\n")
+end
+
 local function byte2pos (buffer, byte)
 	local line = call_function("byte2line", { byte })
 	-- local col = byte - vim.api.nvim_buf_get_offset(buffer, line)
