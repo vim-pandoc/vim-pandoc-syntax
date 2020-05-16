@@ -1,4 +1,4 @@
-package.loaded["rust"] = nil
+package.loaded["rust"] = nil -- Force module reload during dev
 local rust = require("libvim_pandoc_syntax")
 
 local rustymarks = vim.api.nvim_create_namespace("rustymarks")
@@ -6,31 +6,26 @@ local rustymarks = vim.api.nvim_create_namespace("rustymarks")
 local call = vim.api.nvim_call_function
 local addhl = vim.api.nvim_buf_add_highlight
 
-local function byte2pos (byte)
-	local line = call("byte2line", { byte })
-	local col = byte - call("line2byte", { line })
+local function byte2pos (buffer, byte)
+	local line = call("byte2line", { byte }) - 1
+	local col = byte - vim.api.nvim_buf_get_offset(buffer, line)
+	-- local col = byte - call("line2byte", { line })
 	return line, col
 end
 
-local function highlight (buffer)
-	addhl(buffer, rustymarks, "cmarkComment", 0, 3, 5)
-	vim.api.nvim_buf_clear_namespace(buffer, rustymarks, 1, -1)
-	events = rust.get_offsets(buffer)
-		vim.api.nvim_err_writeln("num::: "..#events)
+local function highlight (buffer, contents)
+	vim.api.nvim_buf_clear_namespace(buffer, rustymarks, 0, -1)
+	local lines = vim.api.nvim_buf_get_lines(buffer, 0, -1, true)
+	local contents = table.concat(lines)
+	local events = rust.get_offsets(contents)
 	for i, event in ipairs(events) do
-		vim.api.nvim_err_writeln("should I "..event.group)
-		local sline, scol = event2pos(event)
-		local eline, ecol = event2pos(event)
+		local sline, scol = byte2pos(buffer, event.first)
+		local eline, ecol = byte2pos(buffer, event.last)
 		if eline > sline then
 		else
-			addhl(buffer, rustymarks, event.group, sline, scol, ecol)
-			vim.api.nvim_err_writeln("did a "..event.group)
+			addhl(buffer, rustymarks, event.group, sline, scol - 1, ecol)
 		end
-		-- while sline < eline do
-			-- sline = sline + 1
-		-- end
 	end
-	return offsets
 end
 
 return {

@@ -14,8 +14,7 @@ if exists('b:current_syntax')
 endif
 
 if exists('g:pandoc#syntax#flavor#commonmark') || exists('b:pandoc#syntax#flavor#commonmark')
-	" Force module reload during dev
-	lua package.loaded["syntax_commonmark"] = nil
+	lua package.loaded["syntax_commonmark"] = nil -- Force module reload during dev
 	lua vcs = require("syntax_commonmark")
 	lua vcs.highlight(vim.api.nvim_get_current_buf())
 else
@@ -29,6 +28,7 @@ hi link cmarkHeading4 Title
 hi link cmarkHeading5 Title
 hi link cmarkHeading6 Title
 hi link cmarkParagraph Integer
+hi link cmarkBlockquote Integer
 hi link cmarkComment Comment
 hi cmarkEmphasis gui=italic cterm=italic
 hi cmarkStrong gui=bold cterm=bold
