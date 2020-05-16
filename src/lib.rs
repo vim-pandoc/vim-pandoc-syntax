@@ -36,8 +36,8 @@ fn get_offsets(buffer: String) -> Result<Events> {
                 Tag::Heading(n) => format!("cmarkHeading{}", n),
                 _ => format!("cmark{:?}", tag),
             };
-            let first = range.start + 1;
-            let last = range.end + 1;
+            let first = range.start;
+            let last = range.end;
             events.push(MdTag { group, first, last });
         }
     }

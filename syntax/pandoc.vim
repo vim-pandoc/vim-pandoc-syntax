@@ -28,7 +28,8 @@ hi link cmarkHeading3 Title
 hi link cmarkHeading4 Title
 hi link cmarkHeading5 Title
 hi link cmarkHeading6 Title
-hi link cmarkParagraph Comment
+hi link cmarkParagraph Integer
+hi link cmarkComment Comment
 hi cmarkEmphasis gui=italic cterm=italic
 hi cmarkStrong gui=bold cterm=bold
 
