@@ -16,10 +16,12 @@ python_lib:
 
 .PHONY: links
 
-links: lua/libvim_pandoc_syntax.so python/libvim_pandoc_syntax.so
+links: lua/libvim_pandoc_syntax.so python3/libvim_pandoc_syntax.so
 
 lua/libvim_pandoc_syntax.so: lua_lib
+	mkdir -p $(@D)
 	ln -sf ../target-lua/debug/libvim_pandoc_syntax.so $@
 
-python/libvim_pandoc_syntax.so: python_lib
+python3/libvim_pandoc_syntax.so: python_lib
+	mkdir -p $(@D)
 	ln -sf ../target-python/debug/libvim_pandoc_syntax.so $@
