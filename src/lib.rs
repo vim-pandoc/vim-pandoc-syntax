@@ -55,7 +55,7 @@ fn get_offsets(buffer: String) -> Result<Events> {
             Event::End { .. } => None,
             Event::Text { .. } => Some(String::from("cmarkText")),
             Event::Code { .. } => Some(String::from("cmarkCode")),
-            Event::Html { .. } => Some(String::from("cmarkHTML")),
+            Event::Html { .. } => Some(String::from("cmarkHtml")),
             Event::FootnoteReference { .. } => Some(String::from("cmarkFootnoteReference")),
             Event::SoftBreak => None,
             // Event::HardBreak => Some(String::from("cmarkHardBreak")),
