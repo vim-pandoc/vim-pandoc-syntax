@@ -4,7 +4,7 @@ pub mod lua;
 #[cfg(feature = "python")]
 pub mod python;
 
-use pulldown_cmark::{html, Event, Options, Parser, Tag};
+use pulldown_cmark::{html, CodeBlockKind, Event, Options, Parser, Tag};
 use std::{error, result};
 
 type Result<T> = result::Result<T, Box<dyn error::Error>>;
@@ -22,6 +22,7 @@ struct MdTag {
     group: String,
     first: usize,
     last: usize,
+    lang: Option<String>,
 }
 
 type Events = Vec<MdTag>;
@@ -33,26 +34,42 @@ fn get_offsets(buffer: String) -> Result<Events> {
     for (event, range) in parser.into_offset_iter() {
         let first = range.start + 1;
         let last = range.end + 1;
+        let mut lang = None;
         let group = match event {
             Event::Start(tag) => Some(match tag {
                 Tag::Heading(level) => format!("cmarkHeading{}", level),
-                Tag::CodeBlock(kind) => format!("cmarkCodeBlock{}", kind),
+                Tag::CodeBlock(kind) => match kind {
+                    CodeBlockKind::Indented => String::from("cmarkCodeBlockIndented"),
+                    CodeBlockKind::Fenced(attrs) => {
+                        lang = Some(attrs.to_string());
+                        String::from("cmarkCodeBlockFenced")
+                    }
+                },
+                Tag::List(_) => String::from("cmarkList"),
+                Tag::FootnoteDefinition(_) => String::from("cmarkFootnoteDefinition"),
+                Tag::Table(_) => String::from("cmarkTable"),
                 Tag::Link { .. } => String::from("cmarkLink"),
+                Tag::Image { .. } => String::from("cmarkImage"),
                 _ => format!("cmark{:?}", tag),
             }),
             Event::End { .. } => None,
             Event::Text { .. } => Some(String::from("cmarkText")),
-            // Event::Code { .. } => {}
-            // Event::Html { .. } => {}
-            // Event::FootnoteReference { .. }=> {}
+            Event::Code { .. } => Some(String::from("cmarkCode")),
+            Event::Html { .. } => Some(String::from("cmarkHTML")),
+            Event::FootnoteReference { .. } => Some(String::from("cmarkFootnoteReference")),
             Event::SoftBreak => None,
-            // Event::HardBreak => {}
+            // Event::HardBreak => Some(String::from("cmarkHardBreak")),
             Event::Rule => Some(String::from("cmarkRule")),
-            // Event::TaskListMarker { .. }=> {}
+            Event::TaskListMarker { .. } => Some(String::from("cmarkTaskListMarker")),
             _other => Some(format!("cmark{:?}", _other)),
         };
         if let Some(group) = group {
-            events.push(MdTag { group, first, last });
+            events.push(MdTag {
+                group,
+                first,
+                last,
+                lang,
+            });
         }
     }
     Ok(events)
