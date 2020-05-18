@@ -13,12 +13,15 @@ if exists('b:current_syntax')
     finish
 endif
 
-if exists('g:pandoc#syntax#flavor#commonmark') || exists('b:pandoc#syntax#flavor#commonmark')
-    runtime syntax/pandoc_commonmark.vim
-elseif exists('g:pandoc#syntax#flavor#minimized') || exists('b:pandoc#syntax#flavor#minimized')
-    runtime syntax/pandoc_minimized.vim
-else
-    runtime syntax/pandoc_legacy.vim
+if exists('g:pandoc#syntax#flavor')
+    let s:flavor = g:pandoc#syntax#flavor
 endif
+if exists('b:pandoc#syntax#flavor')
+    let s:flavor = b:pandoc#syntax#flavor
+endif
+
+let s:cmd = 'runtime syntax/pandoc_'.s:flavor.'.vim'
+
+exe s:cmd
 
 let b:current_syntax = 'pandoc'
