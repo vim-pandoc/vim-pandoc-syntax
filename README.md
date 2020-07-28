@@ -40,6 +40,13 @@ Vim to load it for certain files. Just add something like this to your vimrc:
     augroup END
 ~~~
 
+For vim-wiki users, use
+
+~~~ vim
+au FileType vimwiki set syntax=markdown.pandoc
+~~~
+
+
 ## Features
 
 * Supports most (if not all) pandoc's markdown features, including tables,
