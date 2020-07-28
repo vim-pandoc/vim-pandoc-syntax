@@ -40,7 +40,7 @@ Vim to load it for certain files. Just add something like this to your vimrc:
     augroup END
 ~~~
 
-For vim-wiki users, use
+For vimwiki users, use
 
 ~~~ vim
 au FileType vimwiki set syntax=markdown.pandoc
