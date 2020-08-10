@@ -35,9 +35,9 @@ If you want to use `vim-pandoc-syntax` without vim-pandoc, you'll need to tell
 Vim to load it for certain files. Just add something like this to your vimrc:
 
 ~~~ vim
-    augroup pandoc_syntax
-        au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
-    augroup END
+augroup pandoc_syntax
+    au! BufNewFile,BufFilePre,BufRead *.md set filetype=markdown.pandoc
+augroup END
 ~~~
 
 For vimwiki users, use
