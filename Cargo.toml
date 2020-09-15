@@ -1,0 +1,35 @@
+[package]
+name = "vim-pandoc-syntax"
+version = "0.0.0"
+authors = [
+	"Caleb Maclennan <caleb@alerque.com>",
+	"Felipe Morales <hel.sheep@gmail.com>" ]
+edition = "2018"
+
+[lib]
+name = 'vim_pandoc_syntax'
+crate-type = ["cdylib"]
+
+[features]
+default = ["python"]
+python = ["pyo3"]
+lua = ["mlua", "mlua_derive"]
+
+[dependencies.pulldown-cmark]
+version = "0.7.1"
+features = ["simd"]
+
+[dependencies.mlua]
+optional = true
+version = "0.3.2"
+default-features = false
+features = [ "luajit" ]
+
+[dependencies.mlua_derive]
+optional = true
+version = "0.3.0"
+
+[dependencies.pyo3]
+optional = true
+version = "0.10.1"
+features = ["extension-module"]
