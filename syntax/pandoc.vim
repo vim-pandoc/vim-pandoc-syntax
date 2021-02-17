@@ -162,6 +162,7 @@ function! EnableEmbedsforCodeblocksWithLang(entry)
     " prevent embedded language syntaxes from changing 'foldmethod' 
     if has('folding')
         let s:foldmethod = &l:foldmethod
+        let s:foldtext = &l:foldtext     
     endif
 
     try
@@ -182,6 +183,9 @@ function! EnableEmbedsforCodeblocksWithLang(entry)
 
     if exists('s:foldmethod') && s:foldmethod !=# &l:foldmethod
         let &l:foldmethod = s:foldmethod
+    endif
+    if exists('s:foldtext') && s:foldtext !=# &l:foldtext
+        let &l:foldtext = s:foldtext
     endif
 endfunction
 " }}}2
