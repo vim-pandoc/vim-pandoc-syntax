@@ -2,4 +2,4 @@
 
 " Pandoc: {{{1
 " load vim-pandoc-syntax {{{2
-runtime pandoc.vim
+runtime syntax/pandoc.vim
