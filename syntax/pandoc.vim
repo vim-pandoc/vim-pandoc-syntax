@@ -570,7 +570,7 @@ endif
 " }}}3
 
 " &-escaped Special Characters: {{{3
-syn match pandocAmpersandEscape /\v\&(#\d+|#x\x+|[[:alnum:]]+)\;/ contains=NoSpell
+syn match pandocAmpersandEscape /\v\&(#\d+|#x\x+|[[:alnum:]]+)\;/ contains=@NoSpell
 " }}}3
 
 " YAML: {{{2
