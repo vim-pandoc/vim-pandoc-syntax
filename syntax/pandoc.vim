@@ -407,7 +407,7 @@ syn match pandocLineBlockDelimiter /^|/ contained containedin=pandocLineBlock
 " Tables: {{{2
 
 " Simple: {{{3
-syn region pandocSimpleTable start=/\%#=2\(^.*[[:graph:]].*\n\)\@<!\(^.*[[:graph:]].*\n\)\(-\{2,}\s*\)\+\n\n\@!/ end=/\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock,pandocYAMLHeader keepend
+syn region pandocSimpleTable start=/\%#=2\(^.*[[:graph:]].*\n\)\@<!\(^.*[[:graph:]].*\n\)\(-\{2,}\s*\)\+\n\n\@!/ end=/\n\n/ containedin=ALLBUT,pandocDelimitedCodeBlock,pandocDelimitedCodeBlockStart,pandocYAMLHeader keepend
 syn match pandocSimpleTableDelims /\-/ contained containedin=pandocSimpleTable
 syn match pandocSimpleTableHeader /\%#=2\(^.*[[:graph:]].*\n\)\@<!\(^.*[[:graph:]].*\n\)/ contained containedin=pandocSimpleTable
 
