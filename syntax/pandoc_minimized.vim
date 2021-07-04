@@ -47,7 +47,7 @@ syn region pdcFencedDiv matchgroup=Delimiter start=/^:::.*$/ end=/:::\n\s*\n/ ke
 syn match pdcAtxHeader /\(\%^\|<.\+>.*\n\|^\s*\n\)\@<=#\{1,6}.*\n/ keepend contained containedin=pdcPar contains=@Spell
 
 " Footnotes
-syn region pdcFootnote start=/^\[\^/ end=/[[:print:]]\zs\n\ze\s*\n/ keepend contains=@Spell
+syn region pdcFootnote start=/^\[\^/ end=/[[:print:]]\zs\n\ze\s*\n/ keepend contains=@Spell nextgroup=pdcFootnotePar
 syn region pdcInlineFootnote matchgroup=Delimiter start=/\^\[/ skip=/\[[[:print:]]*\]/ end=/\]/ keepend contained containedin=pdcPar,pdcUList,pdcOList
 syn region pdcFootnoteRef matchgroup=Delimiter start=/\[\^/ end=/\]/ contained containedin=pdcPar,pdcBlockQuote,pdcUList,pdcOList,pdcFootnote nextgroup=pdcFootnotePar
 syn region pdcFootnotePar start=/^\t[[:print:]]/ end=/[[:print:]]\(\n\s*\n\)\@=/ keepend contains=@Spell nextgroup=pdcFootnotePar
