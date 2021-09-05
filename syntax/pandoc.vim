@@ -170,7 +170,7 @@ function! EnableEmbedsforCodeblocksWithLang(entry)
         let s:langsyntaxfile = matchstr(a:entry, '[^=]*$')
         unlet! b:current_syntax
         exe 'syn include @'.toupper(s:langname).' syntax/'.s:langsyntaxfile.'.vim'
-        exe 'syn region pandocDelimitedCodeBlock_' . s:langname . ' start=/\(\_^\([ ]\{4,}\|\t\)\=\(`\{3,}`*\|\~\{3,}\~*\)\s*\%({[^.]*\.\)\=' . s:langname . '\>.*\n\)\@<=\_^/' .
+        exe 'syn region pandocDelimitedCodeBlock_' . s:langname . ' start=/\(\_^\([ ]\{4,}\|\t\)\=\(`\{3,}`*\|\~\{3,}\~*\)\s*\%({[^.]*[.=]\)\=' . s:langname . '\>.*\n\)\@<=\_^/' .
                     \' end=/\_$\n\(\([ ]\{4,}\|\t\)\=\(`\{3,}`*\|\~\{3,}\~*\)\_$\n\_$\)\@=/ contained containedin=pandocDelimitedCodeBlock' .
                     \' contains=@' . toupper(s:langname)
         exe 'syn region pandocDelimitedCodeBlockinBlockQuote_' . s:langname . ' start=/>\s\(`\{3,}`*\|\~\{3,}\~*\)\s*\%({[^.]*\.\)\=' . s:langname . '\>/' .
