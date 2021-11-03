@@ -159,10 +159,10 @@ endif
 " Functions: {{{1
 " EnableEmbedsforCodeblocksWithLang {{{2
 function! EnableEmbedsforCodeblocksWithLang(entry)
-    " prevent embedded language syntaxes from changing 'foldmethod' 
+    " prevent embedded language syntaxes from changing 'foldmethod'
     if has('folding')
         let s:foldmethod = &l:foldmethod
-        let s:foldtext = &l:foldtext     
+        let s:foldtext = &l:foldtext
     endif
 
     try
@@ -238,7 +238,7 @@ endif
 
 " Embeds: {{{2
 
-" prevent embedded language syntaxes from changing 'foldmethod' 
+" prevent embedded language syntaxes from changing 'foldmethod'
 if has('folding')
     let s:foldmethod = &l:foldmethod
 endif
@@ -339,8 +339,8 @@ syn match pandocCiteLocator /[\[\]]/ contained containedin=pandocPCite,pandocICi
 " Text Styles: {{{2
 
 " Emphasis: {{{3
-call s:WithConceal('block', 'syn region pandocEmphasis matchgroup=pandocOperator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\*\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell,pandocNoFormattedInEmphasis,pandocLatexInlineMath,pandocAmpersandEscape', 'concealends')
-call s:WithConceal('block', 'syn region pandocEmphasis matchgroup=pandocOperator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=_\([[:punct:]]\|\s\|\_$\)\@=/ contains=@Spell,pandocNoFormattedInEmphasis,pandocLatexInlineMath,pandocAmpersandEscape', 'concealends')
+call s:WithConceal('block', 'syn region pandocEmphasis matchgroup=pandocOperator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@<=\*\S\@=/ skip=/\(\*\*\|__\)/ end=/\*\([[:punct:]]\|\a\|\s\|\_$\)\@=/ contains=@Spell,pandocNoFormattedInEmphasis,pandocLatexInlineMath,pandocAmpersandEscape', 'concealends')
+call s:WithConceal('block', 'syn region pandocEmphasis matchgroup=pandocOperator start=/\\\@1<!\(\_^\|\s\|[[:punct:]]\)\@<=_\S\@=/ skip=/\(\*\*\|__\)/ end=/\S\@1<=_\([[:punct:]]\|\a\|\s\|\_$\)\@=/ contains=@Spell,pandocNoFormattedInEmphasis,pandocLatexInlineMath,pandocAmpersandEscape', 'concealends')
 " }}}3
 
 " Strong: {{{3
