@@ -38,6 +38,7 @@ CONFIGURATION				       *vim-pandoc-syntax-configuration*
   - ellipses
   - quotes
   - inlinecode
+  - inlinemath
 
   To review what are the rules for, look for the call to |s:WithConceal| in
   syntax/pandoc.vim that takes the corresponding  rulename as first argument.
