@@ -51,7 +51,9 @@ if &encoding ==# 'utf-8'
                 \'definition': ' ',
                 \'li': '•',
                 \'html_c_s': '‹',
-                \'html_c_e': '›'}
+                \'html_c_e': '›',
+                \'quote_s': '“',
+                \'quote_e': '”'}
 else
     " ascii defaults
     let s:cchars = {
@@ -543,8 +545,8 @@ endif
 
 " Quotes: {{{3
 if &encoding ==# 'utf-8'
-    call s:WithConceal('quotes', 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation,pandocUListItem display', 'conceal cchar=“')
-    call s:WithConceal('quotes', 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong,pandocUListItem,pandocListItem,pandocListItemContinuation display', 'conceal cchar=”')
+    call s:WithConceal('quotes', 'syn match pandocBeginQuote /"\</  containedin=pandocEmphasis,pandocStrong,pandocListItem,pandocListItemContinuation,pandocUListItem display', 'conceal cchar='.s:cchars['quote_s'])
+    call s:WithConceal('quotes', 'syn match pandocEndQuote /\(\>[[:punct:]]*\)\@<="[[:blank:][:punct:]\n]\@=/  containedin=pandocEmphasis,pandocStrong,pandocUListItem,pandocListItem,pandocListItemContinuation display', 'conceal cchar='.s:cchars['quote_e'])
 endif
 " }}}3
 
