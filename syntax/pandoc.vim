@@ -263,6 +263,7 @@ unlet b:current_syntax
 syn include @LATEX syntax/tex.vim
 call s:WithConceal('inlinemath', 'syn region pandocLaTeXInlineMath start=/\v\\@<!\$\S@=/ end=/\v\\@<!\$\d@!/ keepend contains=@LATEX', 'conceal')
 call s:WithConceal('inlinemath', 'syn region pandocLaTeXInlineMath start=/\\\@<!\\(/ end=/\\\@<!\\)/ keepend contains=@LATEX ', 'conceal')
+call s:WithConceal('inlinemathdebug', 'syn region pandocLaTeXInlineMath start=/DEBUGSTARTMATH/ end=/DEBUGENDMATH/ keepend ', 'conceal')
 syn match pandocEscapedDollar /\\\$/ conceal cchar=$
 syn match pandocProtectedFromInlineLaTeX /\\\@<!\${.*}\(\(\s\|[[:punct:]]\)\([^$]*\|.*\(\\\$.*\)\{2}\)\n\n\|$\)\@=/ display
 " contains=@LATEX
