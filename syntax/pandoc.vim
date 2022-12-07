@@ -263,8 +263,8 @@ call s:WithConceal('html_c_e', 'syn match pandocHTMLCommentEnd /-->/ contained',
 " Unset current_syntax so the 2nd include will work
 unlet b:current_syntax
 syn include @LATEX syntax/tex.vim
-call s:WithConceal('inlinemath', 'syn region pandocLaTeXInlineMath start=/\v\\@<!\$\S@=/ end=/\v\\@<!\$\d@!/ keepend contains=@LATEX', 'conceal')
-call s:WithConceal('inlinemath', 'syn region pandocLaTeXInlineMath start=/\\\@<!\\(/ end=/\\\@<!\\)/ keepend contains=@LATEX ', 'conceal')
+call s:WithConceal('inlinemath', 'syn region pandocLaTeXInlineMath start=/\v\\@<!\$\S@=/ end=/\v\\@<!\$\d@!/ keepend ', 'contains=@LATEX')
+call s:WithConceal('inlinemath', 'syn region pandocLaTeXInlineMath start=/\\\@<!\\(/ end=/\\\@<!\\)/ keepend ', 'contains=@LATEX')
 call s:WithConceal('inlinemathdebug', 'syn region pandocLaTeXInlineMath start=/DEBUGSTARTMATH/ end=/DEBUGENDMATH/ keepend ', 'conceal')
 syn match pandocEscapedDollar /\\\$/ conceal cchar=$
 syn match pandocProtectedFromInlineLaTeX /\\\@<!\${.*}\(\(\s\|[[:punct:]]\)\([^$]*\|.*\(\\\$.*\)\{2}\)\n\n\|$\)\@=/ display
