@@ -583,130 +583,130 @@ syn region pandocYAMLHeader start=/\%(\%^\|\_^\s*\n\)\@<=\_^-\{3}\ze\n.\+/ end=/
 " Styling: {{{1
 function! s:SetupPandocHighlights()
 
-hi link pandocOperator Operator
+  hi link pandocOperator Operator
 
-" override this for consistency
-hi pandocTitleBlock term=italic gui=italic
-hi link pandocTitleBlockTitle Directory
-hi link pandocAtxHeader Title
-hi link pandocAtxStart Operator
-hi link pandocSetexHeader Title
-hi link pandocHeaderAttr Comment
-hi link pandocHeaderID Identifier
+  " override this for consistency
+  hi pandocTitleBlock term=italic gui=italic
+  hi link pandocTitleBlockTitle Directory
+  hi link pandocAtxHeader Title
+  hi link pandocAtxStart Operator
+  hi link pandocSetexHeader Title
+  hi link pandocHeaderAttr Comment
+  hi link pandocHeaderID Identifier
 
-hi link pandocLaTexSectionCmd texSection
-hi link pandocLaTeXDelimiter texDelimiter
+  hi link pandocLaTexSectionCmd texSection
+  hi link pandocLaTeXDelimiter texDelimiter
 
-hi link pandocHTMLComment Comment
-hi link pandocHTMLCommentStart Delimiter
-hi link pandocHTMLCommentEnd Delimiter
-hi link pandocBlockQuote Comment
-hi link pandocBlockQuoteMark Comment
-hi link pandocAmpersandEscape Special
+  hi link pandocHTMLComment Comment
+  hi link pandocHTMLCommentStart Delimiter
+  hi link pandocHTMLCommentEnd Delimiter
+  hi link pandocBlockQuote Comment
+  hi link pandocBlockQuoteMark Comment
+  hi link pandocAmpersandEscape Special
 
-" if the user sets g:pandoc#syntax#codeblocks#ignore to contain
-" a codeblock type, don't highlight it so that it remains Normal
-if index(g:pandoc#syntax#codeblocks#ignore, 'definition') == -1
-  hi link pandocCodeBlockInsideIndent String
-endif
+  " if the user sets g:pandoc#syntax#codeblocks#ignore to contain
+  " a codeblock type, don't highlight it so that it remains Normal
+  if index(g:pandoc#syntax#codeblocks#ignore, 'definition') == -1
+    hi link pandocCodeBlockInsideIndent String
+  endif
 
-if index(g:pandoc#syntax#codeblocks#ignore, 'delimited') == -1
-  hi link pandocDelimitedCodeBlock Special
-endif
+  if index(g:pandoc#syntax#codeblocks#ignore, 'delimited') == -1
+    hi link pandocDelimitedCodeBlock Special
+  endif
 
-hi link pandocDelimitedCodeBlockStart Delimiter
-hi link pandocDelimitedCodeBlockEnd Delimiter
-hi link pandocDelimitedCodeBlockLanguage Comment
-hi link pandocBlockQuoteinDelimitedCodeBlock pandocBlockQuote
-hi link pandocCodePre String
+  hi link pandocDelimitedCodeBlockStart Delimiter
+  hi link pandocDelimitedCodeBlockEnd Delimiter
+  hi link pandocDelimitedCodeBlockLanguage Comment
+  hi link pandocBlockQuoteinDelimitedCodeBlock pandocBlockQuote
+  hi link pandocCodePre String
 
-hi link pandocLineBlockDelimiter Delimiter
+  hi link pandocLineBlockDelimiter Delimiter
 
-hi link pandocListItemBullet Operator
-hi link pandocUListItemBullet Operator
-hi link pandocListItemBulletId Identifier
+  hi link pandocListItemBullet Operator
+  hi link pandocUListItemBullet Operator
+  hi link pandocListItemBulletId Identifier
 
-hi link pandocReferenceLabel Label
-hi link pandocReferenceURL Underlined
-hi link pandocLinkTip Identifier
-hi link pandocImageIcon Operator
+  hi link pandocReferenceLabel Label
+  hi link pandocReferenceURL Underlined
+  hi link pandocLinkTip Identifier
+  hi link pandocImageIcon Operator
 
-hi link pandocReferenceDefinition Operator
-hi link pandocReferenceDefinitionLabel Label
-hi link pandocReferenceDefinitionAddress Underlined
-hi link pandocReferenceDefinitionTip Identifier
+  hi link pandocReferenceDefinition Operator
+  hi link pandocReferenceDefinitionLabel Label
+  hi link pandocReferenceDefinitionAddress Underlined
+  hi link pandocReferenceDefinitionTip Identifier
 
-hi link pandocAutomaticLink Underlined
+  hi link pandocAutomaticLink Underlined
 
-hi link pandocDefinitionBlockTerm Identifier
-hi link pandocDefinitionBlockMark Operator
+  hi link pandocDefinitionBlockTerm Identifier
+  hi link pandocDefinitionBlockMark Operator
 
-hi link pandocSimpleTableDelims Delimiter
-hi link pandocSimpleTableHeader pandocStrong
-hi link pandocTableMultilineHeader pandocStrong
-hi link pandocTableDelims Delimiter
-hi link pandocGridTableDelims Delimiter
-hi link pandocGridTableHeader Delimiter
-hi link pandocPipeTableDelims Delimiter
-hi link pandocPipeTableHeader Delimiter
-hi link pandocTableHeaderWord pandocStrong
+  hi link pandocSimpleTableDelims Delimiter
+  hi link pandocSimpleTableHeader pandocStrong
+  hi link pandocTableMultilineHeader pandocStrong
+  hi link pandocTableDelims Delimiter
+  hi link pandocGridTableDelims Delimiter
+  hi link pandocGridTableHeader Delimiter
+  hi link pandocPipeTableDelims Delimiter
+  hi link pandocPipeTableHeader Delimiter
+  hi link pandocTableHeaderWord pandocStrong
 
-hi link pandocAbbreviationHead Type
-hi link pandocAbbreviation Label
-hi link pandocAbbreviationTail Type
-hi link pandocAbbreviationSeparator Identifier
-hi link pandocAbbreviationDefinition Comment
+  hi link pandocAbbreviationHead Type
+  hi link pandocAbbreviation Label
+  hi link pandocAbbreviationTail Type
+  hi link pandocAbbreviationSeparator Identifier
+  hi link pandocAbbreviationDefinition Comment
 
-hi link pandocFootnoteID Label
-hi link pandocFootnoteIDHead Type
-hi link pandocFootnoteIDTail Type
-hi link pandocFootnoteDef Comment
-hi link pandocFootnoteDefHead Type
-hi link pandocFootnoteDefTail Type
-hi link pandocFootnoteBlock Comment
-hi link pandocFootnoteBlockSeparator Operator
+  hi link pandocFootnoteID Label
+  hi link pandocFootnoteIDHead Type
+  hi link pandocFootnoteIDTail Type
+  hi link pandocFootnoteDef Comment
+  hi link pandocFootnoteDefHead Type
+  hi link pandocFootnoteDefTail Type
+  hi link pandocFootnoteBlock Comment
+  hi link pandocFootnoteBlockSeparator Operator
 
-hi link pandocPCite Operator
-hi link pandocICite Operator
-hi link pandocCiteKey Label
-hi link pandocCiteAnchor Operator
-hi link pandocCiteLocator Operator
+  hi link pandocPCite Operator
+  hi link pandocICite Operator
+  hi link pandocCiteKey Label
+  hi link pandocCiteAnchor Operator
+  hi link pandocCiteLocator Operator
 
-if g:pandoc#syntax#style#emphases == 1
-    hi pandocEmphasis gui=italic cterm=italic
-    hi pandocStrong gui=bold cterm=bold
-    hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
-    hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
-    hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
-    if !exists('s:hi_tail')
-        let s:fg = '' " Vint can't figure ou these get set dynamically
-        let s:bg = '' " so initialize them manually first
-        for s:i in ['fg', 'bg']
-            let s:tmp_val = synIDattr(synIDtrans(hlID('String')), s:i)
-            let s:tmp_ui =  has('gui_running') || (has('termguicolors') && &termguicolors) ? 'gui' : 'cterm'
-            if !empty(s:tmp_val) && s:tmp_val != -1
-                exe 'let s:'.s:i . ' = "'.s:tmp_ui.s:i.'='.s:tmp_val.'"'
-            else
-                exe 'let s:'.s:i . ' = ""'
-            endif
-        endfor
-        let s:hi_tail = ' '.s:fg.' '.s:bg
-    endif
-    exe 'hi pandocNoFormattedInEmphasis gui=italic cterm=italic'.s:hi_tail
-    exe 'hi pandocNoFormattedInStrong gui=bold cterm=bold'.s:hi_tail
-endif
-hi link pandocNoFormatted String
-hi link pandocNoFormattedAttrs Comment
-hi link pandocSubscriptMark Operator
-hi link pandocSuperscriptMark Operator
-hi link pandocStrikeoutMark Operator
-if g:pandoc#syntax#style#underline_special == 1
-    hi pandocSubscript gui=underline cterm=underline
-    hi pandocSuperscript gui=underline cterm=underline
-    hi pandocStrikeout gui=underline cterm=underline
-endif
-hi link pandocNewLine Error
-hi link pandocHRule Delimiter
+  if g:pandoc#syntax#style#emphases == 1
+      hi pandocEmphasis gui=italic cterm=italic
+      hi pandocStrong gui=bold cterm=bold
+      hi pandocStrongEmphasis gui=bold,italic cterm=bold,italic
+      hi pandocStrongInEmphasis gui=bold,italic cterm=bold,italic
+      hi pandocEmphasisInStrong gui=bold,italic cterm=bold,italic
+      if !exists('s:hi_tail')
+          let s:fg = '' " Vint can't figure ou these get set dynamically
+          let s:bg = '' " so initialize them manually first
+          for s:i in ['fg', 'bg']
+              let s:tmp_val = synIDattr(synIDtrans(hlID('String')), s:i)
+              let s:tmp_ui =  has('gui_running') || (has('termguicolors') && &termguicolors) ? 'gui' : 'cterm'
+              if !empty(s:tmp_val) && s:tmp_val != -1
+                  exe 'let s:'.s:i . ' = "'.s:tmp_ui.s:i.'='.s:tmp_val.'"'
+              else
+                  exe 'let s:'.s:i . ' = ""'
+              endif
+          endfor
+          let s:hi_tail = ' '.s:fg.' '.s:bg
+      endif
+      exe 'hi pandocNoFormattedInEmphasis gui=italic cterm=italic'.s:hi_tail
+      exe 'hi pandocNoFormattedInStrong gui=bold cterm=bold'.s:hi_tail
+  endif
+  hi link pandocNoFormatted String
+  hi link pandocNoFormattedAttrs Comment
+  hi link pandocSubscriptMark Operator
+  hi link pandocSuperscriptMark Operator
+  hi link pandocStrikeoutMark Operator
+  if g:pandoc#syntax#style#underline_special == 1
+      hi pandocSubscript gui=underline cterm=underline
+      hi pandocSuperscript gui=underline cterm=underline
+      hi pandocStrikeout gui=underline cterm=underline
+  endif
+  hi link pandocNewLine Error
+  hi link pandocHRule Delimiter
 
 endfunction
 
