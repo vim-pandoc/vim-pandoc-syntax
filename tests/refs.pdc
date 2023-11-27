@@ -63,3 +63,7 @@ unit impulse (Dirac delta function) through a linear system.
 [`]`](http://foo.com) foo
 
 [Why isn't `ListT []`{.haskell} a monad](http://blog.sigfpe.com/2006/11/why-isnt-listt-monad.html)
+
+# code in ref with more code in same line
+
+1. [`link`](link) and more text `with code` and a [`link`](link)
