@@ -37,6 +37,8 @@ CONFIGURATION				       *vim-pandoc-syntax-configuration*
   - dashes
   - ellipses
   - quotes
+  - squotes
+  - apostrophe
   - inlinecode
   - inlinemath
 

@@ -1,0 +1,95 @@
+# Smart Punctuation
+
+# Ellipses ...
+
+Ellipses ...
+----------
+
+Ellipses ...
+==========
+
+And then there was ...
+
+Blah ... blah.
+
+... and yet.
+...and yet.
+
+* I'm in a bullet...
+
+Endash --
+----------
+
+Endash --
+==========
+
+And then there was --
+
+Blah--blah.
+Blah -- blah.
+
+-- and yet.
+--and yet.
+
+* I'm in a bullet...
+
+Emdash ---
+---------
+
+Emdash ---
+==========
+
+And then there was ---
+
+Blah---blah.
+Blah --- blah.
+
+--- and yet.
+---and yet.
+
+# "Foo" is a thing
+
+A "Foo" is a thing
+------------------
+
+A "Foo" is a thing
+==================
+
+Just some "foo" here.
+Are you a "foo"?
+
+"Foo"
+*"Foo"*
+**"Foo"**
+_"Foo"_
+__"Foo"__
+~~"Foo"~~
+
+# 'Bar'
+
+'Bar'
+-----
+
+'Bar'
+=====
+
+Just some 'bar' here.
+Are you a 'bar'?
+
+'Bar'
+*'Bar'*
+**'Bar'**
+_'Bar'_
+__'Bar'__
+~~'Bar'~~
+
+# I'd Really Like to Know
+
+I'd Really Like to Know
+-----------------------
+
+I'd Really Like to Know
+=======================
+
+I'd
+'cuz
