@@ -1,30 +1,25 @@
 scriptencoding utf-8
-" vim: set fdm=marker foldlevel=0:
 "
-" Vim syntax file
+" Language:	Pandoc (superset of Markdown)
+" Maintainer:	Felipe Morales <hel.sheep@gmail.com>
+" Maintainer:	Caleb Maclennan <caleb@alerque.com>
+" Upstream:	https://github.com/vim-pandoc/vim-pandoc-syntax
 "
-" Language: Pandoc (superset of Markdown)
-" Maintainer: Felipe Morales <hel.sheep@gmail.com>
-" Maintainer: Caleb Maclennan <caleb@alerque.com>
-" Contributor: David Sanson <dsanson@gmail.com>
-" Contributor: Jorge Israel Peña <jorge.israel.p@gmail.com>
-" OriginalAuthor: Jeremy Schultz <taozhyn@gmail.com>
+" Contributor:	David Sanson <dsanson@gmail.com>
+"		Jorge Israel Peña <jorge.israel.p@gmail.com>
+"       Christian Brabandt @chrisbra
+" Original Author:	Jeremy Schultz <taozhyn@gmail.com>
 " Version: 5.0
+" Last Change:	2024 Apr 08
+
+let s:cpo_save = &cpo
+set cpo&vim
 
 " Configuration: {{{1
 "
 " use conceal? {{{2
 if !exists('g:pandoc#syntax#conceal#use')
-    if v:version < 703
-        let g:pandoc#syntax#conceal#use = 0
-    else
-        let g:pandoc#syntax#conceal#use = 1
-    endif
-else
-    " exists, but we cannot use it, disable anyway
-    if v:version < 703
-        let g:pandoc#syntax#conceal#use = 0
-    endif
+    let g:pandoc#syntax#conceal#use = 1
 endif
 "}}}2
 
@@ -228,15 +223,6 @@ command! -buffer -nargs=1 -complete=syntax PandocUnhighlight call DisableEmbedsf
 " BASE:
 syntax clear
 syntax spell toplevel
-" apply extra settings: {{{1
-if g:pandoc#syntax#colorcolumn == 1
-    exe 'setlocal colorcolumn='.string(&textwidth+5)
-elseif g:pandoc#syntax#colorcolumn == 2
-    exe 'setlocal colorcolumn='.join(range(&textwidth+5, 2*&columns), ',')
-endif
-if g:pandoc#syntax#conceal#use != 0
-    setlocal conceallevel=2
-endif
 " }}}1
 
 " Syntax Rules: {{{1
@@ -583,94 +569,94 @@ syn region pandocYAMLHeader start=/\%(\%^\|\_^\s*\n\)\@<=\_^-\{3}\ze\n.\+/ end=/
 " Styling: {{{1
 function! s:SetupPandocHighlights()
 
-  hi link pandocOperator Operator
+  hi def link pandocOperator Operator
 
   " override this for consistency
   hi pandocTitleBlock term=italic gui=italic
-  hi link pandocTitleBlockTitle Directory
-  hi link pandocAtxHeader Title
-  hi link pandocAtxStart Operator
-  hi link pandocSetexHeader Title
-  hi link pandocHeaderAttr Comment
-  hi link pandocHeaderID Identifier
+  hi def link pandocTitleBlockTitle Directory
+  hi def link pandocAtxHeader Title
+  hi def link pandocAtxStart Operator
+  hi def link pandocSetexHeader Title
+  hi def link pandocHeaderAttr Comment
+  hi def link pandocHeaderID Identifier
 
-  hi link pandocLaTexSectionCmd texSection
-  hi link pandocLaTeXDelimiter texDelimiter
+  hi def link pandocLaTexSectionCmd texSection
+  hi def link pandocLaTeXDelimiter texDelimiter
 
-  hi link pandocHTMLComment Comment
-  hi link pandocHTMLCommentStart Delimiter
-  hi link pandocHTMLCommentEnd Delimiter
-  hi link pandocBlockQuote Comment
-  hi link pandocBlockQuoteMark Comment
-  hi link pandocAmpersandEscape Special
+  hi def link pandocHTMLComment Comment
+  hi def link pandocHTMLCommentStart Delimiter
+  hi def link pandocHTMLCommentEnd Delimiter
+  hi def link pandocBlockQuote Comment
+  hi def link pandocBlockQuoteMark Comment
+  hi def link pandocAmpersandEscape Special
 
   " if the user sets g:pandoc#syntax#codeblocks#ignore to contain
   " a codeblock type, don't highlight it so that it remains Normal
   if index(g:pandoc#syntax#codeblocks#ignore, 'definition') == -1
-    hi link pandocCodeBlockInsideIndent String
+    hi def link pandocCodeBlockInsideIndent String
   endif
 
   if index(g:pandoc#syntax#codeblocks#ignore, 'delimited') == -1
-    hi link pandocDelimitedCodeBlock Special
+    hi def link pandocDelimitedCodeBlock Special
   endif
 
-  hi link pandocDelimitedCodeBlockStart Delimiter
-  hi link pandocDelimitedCodeBlockEnd Delimiter
-  hi link pandocDelimitedCodeBlockLanguage Comment
-  hi link pandocBlockQuoteinDelimitedCodeBlock pandocBlockQuote
-  hi link pandocCodePre String
+  hi def link pandocDelimitedCodeBlockStart Delimiter
+  hi def link pandocDelimitedCodeBlockEnd Delimiter
+  hi def link pandocDelimitedCodeBlockLanguage Comment
+  hi def link pandocBlockQuoteinDelimitedCodeBlock pandocBlockQuote
+  hi def link pandocCodePre String
 
-  hi link pandocLineBlockDelimiter Delimiter
+  hi def link pandocLineBlockDelimiter Delimiter
 
-  hi link pandocListItemBullet Operator
-  hi link pandocUListItemBullet Operator
-  hi link pandocListItemBulletId Identifier
+  hi def link pandocListItemBullet Operator
+  hi def link pandocUListItemBullet Operator
+  hi def link pandocListItemBulletId Identifier
 
-  hi link pandocReferenceLabel Label
-  hi link pandocReferenceURL Underlined
-  hi link pandocLinkTip Identifier
-  hi link pandocImageIcon Operator
+  hi def link pandocReferenceLabel Label
+  hi def link pandocReferenceURL Underlined
+  hi def link pandocLinkTip Identifier
+  hi def link pandocImageIcon Operator
 
-  hi link pandocReferenceDefinition Operator
-  hi link pandocReferenceDefinitionLabel Label
-  hi link pandocReferenceDefinitionAddress Underlined
-  hi link pandocReferenceDefinitionTip Identifier
+  hi def link pandocReferenceDefinition Operator
+  hi def link pandocReferenceDefinitionLabel Label
+  hi def link pandocReferenceDefinitionAddress Underlined
+  hi def link pandocReferenceDefinitionTip Identifier
 
-  hi link pandocAutomaticLink Underlined
+  hi def link pandocAutomaticLink Underlined
 
-  hi link pandocDefinitionBlockTerm Identifier
-  hi link pandocDefinitionBlockMark Operator
+  hi def link pandocDefinitionBlockTerm Identifier
+  hi def link pandocDefinitionBlockMark Operator
 
-  hi link pandocSimpleTableDelims Delimiter
-  hi link pandocSimpleTableHeader pandocStrong
-  hi link pandocTableMultilineHeader pandocStrong
-  hi link pandocTableDelims Delimiter
-  hi link pandocGridTableDelims Delimiter
-  hi link pandocGridTableHeader Delimiter
-  hi link pandocPipeTableDelims Delimiter
-  hi link pandocPipeTableHeader Delimiter
-  hi link pandocTableHeaderWord pandocStrong
+  hi def link pandocSimpleTableDelims Delimiter
+  hi def link pandocSimpleTableHeader pandocStrong
+  hi def link pandocTableMultilineHeader pandocStrong
+  hi def link pandocTableDelims Delimiter
+  hi def link pandocGridTableDelims Delimiter
+  hi def link pandocGridTableHeader Delimiter
+  hi def link pandocPipeTableDelims Delimiter
+  hi def link pandocPipeTableHeader Delimiter
+  hi def link pandocTableHeaderWord pandocStrong
 
-  hi link pandocAbbreviationHead Type
-  hi link pandocAbbreviation Label
-  hi link pandocAbbreviationTail Type
-  hi link pandocAbbreviationSeparator Identifier
-  hi link pandocAbbreviationDefinition Comment
+  hi def link pandocAbbreviationHead Type
+  hi def link pandocAbbreviation Label
+  hi def link pandocAbbreviationTail Type
+  hi def link pandocAbbreviationSeparator Identifier
+  hi def link pandocAbbreviationDefinition Comment
 
-  hi link pandocFootnoteID Label
-  hi link pandocFootnoteIDHead Type
-  hi link pandocFootnoteIDTail Type
-  hi link pandocFootnoteDef Comment
-  hi link pandocFootnoteDefHead Type
-  hi link pandocFootnoteDefTail Type
-  hi link pandocFootnoteBlock Comment
-  hi link pandocFootnoteBlockSeparator Operator
+  hi def link pandocFootnoteID Label
+  hi def link pandocFootnoteIDHead Type
+  hi def link pandocFootnoteIDTail Type
+  hi def link pandocFootnoteDef Comment
+  hi def link pandocFootnoteDefHead Type
+  hi def link pandocFootnoteDefTail Type
+  hi def link pandocFootnoteBlock Comment
+  hi def link pandocFootnoteBlockSeparator Operator
 
-  hi link pandocPCite Operator
-  hi link pandocICite Operator
-  hi link pandocCiteKey Label
-  hi link pandocCiteAnchor Operator
-  hi link pandocCiteLocator Operator
+  hi def link pandocPCite Operator
+  hi def link pandocICite Operator
+  hi def link pandocCiteKey Label
+  hi def link pandocCiteAnchor Operator
+  hi def link pandocCiteLocator Operator
 
   if g:pandoc#syntax#style#emphases == 1
       hi pandocEmphasis gui=italic cterm=italic
@@ -695,48 +681,20 @@ function! s:SetupPandocHighlights()
       exe 'hi pandocNoFormattedInEmphasis gui=italic cterm=italic'.s:hi_tail
       exe 'hi pandocNoFormattedInStrong gui=bold cterm=bold'.s:hi_tail
   endif
-  hi link pandocNoFormatted String
-  hi link pandocNoFormattedAttrs Comment
-  hi link pandocSubscriptMark Operator
-  hi link pandocSuperscriptMark Operator
-  hi link pandocStrikeoutMark Operator
+  hi def link pandocNoFormatted String
+  hi def link pandocNoFormattedAttrs Comment
+  hi def link pandocSubscriptMark Operator
+  hi def link pandocSuperscriptMark Operator
+  hi def link pandocStrikeoutMark Operator
   if g:pandoc#syntax#style#underline_special == 1
       hi pandocSubscript gui=underline cterm=underline
       hi pandocSuperscript gui=underline cterm=underline
       hi pandocStrikeout gui=underline cterm=underline
   endif
-  hi link pandocNewLine Error
-  hi link pandocHRule Delimiter
-
+  hi def link pandocNewLine Error
+  hi def link pandocHRule Delimiter
 endfunction
 
-" Whenever the colorscheme changes, all highlights are cleared.
-"
-" The most common circumstance is that the vimrc picks a colorscheme *at
-" startup*, then a file is opened and the syntax is set based on that file. So
-" the most common situation is that the colorscheme runs, then the syntax
-" runs, and that's that. So if the code for the syntax (e.g., this code here
-" in vim-pandoc-syntax) *adds* new highlighting groups that weren't defined in
-" the colorscheme, that's almost always fine because the colorscheme rarely
-" changes after startup.
-"
-" But the colorscheme *can* change after startup. This happens for example any
-" time the user toggles their background (:set bg=light or :set bg=dark), or
-" picks another colorscheme (:colorscheme something_else). In these cases, the
-" new colorscheme calls `:highlight clear`, clearing any custom pandoc
-" highlighting groups.
-"
-" The solution is to register an autocommand that runs whenever the
-" ColorScheme changes, so that we can re-register vim-pandoc-syntax's custom
-" highlighting groups, after the new colorscheme has cleared them.
-"
-" (This also affects popular plugins like goyo.vim, which call `:colorscheme`
-" with your chosen colorscheme to approximate undoing any custom highlighting
-" modifications that they've made.)
-augroup vim-pandoc-syntax
-  autocmd!
-  autocmd ColorScheme * call s:SetupPandocHighlights()
-augroup end
 call s:SetupPandocHighlights()
 
 " }}}1
@@ -745,3 +703,8 @@ let b:current_syntax = 'pandoc'
 
 syntax sync clear
 syntax sync minlines=1000
+
+let &cpo = s:cpo_save
+unlet s:cpo_save
+
+" vim: set fdm=marker foldlevel=0:
