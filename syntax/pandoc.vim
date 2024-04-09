@@ -1,13 +1,13 @@
 scriptencoding utf-8
-"
+
+" Vim syntax file
 " Language:	Pandoc (superset of Markdown)
 " Maintainer:	Felipe Morales <hel.sheep@gmail.com>
 " Maintainer:	Caleb Maclennan <caleb@alerque.com>
-" Upstream:	https://github.com/vim-pandoc/vim-pandoc-syntax
 "
 " Contributor:	David Sanson <dsanson@gmail.com>
-"		Jorge Israel Peña <jorge.israel.p@gmail.com>
-"       Christian Brabandt @chrisbra
+"		        Jorge Israel Peña <jorge.israel.p@gmail.com>
+"               Christian Brabandt @chrisbra
 " Original Author:	Jeremy Schultz <taozhyn@gmail.com>
 " Version: 5.0
 " Last Change:	2024 Apr 08
@@ -223,6 +223,16 @@ command! -buffer -nargs=1 -complete=syntax PandocUnhighlight call DisableEmbedsf
 " BASE:
 syntax clear
 syntax spell toplevel
+
+" apply extra settings: {{{1
+if g:pandoc#syntax#colorcolumn == 1
+    exe 'setlocal colorcolumn='.string(&textwidth+5)
+elseif g:pandoc#syntax#colorcolumn == 2
+    exe 'setlocal colorcolumn='.join(range(&textwidth+5, 2*&columns), ',')
+endif
+if g:pandoc#syntax#conceal#use != 0
+    setlocal conceallevel=2
+endif
 " }}}1
 
 " Syntax Rules: {{{1
