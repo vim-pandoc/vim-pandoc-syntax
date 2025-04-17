@@ -11,6 +11,10 @@ scriptencoding utf-8
 " OriginalAuthor: Jeremy Schultz <taozhyn@gmail.com>
 " Version: 5.0
 
+if exists('b:current_syntax')
+  finish
+endif
+
 " Configuration: {{{1
 "
 " use conceal? {{{2
