@@ -16,8 +16,8 @@ if exists('b:current_syntax')
   finish
 endif
 
-let s:cpo_save = &cpo
-set cpo&vim
+let s:cpo_save = &cpoptions
+set cpoptions&vim
 
 " Configuration: {{{1
 "
@@ -745,7 +745,7 @@ let b:current_syntax = 'pandoc'
 syntax sync clear
 syntax sync minlines=1000
 
-let &cpo = s:cpo_save
+let &cpoptions = s:cpo_save
 unlet s:cpo_save
 
 " vim: set fdm=marker foldlevel=0:
