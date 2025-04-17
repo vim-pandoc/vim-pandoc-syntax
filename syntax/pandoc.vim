@@ -12,12 +12,12 @@ scriptencoding utf-8
 " Version: 5.0
 " Last Change:	2024 Apr 08
 
-let s:cpo_save = &cpo
-set cpo&vim
-
 if exists('b:current_syntax')
   finish
 endif
+
+let s:cpo_save = &cpo
+set cpo&vim
 
 " Configuration: {{{1
 "
