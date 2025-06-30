@@ -41,7 +41,6 @@ if &encoding ==# 'utf-8'
                 \'image': '▨',
                 \'super': 'ⁿ',
                 \'sub': 'ₙ',
-                \'strike': 'x̶',
                 \'atx': '§',
                 \'codelang': 'λ',
                 \'codeend': '—',
@@ -60,7 +59,6 @@ else
                 \'image': 'i',
                 \'super': '^',
                 \'sub': '_',
-                \'strike': '~',
                 \'atx': '#',
                 \'codelang': 'l',
                 \'codeend': '-',
@@ -393,8 +391,7 @@ call s:WithConceal('superscript', 'syn match pandocSuperscriptMark /\^/ containe
 " }}}3
 
 " Strikeout: {{{3
-syn region pandocStrikeout start=/\~\~/ end=/\~\~/ contains=@Spell,pandocAmpersandEscape keepend
-call s:WithConceal('strikeout', 'syn match pandocStrikeoutMark /\~\~/ contained containedin=pandocStrikeout', 'conceal cchar='.s:cchars['strike'])
+call s:WithConceal('strikeout', 'syn region pandocStrikeout matchgroup=pandocOperator start=/\~\~/ end=/\~\~/ contains=@Spell,pandocAmpersandEscape keepend', 'concealends')
 " }}}3
 
 " }}}2
@@ -699,11 +696,10 @@ function! s:SetupPandocHighlights()
   hi def link pandocNoFormattedAttrs Comment
   hi def link pandocSubscriptMark Operator
   hi def link pandocSuperscriptMark Operator
-  hi def link pandocStrikeoutMark Operator
   if g:pandoc#syntax#style#underline_special == 1
       hi pandocSubscript gui=underline cterm=underline
       hi pandocSuperscript gui=underline cterm=underline
-      hi pandocStrikeout gui=underline cterm=underline
+      hi pandocStrikeout gui=strikethrough cterm=strikethrough
   endif
   hi def link pandocNewLine Error
   hi def link pandocHRule Delimiter
