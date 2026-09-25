@@ -67,3 +67,11 @@ unit impulse (Dirac delta function) through a linear system.
 # code in ref with more code in same line
 
 1. [`link`](link) and more text `with code` and a [`link`](link)
+
+# inline code styles in link labels
+
+[`single backticks`](link)
+
+[``double ` backticks``](link)
+
+[`code with attributes`{.haskell}](link)
